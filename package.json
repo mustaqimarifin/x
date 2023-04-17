@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+  "build": "contentlayer build && node scripts/hack.mjs && next build",
+  "start": "next start",
     "format": "pnpm dlx prettier --write . --ignore-path .gitignore",
     "lint": "next lint -- --ignore-path .gitignore",
     "lint:fix": "pnpm format && pnpm lint --fix"
