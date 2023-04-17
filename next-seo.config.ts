@@ -1,4 +1,4 @@
-import type { NextSeoProps } from "next-seo"
+import type { NextSeoProps } from "next-seo";
 
 export default {
   titleTemplate: "%s // Mustaqim Arifin",
@@ -30,4 +30,4 @@ export default {
       sizes: "180x180",
     },
   ],
-} as NextSeoProps
+} as NextSeoProps;

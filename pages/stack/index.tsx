@@ -1,12 +1,12 @@
-import * as React from "react";
-import type { NextPage } from "next";
-import { NextSeo } from "next-seo";
-import * as Grid from "components/Grid";
-import * as List from "components/List";
-import { Heading } from "components/Heading";
-import { Text } from "components/Text";
-import { Spacer } from "components/Spacer";
-import { Prose } from "components/Prose";
+import * as Grid from "components/Grid"
+import { Heading } from "components/Heading"
+import * as List from "components/List"
+import { Prose } from "components/Prose"
+import { Spacer } from "components/Spacer"
+import { Text } from "components/Text"
+import type { NextPage } from "next"
+import { NextSeo } from "next-seo"
+import * as React from "react"
 
 const inspiration = [
   "https://berkeleygraphics.com/",
@@ -20,20 +20,20 @@ const inspiration = [
   "https://rauno.me/",
   "https://sdrn.co/",
   "https://sj.land/",
-];
+]
 
-const Colophon: NextPage = () => {
+const Stack: NextPage = () => {
   return (
     <>
-      <NextSeo title="Colophon" />
+      <NextSeo title="Stack" />
 
       <Grid.Container>
         <Grid.Column
-          colStart={{ xs: "1", md: "2" }}
-          colEnd={{ xs: "-1", md: "4" }}
+          colStart={ { xs: "1", md: "2" } }
+          colEnd={ { xs: "-1", md: "4" } }
         >
           <Heading fontSize="xxl" as="h1">
-            Colophon
+            Stack
           </Heading>
           <Spacer height="xxs" />
           <Text color="foregroundNeutral">
@@ -49,8 +49,8 @@ const Colophon: NextPage = () => {
       <section>
         <Grid.Container>
           <Grid.Column
-            colStart={{ xs: "1", md: "2" }}
-            colEnd={{ xs: "-1", md: "4" }}
+            colStart={ { xs: "1", md: "2" } }
+            colEnd={ { xs: "-1", md: "4" } }
           >
             <Heading fontSize="lg">Tech stack &not;</Heading>
           </Grid.Column>
@@ -62,22 +62,22 @@ const Colophon: NextPage = () => {
           <List.Item>
             <Grid.Container rowGap="md" alignItems="baseline">
               <Grid.Column
-                colStart={{ xs: "1" }}
-                colEnd={{ xs: "-1", md: "1" }}
+                colStart={ { xs: "1" } }
+                colEnd={ { xs: "-1", md: "1" } }
               >
                 <Heading as="h3">Next.js</Heading>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "2" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "2" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text>Framework... WIP</Text>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "4" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "4" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text color="foregroundNeutral" fontSize="sm">
                   <a href="https://nextjs.org/">Visit ↗</a>
@@ -89,22 +89,22 @@ const Colophon: NextPage = () => {
           <List.Item>
             <Grid.Container rowGap="md">
               <Grid.Column
-                colStart={{ xs: "1" }}
-                colEnd={{ xs: "-1", md: "1" }}
+                colStart={ { xs: "1" } }
+                colEnd={ { xs: "-1", md: "1" } }
               >
                 <Heading as="h3">vanilla-extract</Heading>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "2" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "2" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text>Styling... WIP</Text>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "4" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "4" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text color="foregroundNeutral" fontSize="sm">
                   <a href="https://vanilla-extract.style/">Visit ↗</a>
@@ -116,22 +116,22 @@ const Colophon: NextPage = () => {
           <List.Item>
             <Grid.Container rowGap="md">
               <Grid.Column
-                colStart={{ xs: "1" }}
-                colEnd={{ xs: "-1", md: "1" }}
+                colStart={ { xs: "1" } }
+                colEnd={ { xs: "-1", md: "1" } }
               >
                 <Heading as="h3">Radix UI</Heading>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "2" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "2" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text>Accessibility... WIP</Text>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "4" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "4" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text color="foregroundNeutral" fontSize="sm">
                   <a href="https://www.radix-ui.com/">Visit ↗</a>
@@ -143,22 +143,22 @@ const Colophon: NextPage = () => {
           <List.Item>
             <Grid.Container rowGap="md">
               <Grid.Column
-                colStart={{ xs: "1" }}
-                colEnd={{ xs: "-1", md: "1" }}
+                colStart={ { xs: "1" } }
+                colEnd={ { xs: "-1", md: "1" } }
               >
                 <Heading as="h3">Framer Motion</Heading>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "2" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "2" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text>Animation... WIP</Text>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "4" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "4" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text color="foregroundNeutral" fontSize="sm">
                   <a href="https://www.framer.com/motion/">Visit ↗</a>
@@ -170,22 +170,22 @@ const Colophon: NextPage = () => {
           <List.Item>
             <Grid.Container rowGap="md">
               <Grid.Column
-                colStart={{ xs: "1" }}
-                colEnd={{ xs: "-1", md: "1" }}
+                colStart={ { xs: "1" } }
+                colEnd={ { xs: "-1", md: "1" } }
               >
                 <Heading as="h3">Contentlayer</Heading>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "2" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "2" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text>Data... WIP</Text>
               </Grid.Column>
 
               <Grid.Column
-                colStart={{ xs: "1", md: "4" }}
-                colEnd={{ xs: "-1", md: "4" }}
+                colStart={ { xs: "1", md: "4" } }
+                colEnd={ { xs: "-1", md: "4" } }
               >
                 <Text color="foregroundNeutral" fontSize="sm">
                   <a href="https://www.contentlayer.dev/">Visit ↗</a>
@@ -201,8 +201,8 @@ const Colophon: NextPage = () => {
       <section>
         <Grid.Container>
           <Grid.Column
-            colStart={{ xs: "1", md: "2" }}
-            colEnd={{ xs: "-1", md: "4" }}
+            colStart={ { xs: "1", md: "2" } }
+            colEnd={ { xs: "-1", md: "4" } }
           >
             <Heading fontSize="lg">Inspiration &not;</Heading>
           </Grid.Column>
@@ -212,31 +212,31 @@ const Colophon: NextPage = () => {
 
         <Grid.Container>
           <Grid.Column
-            colStart={{ xs: "1", md: "2" }}
-            colEnd={{ xs: "-1", md: "4" }}
+            colStart={ { xs: "1", md: "2" } }
+            colEnd={ { xs: "-1", md: "4" } }
           >
             <Prose>
-              {inspiration.map((url, index) => {
+              { inspiration.map((url, index) => {
                 return (
-                  <React.Fragment key={url}>
-                    <a href={url}>{new URL(url).hostname}</a>
-                    {index !== inspiration.length - 1 ? (
+                  <React.Fragment key={ url }>
+                    <a href={ url }>{ new URL(url).hostname }</a>
+                    { index !== inspiration.length - 1 ? (
                       <>
                         &nbsp;
                         <Text as="span" color="foregroundNeutral" role="none">
                           ⁕
-                        </Text>{" "}
+                        </Text>{ " " }
                       </>
-                    ) : null}
+                    ) : null }
                   </React.Fragment>
-                );
-              })}
+                )
+              }) }
             </Prose>
           </Grid.Column>
         </Grid.Container>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Colophon;
+export default Stack

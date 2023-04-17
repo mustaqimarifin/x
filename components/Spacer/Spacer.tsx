@@ -1,11 +1,11 @@
-import * as React from "react"
-import type { Sprinkles } from "styles/sprinkles.css"
-import { sprinkles } from "styles/sprinkles.css"
-import cn from 'clsx'
+import cn from "clsx";
+import * as React from "react";
+import type { Sprinkles } from "styles/sprinkles.css";
+import { sprinkles } from "styles/sprinkles.css";
 
 interface SpacerProps {
-  width?: Sprinkles["width"]
-  height?: Sprinkles["height"]
+  width?: Sprinkles["width"];
+  height?: Sprinkles["height"];
 }
 
 const Spacer = ({ width, height }: SpacerProps) => {
@@ -14,7 +14,7 @@ const Spacer = ({ width, height }: SpacerProps) => {
     className: cn(
       sprinkles({ display: width ? "inline-block" : "block", width, height })
     ),
-  })
-}
+  });
+};
 
-export { Spacer }
+export { Spacer };

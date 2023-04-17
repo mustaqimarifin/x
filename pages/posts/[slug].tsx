@@ -1,13 +1,14 @@
-import type { NextPage } from "next/types";
-import { allPosts, Post } from "contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer/hooks";
-import { NextSeo } from "next-seo";
-import { Components } from "components/MdxComponents";
 import * as Grid from "components/Grid";
 import { Heading } from "components/Heading";
+import { Components } from "components/MdxComponents";
 import { Prose } from "components/Prose";
-import { Text } from "components/Text";
 import { Spacer } from "components/Spacer";
+import { Text } from "components/Text";
+import { allPosts, Post } from "contentlayer/generated";
+import { formatDate } from "lib/utils";
+import type { NextPage } from "next/types";
+import { useMDXComponent } from "next-contentlayer/hooks";
+import { NextSeo } from "next-seo";
 
 export async function getStaticPaths() {
   return {
@@ -62,6 +63,7 @@ const PostPage: NextPage<{ post: Post }> = ({ post }) => {
             <Heading fontSize="xxl" as="h1">
               {post.title}
             </Heading>
+            <Heading fontSize="xs">{formatDate(post.date)}</Heading>
           </Grid.Column>
         </Grid.Container>
 
@@ -73,7 +75,7 @@ const PostPage: NextPage<{ post: Post }> = ({ post }) => {
             colEnd={{ xs: "-1", md: "4" }}
           >
             <Prose>
-              <MDXContent components={Components} />
+              <MDXContent components={ Components } />
             </Prose>
           </Grid.Column>
         </Grid.Container>

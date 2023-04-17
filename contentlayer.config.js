@@ -4,11 +4,14 @@ import {
   defineNestedType,
   makeSource,
 } from "contentlayer/source-files";
-import remarkGfm from "remark-gfm";
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypePrettyCode, { Options } from "rehype-pretty-code";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
+import rehypeCodeTitles from "rehype-code-titles";
+import rehypePrettyCode from "rehype-pretty-code";
+import remarkGfm from "remark-gfm";
+
+//import imageMetadata from "./lib/Meta"
 import { formatDate, formatDateTime } from "./lib/utils";
+import imageMetadata from "./lib/Meta"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Posts
@@ -69,61 +72,66 @@ const Event = defineNestedType(() => ({
 }));
 
 export const Job = defineDocumentType(() => ({
-  name: "Job",
+  name: 'Job',
   filePathPattern: `jobs/*.mdx`,
-  contentType: "mdx",
+  contentType: 'mdx',
   fields: {
     company: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     startDate: {
-      type: "date",
+      type: 'date',
       required: true,
     },
     endDate: {
-      type: "date",
+      type: 'date',
       required: false,
     },
     title: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     location: {
-      type: "string",
+      type: 'string',
       required: false,
     },
     link: {
-      type: "string",
+      type: 'string',
       required: true,
     },
     description: {
-      type: "string",
+      type: 'string',
       required: false,
     },
     logo: {
-      type: "string",
+      type: 'string',
       required: false,
     },
     timeline: {
-      type: "list",
+      type: 'list',
       of: Event,
       required: false,
     },
+    clients: {
+      type: 'list',
+      of: { type: 'string' },
+      required: false,
+    },
     tags: {
-      type: "list",
-      of: { type: "string" },
+      type: 'list',
+      of: { type: 'string' },
       required: false,
     },
     currently: {
-      type: "string",
+      type: 'string',
       required: false,
     },
   },
   computedFields: {
     slug: {
-      type: "string",
-      resolve: (job) => job._raw.sourceFileName.replace(/\.mdx$/, ""),
+      type: 'string',
+      resolve: (job) => job._raw.sourceFileName.replace(/\.mdx$/, ''),
     },
   },
 }));
@@ -235,20 +243,16 @@ const IceBaths = defineDocumentType(() => ({
 ////////////////////////////////////////////////////////////////////////////////
 // Rehype Pretty Code
 
-const rehypePrettyCodeOptions: Partial<Options> = {
+const rehypePrettyCodeOptions= {
   theme: {
     light: "github-light",
     dark: "github-dark",
   },
   tokensMap: {
-    // VScode command palette: Inspect Editor Tokens and Scopes
-    // https://github.com/Binaryify/OneDark-Pro/blob/47c66a2f2d3e5c85490e1aaad96f5fab3293b091/themes/OneDark-Pro.json
     fn: "entity.name.function",
     objKey: "meta.object-literal.key",
   },
   onVisitLine(node) {
-    // Prevent lines from collapsing in `display: grid` mode, and
-    // allow empty lines to be copy/pasted
     if (node.children.length === 0) {
       node.children = [{ type: "text", value: " " }];
     }
@@ -270,7 +274,7 @@ export default makeSource({
     rehypePlugins: [
       rehypeCodeTitles,
       [rehypePrettyCode, rehypePrettyCodeOptions],
-      rehypeAccessibleEmojis,
+      rehypeAccessibleEmojis, imageMetadata
     ],
   },
 });

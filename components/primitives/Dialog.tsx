@@ -1,20 +1,20 @@
-export {
-  Root,
-  Trigger,
-  Portal,
-  Overlay,
-  Content,
-  Title,
-  Description,
-  Close,
-} from "@radix-ui/react-dialog";
 export type {
-  DialogProps,
-  DialogTriggerProps,
-  DialogPortalProps,
-  DialogOverlayProps,
-  DialogContentProps,
-  DialogTitleProps,
-  DialogDescriptionProps,
   DialogCloseProps,
+  DialogContentProps,
+  DialogDescriptionProps,
+  DialogOverlayProps,
+  DialogPortalProps,
+  DialogProps,
+  DialogTitleProps,
+  DialogTriggerProps,
+} from "@radix-ui/react-dialog";
+export {
+  Close,
+  Content,
+  Description,
+  Overlay,
+  Portal,
+  Root,
+  Title,
+  Trigger,
 } from "@radix-ui/react-dialog";

@@ -1,9 +1,10 @@
-import * as React from "react";
-import { useTheme } from "next-themes";
-import { Monitor, Sun, Moon } from "react-feather";
+import { VisuallyHidden } from "components/VisuallyHidden";
 import { motion } from "framer-motion";
 import { useMounted } from "lib/hooks";
-import { VisuallyHidden } from "components/VisuallyHidden";
+import { useTheme } from "next-themes";
+import * as React from "react";
+import { Monitor, Moon, Sun } from "react-feather";
+
 import * as styles from "./ThemeToggle.css";
 
 type theme = "system" | "light" | "dark";

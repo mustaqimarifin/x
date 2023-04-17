@@ -1,20 +1,21 @@
-import * as React from "react"
-import type { NextPage } from "next"
-import type { Job, Recommendation } from "contentlayer/generated"
-import NextLink from "next/link"
-import Image from "next/image"
-import { NextSeo } from "next-seo"
-import { formatTags, partition } from "lib/utils"
-import { useToggle } from "lib/hooks"
-import { buttonStyles } from "styles/button.css"
 import * as Grid from "components/Grid"
-import * as List from "components/List"
 import { Heading } from "components/Heading"
+import { Link } from "components/Link"
+import * as List from "components/List"
+import { Prose } from "components/Prose"
 import { Spacer } from "components/Spacer"
 import { Text } from "components/Text"
 import { VisuallyHidden } from "components/VisuallyHidden"
+import type { Job, Recommendation } from "contentlayer/generated"
 import { allJobs, allRecommendations } from "contentlayer/generated"
-import { Link } from "components/Link"
+import { useToggle } from "lib/hooks"
+import { formatTags, partition } from "lib/utils"
+import type { NextPage } from "next"
+import Image from "next/image"
+import NextLink from "next/link"
+import { NextSeo } from "next-seo"
+import * as React from "react"
+import { buttonStyles } from "styles/button.css"
 
 const Home: NextPage<{
   jobs: Job[]
@@ -50,15 +51,19 @@ const Home: NextPage<{
             colStart={ { xs: "1", md: "2" } }
             colEnd={ { xs: "-1", lg: "4" } }
           >
-            <Text fontSize="xl" gradient={ true }>
-              A detail oriented user interface 
-              Over a decade at the intersection of  marketing, product and creative helping bring to market some of the largest endurance and lifestyle events around SouthEastAsia. Currently Senior Marketing Manager at Musegroup.
+            <Text fontSize="xl" fontWeight="semiBold" gradient={ true }>
+              Over a decade at the intersection of marketing, product and
+              creative helping bring to market some of the largest endurance and
+              lifestyle events within SouthEastAsia. Currently Senior Marketing
+              Manager at Musegroup.  </Text>
+            --
+            <Prose>On another note, I've been making music for a long time and hope to consolidate my work in its various iterations here. </Prose>
 
-              I’ve also been making music since my teens through a myriad of iterations, eventually culminating in a debut album in 2014 and several production & engineering credits for various artists
-            </Text>
+
+
+
 
             <Spacer height="xl" />
-
             <a
               href="https://read.cv/alexcarpenter"
               className={ buttonStyles({ type: "highContrast" }) }
@@ -93,6 +98,8 @@ const Home: NextPage<{
                     colEnd={ { xs: "-1", md: "1" } }
                   >
                     <Heading as="h3">{ job.company }</Heading>
+                    <Text fontSize="md">{ job.title }</Text>
+
                   </Grid.Column>
 
                   <Grid.Column
@@ -256,6 +263,7 @@ function Recommendations ({
           <button
             type="button"
             className={ buttonStyles({ type: "text" }) }
+            //@ts-ignore
             onClick={ toggleViewAll }
             aria-expanded={ viewAll ? "true" : "false" }
             aria-controls={ groupTwo.map((r) => r._id).toString() }

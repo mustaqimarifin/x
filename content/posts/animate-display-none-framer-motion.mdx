@@ -1,60 +1,85 @@
 ---
-title: Animate to and from display none with Framer Motion
+title: Getter Pattern Framer Motion
 description: How to use onanimationend to animate to and from display none with Framer Motion.
 date: 2022-11-01
 ---
 
-To animate to and from display none using Framer Motion, will make use of variants. We set our two states, hidden and shown.
+<Image
+  src="/img/alex-bryce-next-mdx-remote.png"
+  width="1200"
+  height="720"
+  alt="Implementing next-mdx-remote server components on a Next.js project"
+/>
 
-Within our hidden variant, will set the property `onanimationend` to display none. This will animate our menu from opacity 1, scale 1, and display block, to opacity 1 and scale 0, then once that animation is complete, will then apply display none.
+SWR uses a clever technique to `reduce` the number of re-renders in components that share state. Just like [state selectors](https://github.com/pmndrs/zustand#selecting-multiple-state-slices), it stems from this idea: if you never use a certain value, why re-render when that unused value changes?
+For example:
 
-```jsx {5-7}
-const variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0,
-    onanimationend: {
-      display: "none",
-    },
-  },
-  shown: {
-    opacity: 1,
-    scale: 1,
-    display: "block",
-  },
-};
+```tsx
+const { data } = useSWR();
+
+// useSWR also returns `error`, but it's unused here
+// No need to re-render when `error` changes
 ```
 
-And to implement this within our menu component, will pass the variants to our motion.ul, and animate between `hidden` and `shown` variants.
+Instead of selector callbacks, SWR uses JavaScript [getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) to detect when values are being read, and will only re-render for relevant changes. This trick only applies if your state is shared and object-like – which happens to be a majority of state and context in React apps.
+**[Implementation](https://paco.me/writing/hook-getter#implementation)**
 
-```jsx {14}
-export default function Menu() {
-  const [variant, setVariant] = React.useState("hidden");
+I wrote a [collection of concepts](https://github.com/pacocoursey/state) that implement this pattern with a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). Here’s the general idea:
+
+- Keep state outside of render lifecycle (could be ref, or global)
+- State returned from the hook is actually a proxy
+- When proxy `get` is invoked: track which object key is used, return the value
+- When proxy `set` is invoked: update state, broadcast to all listeners
+- In each hook, listen for broadcast but only re-render if the changed key is tracked
+
+Let’s model our _state solution_ after Zustand, where you create state _stores_ outside of render:
+
+```tsx
+const useStore = createStore({
+  name: "John",
+  username: "johndoe",
+});
+
+function NameDisplay() {
+  const state = useStore();
+
+  // Should only re-render when state.name changes, as username is unused
   return (
-    <>
-      <button
-        onClick={() =>
-          setVariant((prevVariant) =>
-            prevVariant === "hidden" ? "shown" : "hidden"
-          )
-        }
-      >
-        Toggle dropdown
-      </button>
-      <motion.ul variants={variants} initial="hidden" animate={variant}>
-        <li>
-          <button>Option 1</button>
-        </li>
-        <li>
-          <button>Option 2</button>
-        </li>
-        <li>
-          <button>Option 3</button>
-        </li>
-      </motion.ul>
-    </>
+    <input value={state.name} onChange={(e) => (state.name = e.target.value)} />
   );
 }
 ```
 
-[View Codesandbox](https://codesandbox.io/s/animate-to-and-from-display-none-with-framer-motion-jfm2sg)
+When creating a store, we’ll track the state and any listeners. When each hook subscribes to the shared state, we just add it to a set of listeners.
+
+```tsx
+function createStore(initial = {}) {
+  const state = initial;
+  const listeners = new Set();
+
+  function subscribe(listener) {
+    listeners.add(listener);
+    return () => {
+      listeners.delete(listener);
+    };
+  }
+}
+```
+
+Setting state checks for equality and broadcasts to any listeners if the state changed:
+
+```tsx
+function setState(key, value) {
+  if (!Object.is(state[key], value)) {
+    state[key] = value;
+    listeners.forEach((listener) => listener(state, key));
+  }
+}
+```
+
+Finally, creating the store returns a hook to actually use the store. It creates a proxy that updates a `tracked` ref on any `get` access, and calls `setState` for any `set` access.
+
+`return proxy`
+That’s about it, a simple shared state system in about 50 lines. Full [code is here](https://github.com/pacocoursey/state).
+
+**Shine, constantly and steadily**

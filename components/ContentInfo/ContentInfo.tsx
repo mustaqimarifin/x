@@ -1,4 +1,3 @@
-import * as React from "react";
 import * as Grid from "components/Grid";
 import { Spacer } from "components/Spacer";
 import { Text } from "components/Text";

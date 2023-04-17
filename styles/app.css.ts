@@ -20,27 +20,31 @@ globalFontFace("Inter", {
 
 globalFontFace("NewsReader", {
   fontStyle: "italic",
-  fontWeight: "300 700",
-  fontDisplay: "optional",
-  src: 'url(/fonts/NewsReader-Italic.woff2) format("woff2")',
-  unicodeRange:
-    "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-}); 
-
-globalFontFace("Sohne", {
-  fontStyle: "normal",
-  fontWeight: "100 900",
-  fontDisplay: "optional",
-  src: 'url(/fonts/sohne.woff2) format("woff2")',
+  fontWeight: "500",
+  fontDisplay: "swap",
+  src: 'url(/fonts/Newsreader-italic.woff2) format("woff2")',
   unicodeRange:
     "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
 });
 
-globalFontFace("JetBrainsMono", {
+globalFontFace("Sohne", {
+  fontStyle: "normal",
+  fontWeight: "400 600",
+  fontDisplay: "optional",
+  src: [
+    'url(/fonts/Sohne-400.woff2) format("woff2")',
+    'url(/fonts/Sohne-500.woff2) format("woff2")',
+    'url(/fonts/Sohne-600.woff2) format("woff2")',
+  ],
+  unicodeRange:
+    "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+});
+
+globalFontFace("SFMono", {
   fontStyle: "normal",
   fontWeight: "400",
   fontDisplay: "optional",
-  src: 'url(/fonts/JetBrainsMono-Variable.woff2) format("woff2")',
+  src: 'url(/fonts/SFMono.woff2) format("woff2")',
   unicodeRange:
     "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
 });
@@ -55,6 +59,15 @@ globalStyle("body", {
   MozOsxFontSmoothing: "grayscale",
   textRendering: "optimizeLegibility",
   fontFamily: vars.font.sans,
+  backgroundColor: vars.color.page,
+  overflowX: "hidden",
+});
+
+globalStyle("em", {
+  WebkitFontSmoothing: "auto",
+  MozOsxFontSmoothing: "grayscale",
+  textRendering: "optimizeLegibility",
+  fontFamily: vars.font.italic,
   backgroundColor: vars.color.page,
   overflowX: "hidden",
 });

@@ -1,6 +1,7 @@
-import type { Sprinkles } from "styles/sprinkles.css";
 import cn from "clsx";
+import type { Sprinkles } from "styles/sprinkles.css";
 import { sprinkles } from "styles/sprinkles.css";
+
 import * as styles from "./Grid.css";
 
 interface GridContainerProps {
@@ -62,4 +63,4 @@ const Column = ({
   );
 };
 
-export { Container, Column };
+export { Column, Container };

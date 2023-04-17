@@ -1,14 +1,13 @@
-import * as React from "react";
-import type { NextPage } from "next";
-import type { Job } from "contentlayer/generated";
-import { NextSeo } from "next-seo";
-import { formatTags, formatDate } from "lib/utils";
 import * as Grid from "components/Grid";
-import * as List from "components/List";
 import { Heading } from "components/Heading";
-import { Text } from "components/Text";
+import * as List from "components/List";
 import { Spacer } from "components/Spacer";
+import { Text } from "components/Text";
+import type { Job } from "contentlayer/generated";
 import { allJobs } from "contentlayer/generated";
+import { formatDate, formatTags } from "lib/utils";
+import type { NextPage } from "next";
+import { NextSeo } from "next-seo";
 
 export async function getStaticPaths() {
   return {
@@ -43,6 +42,7 @@ const ExperiencePage: NextPage<{ job: Job }> = ({ job }) => {
           colEnd={{ xs: "-1", md: "4" }}
         >
           <Heading fontSize="xxl">{job.company}</Heading>
+
           {job.description ? (
             <>
               <Spacer height="sm" />

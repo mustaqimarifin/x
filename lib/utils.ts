@@ -1,4 +1,3 @@
-
 /**
  * Returns a language-specific formatted string representing the elements of the list.
  *
@@ -30,7 +29,7 @@ export const formatTags = (arr: string[]): string =>
 export const formatDate = (date: string) => {
   return new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
-    month: "2-digit",
+    month: "short",
     day: "2-digit",
   });
 };

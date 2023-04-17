@@ -1,17 +1,18 @@
-import * as React from "react";
-import { Analytics } from "@vercel/analytics/react";
 import "the-new-css-reset";
 import "styles/app.css";
-import type { AppProps } from "next/app";
-import { MotionConfig } from "framer-motion";
-import { DefaultSeo } from "next-seo";
-import { ThemeProvider } from "next-themes";
-import SEO from "next-seo.config";
-import { Provider as TooltipProvider } from "components/primitives/Tooltip";
+
+import { Analytics } from "@vercel/analytics/react";
 import { Banner } from "components/Banner";
-import { ContentInfo } from "components/ContentInfo";
 import { CommandPalette } from "components/CommandPalette";
+import { ContentInfo } from "components/ContentInfo";
+import { Provider as TooltipProvider } from "components/primitives/Tooltip";
 import { SkipLink } from "components/SkipLink";
+import { MotionConfig } from "framer-motion";
+import type { AppProps } from "next/app";
+import { DefaultSeo } from "next-seo";
+import SEO from "next-seo.config";
+import { ThemeProvider } from "next-themes";
+import * as React from "react";
 
 const composeProviders =
   (...providers: any[]) =>

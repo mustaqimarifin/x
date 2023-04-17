@@ -1,7 +1,6 @@
-import * as React from "react"
 import { motion, MotionConfig, AnimatePresence } from "framer-motion"
 import type { ImageProps } from "next/legacy/image"
-import Image from "next/legacy/image"
+import Image from "../Pics"
 import cn from 'clsx'
 import { ArrowRight, ArrowLeft } from "react-feather"
 import { useRovingIndex } from "use-roving-index"
@@ -38,7 +37,7 @@ const ImageCarousel = ({ aspectRatio = "4/3", items }: CarouselProps) => {
                   alt={ item.alt }
                   width={ 800 }
                   height={ (Number(consequent) / Number(antecedent)) * 800 }
-                  objectFit="cover"
+                  fill
                 />
               </div>
             )

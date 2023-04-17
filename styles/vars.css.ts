@@ -4,6 +4,8 @@ import {
   gray,
   grayDark,
   blue,
+  pinkA,
+  pinkDark,
   blueDark,
   lime,
 } from "@radix-ui/colors";
@@ -31,6 +33,7 @@ const color = createGlobalThemeContract({
   overlay: "color-overlay",
   scrim: "color-scrim",
   highlight: "color-highlight",
+  highlightB: "color-highlight",
 });
 
 createGlobalTheme(":root.light", color, {
@@ -48,7 +51,8 @@ createGlobalTheme(":root.light", color, {
   outline: blue.blue11,
   overlay: whiteA.whiteA11,
   scrim: "0, 0%, 97.3%",
-  highlight: "#bef34d",
+  highlight: lime.lime7,
+  highlightB: pinkA.pinkA8,
 });
 
 createGlobalTheme(":root.dark", color, {
@@ -67,6 +71,7 @@ createGlobalTheme(":root.dark", color, {
   overlay: blackA.blackA11,
   scrim: "0, 0%, 8.5%",
   highlight: lime.lime9,
+  highlightB: pinkDark.pink11,
 });
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +81,7 @@ const globals = createGlobalTheme(":root", {
   font: {
     sans: "'Sohne', Inter -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
     italic: "NewsReader",
-    mono: "'JetBrainsMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
+    mono: "'SFMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
   },
   fontSize: {
     xs: ".75rem", // 12px

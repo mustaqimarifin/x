@@ -1,5 +1,5 @@
 import { gray } from "@radix-ui/colors";
-import { style, globalStyle } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 import { vars } from "styles/vars.css";
 
 export const root = style({
@@ -20,6 +20,12 @@ globalStyle(`${root} a`, {
   textDecorationColor: vars.color.underline,
   textDecorationThickness: 1.5,
   textUnderlineOffset: 1.5,
+});
+
+globalStyle(`${root} em`, {
+  fontStyle: "italic",
+  //fontWeight: vars.fontWeight.semiBold,
+  color: vars.color.highlightB,
 });
 
 globalStyle(`${root} a:hover`, {
@@ -72,7 +78,9 @@ globalStyle(
 
 globalStyle("code", {
   fontFamily: vars.font.mono,
-  fontSize: "0.9rem",
+  fontSize: "0.8rem",
+  fontWeight:"bolder",
+  color: vars.color.surfaceInverted
 });
 
 globalStyle("[data-rehype-pretty-code-title]", {

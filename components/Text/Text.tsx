@@ -1,23 +1,24 @@
-import * as React from "react"
-import cn from 'clsx'
-import type { PolymorphicComponentProps } from "types"
-import type { Sprinkles } from "styles/sprinkles.css"
-import { sprinkles } from "styles/sprinkles.css"
-import * as styles from "./Text.css"
+import cn from "clsx";
+import * as React from "react";
+import type { Sprinkles } from "styles/sprinkles.css";
+import { sprinkles } from "styles/sprinkles.css";
+import type { PolymorphicComponentProps } from "types";
+
+import * as styles from "./Text.css";
 
 type TextProps<C extends React.ElementType> = PolymorphicComponentProps<
   C,
   {
-    as?: "p" | "span" | "strong" | "em" | "time"
-    fontFamily?: Sprinkles["fontFamily"]
-    fontSize?: Sprinkles["fontSize"]
-    fontWeight?: Sprinkles["fontWeight"]
-    color?: Extract<Sprinkles["color"], "foreground" | "foregroundNeutral">
-    gradient?: boolean
+    as?: "p" | "span" | "strong" | "em" | "time";
+    fontFamily?: Sprinkles["fontFamily"];
+    fontSize?: Sprinkles["fontSize"];
+    fontWeight?: Sprinkles["fontWeight"];
+    color?: Extract<Sprinkles["color"], "foreground" | "foregroundNeutral">;
+    gradient?: boolean;
   }
->
+>;
 
-const Text = <C extends React.ElementType = "p"> ({
+export const Text = <C extends React.ElementType = "p">({
   as,
   fontFamily,
   fontSize = "md",
@@ -26,7 +27,7 @@ const Text = <C extends React.ElementType = "p"> ({
   gradient = false,
   ...restProps
 }: TextProps<C>) => {
-  const component = as || "p"
+  const component = as || "p";
   return React.createElement(component, {
     className: cn(
       styles.root,
@@ -34,7 +35,5 @@ const Text = <C extends React.ElementType = "p"> ({
       sprinkles({ fontFamily, fontSize, fontWeight, color })
     ),
     ...restProps,
-  })
-}
-
-export { Text }
+  });
+};

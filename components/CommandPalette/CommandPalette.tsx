@@ -1,25 +1,27 @@
 /* eslint-disable react/no-unknown-property */
-import * as React from "react"
-import { useRouter } from "next/router"
+//@ts-nocheck
+import "./CommandPalette.css"
+
 import { Command, useCommandState } from "cmdk"
-import { useTheme } from "next-themes"
-import tinykeys from "tinykeys"
-import {
-  Twitter,
-  Linkedin,
-  GitHub,
-  Sun,
-  Moon,
-  Monitor,
-  Home,
-  Edit,
-  Copy,
-  Activity,
-  Info,
-} from "react-feather"
 import { motion } from "framer-motion"
 import { useToggle } from "lib/hooks"
-import "./CommandPalette.css"
+import { useRouter } from "next/router"
+import { useTheme } from "next-themes"
+import * as React from "react"
+import {
+  Activity,
+  Copy,
+  Edit,
+  GitHub,
+  Home,
+  Info,
+  Linkedin,
+  Monitor,
+  Moon,
+  Sun,
+  Twitter,
+} from "react-feather"
+import tinykeys from "tinykeys"
 
 const CommandItem = ({
   onSelect,
@@ -54,7 +56,7 @@ const CommandPalette = () => {
 
   // Toggle the menu when ⌘K is pressed
   React.useEffect(() => {
-    let unsubscribe = tinykeys(window, {
+    const unsubscribe = tinykeys(window, {
       "$mod+KeyK": () => {
         toggleOpen()
       },
@@ -137,7 +139,7 @@ const CommandPalette = () => {
               value="stack"
             >
               <Info />
-              <span>Colophon</span>
+              <span>Stack</span>
             </CommandItem>
           </Command.Group>
 

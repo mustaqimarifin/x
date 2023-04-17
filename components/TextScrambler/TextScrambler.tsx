@@ -1,8 +1,9 @@
-import * as React from "react";
 import { useReducedMotion } from "framer-motion";
 import { useInterval, useMounted } from "lib/hooks";
-import { getScrambledState } from "./utils";
+import * as React from "react";
+
 import * as styles from "./TextScrambler.css";
+import { getScrambledState } from "./utils";
 
 /**
  * TextScrambler

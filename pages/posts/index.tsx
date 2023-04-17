@@ -1,15 +1,15 @@
-import * as React from "react";
-import type { NextPage } from "next";
-import type { Post } from "contentlayer/generated";
-import { NextSeo } from "next-seo";
-import NextLink from "next/link";
 import * as Grid from "components/Grid";
-import * as List from "components/List";
 import { Heading } from "components/Heading";
 import { Link } from "components/Link";
+import * as List from "components/List";
 import { Spacer } from "components/Spacer";
 import { Text } from "components/Text";
+import type { Post } from "contentlayer/generated";
 import { allPosts } from "contentlayer/generated";
+import type { NextPage } from "next";
+import NextLink from "next/link";
+import { NextSeo } from "next-seo";
+import * as React from "react";
 
 export async function getStaticProps() {
   const posts = allPosts

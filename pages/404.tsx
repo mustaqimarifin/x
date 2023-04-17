@@ -1,10 +1,9 @@
-import * as React from "react";
-import type { NextPage } from "next";
-import { NextSeo } from "next-seo";
 import * as Grid from "components/Grid";
 import { Heading } from "components/Heading";
-import { Text } from "components/Text";
 import { Spacer } from "components/Spacer";
+import { Text } from "components/Text";
+import type { NextPage } from "next";
+import { NextSeo } from "next-seo";
 
 const FourOhFour: NextPage = () => {
   return (
