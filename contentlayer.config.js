@@ -11,7 +11,7 @@ import remarkGfm from "remark-gfm";
 
 //import imageMetadata from "./lib/Meta"
 import { formatDate, formatDateTime } from "./lib/utils";
-import imageMetadata from "./lib/Meta"
+import imageMetadata from "./lib/Meta";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Posts
@@ -72,66 +72,66 @@ const Event = defineNestedType(() => ({
 }));
 
 export const Job = defineDocumentType(() => ({
-  name: 'Job',
+  name: "Job",
   filePathPattern: `jobs/*.mdx`,
-  contentType: 'mdx',
+  contentType: "mdx",
   fields: {
     company: {
-      type: 'string',
+      type: "string",
       required: true,
     },
     startDate: {
-      type: 'date',
+      type: "date",
       required: true,
     },
     endDate: {
-      type: 'date',
+      type: "date",
       required: false,
     },
     title: {
-      type: 'string',
+      type: "string",
       required: true,
     },
     location: {
-      type: 'string',
+      type: "string",
       required: false,
     },
     link: {
-      type: 'string',
+      type: "string",
       required: true,
     },
     description: {
-      type: 'string',
+      type: "string",
       required: false,
     },
     logo: {
-      type: 'string',
+      type: "string",
       required: false,
     },
     timeline: {
-      type: 'list',
+      type: "list",
       of: Event,
       required: false,
     },
     clients: {
-      type: 'list',
-      of: { type: 'string' },
+      type: "list",
+      of: { type: "string" },
       required: false,
     },
     tags: {
-      type: 'list',
-      of: { type: 'string' },
+      type: "list",
+      of: { type: "string" },
       required: false,
     },
     currently: {
-      type: 'string',
+      type: "string",
       required: false,
     },
   },
   computedFields: {
     slug: {
-      type: 'string',
-      resolve: (job) => job._raw.sourceFileName.replace(/\.mdx$/, ''),
+      type: "string",
+      resolve: (job) => job._raw.sourceFileName.replace(/\.mdx$/, ""),
     },
   },
 }));
@@ -243,7 +243,7 @@ const IceBaths = defineDocumentType(() => ({
 ////////////////////////////////////////////////////////////////////////////////
 // Rehype Pretty Code
 
-const rehypePrettyCodeOptions= {
+const rehypePrettyCodeOptions = {
   theme: {
     light: "github-light",
     dark: "github-dark",
@@ -274,7 +274,8 @@ export default makeSource({
     rehypePlugins: [
       rehypeCodeTitles,
       [rehypePrettyCode, rehypePrettyCodeOptions],
-      rehypeAccessibleEmojis, imageMetadata
+      rehypeAccessibleEmojis,
+      imageMetadata,
     ],
   },
 });

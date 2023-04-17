@@ -18,9 +18,8 @@ const rgbDataURL = (r: number, g: number, b: number) =>
   `data:image/gif;base64,R0lGODlhAQABAPAA${
     triplet(0, r, g) + triplet(b, 255, 255)
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
-  
-type Props = ImageProps & { base64?: string };
 
+type Props = ImageProps & { base64?: string };
 
 const Image = (props: Props) => {
   const { src, alt, width, height, base64 } = props;

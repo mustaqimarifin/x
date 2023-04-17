@@ -79,8 +79,8 @@ globalStyle(
 globalStyle("code", {
   fontFamily: vars.font.mono,
   fontSize: "0.8rem",
-  fontWeight:"bolder",
-  color: vars.color.surfaceInverted
+  fontWeight: "bolder",
+  color: vars.color.surfaceInverted,
 });
 
 globalStyle("[data-rehype-pretty-code-title]", {

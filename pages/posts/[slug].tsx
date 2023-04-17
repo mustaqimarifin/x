@@ -75,7 +75,7 @@ const PostPage: NextPage<{ post: Post }> = ({ post }) => {
             colEnd={{ xs: "-1", md: "4" }}
           >
             <Prose>
-              <MDXContent components={ Components } />
+              <MDXContent components={Components} />
             </Prose>
           </Grid.Column>
         </Grid.Container>

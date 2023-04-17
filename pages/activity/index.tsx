@@ -26,7 +26,7 @@ function ActivityItem({ activity }: { activity: Activity }) {
   const MDXContent = useMDXComponent(activity.body.code);
   return (
     <Prose>
-      <MDXContent components={ Components } />
+      <MDXContent components={Components} />
     </Prose>
   );
 }

@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unknown-property */
 //@ts-nocheck
-import "./CommandPalette.css"
+import "./CommandPalette.css";
 
-import { Command, useCommandState } from "cmdk"
-import { motion } from "framer-motion"
-import { useToggle } from "lib/hooks"
-import { useRouter } from "next/router"
-import { useTheme } from "next-themes"
-import * as React from "react"
+import { Command, useCommandState } from "cmdk";
+import { motion } from "framer-motion";
+import { useToggle } from "lib/hooks";
+import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
+import * as React from "react";
 import {
   Activity,
   Copy,
@@ -20,68 +20,68 @@ import {
   Moon,
   Sun,
   Twitter,
-} from "react-feather"
-import tinykeys from "tinykeys"
+} from "react-feather";
+import tinykeys from "tinykeys";
 
 const CommandItem = ({
   onSelect,
   value,
   children,
 }: {
-  onSelect?: (value: string) => void
-  value: string
-  children: React.ReactNode
+  onSelect?: (value: string) => void;
+  value: string;
+  children: React.ReactNode;
 }) => {
-  const currentValue = useCommandState((state) => state.value)
+  const currentValue = useCommandState((state) => state.value);
   return (
-    <Command.Item onSelect={ onSelect } value={ value }>
-      <span className="content">{ children }</span>
-      { currentValue === value ? (
+    <Command.Item onSelect={onSelect} value={value}>
+      <span className="content">{children}</span>
+      {currentValue === value ? (
         <motion.span
           layoutId="highlight"
           className="highlight"
-          transition={ {
+          transition={{
             duration: 0.2,
-          } }
+          }}
         />
-      ) : null }
+      ) : null}
     </Command.Item>
-  )
-}
+  );
+};
 
 const CommandPalette = () => {
-  const router = useRouter()
-  const { setTheme } = useTheme()
-  const [open, toggleOpen] = useToggle()
+  const router = useRouter();
+  const { setTheme } = useTheme();
+  const [open, toggleOpen] = useToggle();
 
   // Toggle the menu when ⌘K is pressed
   React.useEffect(() => {
     const unsubscribe = tinykeys(window, {
       "$mod+KeyK": () => {
-        toggleOpen()
+        toggleOpen();
       },
-    })
+    });
     return () => {
-      unsubscribe()
-    }
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const handleSetTheme = (val: string) => {
-    setTheme(val)
-    toggleOpen()
-  }
+    setTheme(val);
+    toggleOpen();
+  };
 
   const handleCopyUrl = () => {
-    navigator.clipboard.writeText(window.location.href)
-    toggleOpen()
-  }
+    navigator.clipboard.writeText(window.location.href);
+    toggleOpen();
+  };
 
   return (
     <>
       <Command.Dialog
-        open={ open }
-        onOpenChange={ toggleOpen }
+        open={open}
+        onOpenChange={toggleOpen}
         label="Global Command Palette"
       >
         <div cmdk-header="">
@@ -89,8 +89,8 @@ const CommandPalette = () => {
           <button
             aria-label="Close command palette"
             cmdk-header-esc=""
-            onClick={ () => toggleOpen() }
-            tabIndex={ -1 }
+            onClick={() => toggleOpen()}
+            tabIndex={-1}
           >
             ESC
           </button>
@@ -100,20 +100,20 @@ const CommandPalette = () => {
 
           <Command.Group heading="Navigation &not;">
             <CommandItem
-              onSelect={ () => {
-                router.push("/")
-                toggleOpen()
-              } }
+              onSelect={() => {
+                router.push("/");
+                toggleOpen();
+              }}
               value="index"
             >
               <Home />
               <span>Index</span>
             </CommandItem>
             <CommandItem
-              onSelect={ () => {
-                router.push("/posts")
-                toggleOpen()
-              } }
+              onSelect={() => {
+                router.push("/posts");
+                toggleOpen();
+              }}
               value="posts"
             >
               <Edit />
@@ -121,10 +121,10 @@ const CommandPalette = () => {
             </CommandItem>
 
             <CommandItem
-              onSelect={ () => {
-                router.push("/activity")
-                toggleOpen()
-              } }
+              onSelect={() => {
+                router.push("/activity");
+                toggleOpen();
+              }}
               value="activity"
             >
               <Activity />
@@ -132,10 +132,10 @@ const CommandPalette = () => {
             </CommandItem>
 
             <CommandItem
-              onSelect={ () => {
-                router.push("/stack")
-                toggleOpen()
-              } }
+              onSelect={() => {
+                router.push("/stack");
+                toggleOpen();
+              }}
               value="stack"
             >
               <Info />
@@ -145,7 +145,7 @@ const CommandPalette = () => {
 
           <Command.Group heading="Connect &not;">
             <CommandItem
-              onSelect={ () =>
+              onSelect={() =>
                 window.open("https://twitter.com/hybrid_alex", "_blank")
               }
               value="twitter"
@@ -154,7 +154,7 @@ const CommandPalette = () => {
               <span>Twitter</span>
             </CommandItem>
             <CommandItem
-              onSelect={ () =>
+              onSelect={() =>
                 window.open("https://github.com/alexcarpenter", "_blank")
               }
               value="github"
@@ -163,7 +163,7 @@ const CommandPalette = () => {
               <span>Github</span>
             </CommandItem>
             <CommandItem
-              onSelect={ () =>
+              onSelect={() =>
                 window.open(
                   "https://www.linkedin.com/in/imalexcarpenter/",
                   "_blank"
@@ -177,22 +177,22 @@ const CommandPalette = () => {
           </Command.Group>
 
           <Command.Group heading="Appearance &not;">
-            <CommandItem onSelect={ handleSetTheme } value="system">
+            <CommandItem onSelect={handleSetTheme} value="system">
               <Monitor />
               <span>System</span>
             </CommandItem>
-            <CommandItem onSelect={ handleSetTheme } value="light">
+            <CommandItem onSelect={handleSetTheme} value="light">
               <Sun />
               <span>Light</span>
             </CommandItem>
-            <CommandItem onSelect={ handleSetTheme } value="dark">
+            <CommandItem onSelect={handleSetTheme} value="dark">
               <Moon />
               <span>Dark</span>
             </CommandItem>
           </Command.Group>
 
           <Command.Group heading="Commands &not;">
-            <CommandItem onSelect={ handleCopyUrl } value="copy">
+            <CommandItem onSelect={handleCopyUrl} value="copy">
               <Copy />
               <span>Copy current URL</span>
             </CommandItem>
@@ -200,7 +200,7 @@ const CommandPalette = () => {
         </Command.List>
       </Command.Dialog>
     </>
-  )
-}
+  );
+};
 
-export { CommandPalette }
+export { CommandPalette };
