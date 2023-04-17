@@ -35,9 +35,9 @@ const Home: NextPage<{
             colEnd={{ xs: "-1", lg: "-1" }}
           >
             <Image
-              src="/me.png"
-              width="100"
-              height="100"
+              src="/me2.png"
+              width="120"
+              height="120"
               alt="Headshot"
               style={{
                 //filter: "grayscale(0.2)",
@@ -149,7 +149,7 @@ const Home: NextPage<{
 
       <Spacer height="xxxl" />
 
-      <Recommendations recommendations={recommendations} />
+      {/*   <Recommendations recommendations={recommendations} /> */}
     </>
   );
 };
