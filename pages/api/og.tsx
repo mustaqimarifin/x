@@ -7,7 +7,7 @@ export const config = {
 };
 
 const font = fetch(
-  new URL("../../public/fonts/SFMono.woff2", import.meta.url)
+  new URL("../../public/fonts/Inter-SemiBold.otf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export default async function handler(req: NextRequest) {
@@ -19,7 +19,7 @@ export default async function handler(req: NextRequest) {
       : "Product Operations";
     const description = searchParams.has("description")
       ? searchParams.get("description")?.slice(0, 100)
-      : "alexcarpenter.me";
+      : "eff1gy.xyz";
 
     return new ImageResponse(
       (
@@ -35,10 +35,7 @@ export default async function handler(req: NextRequest) {
           }}
         >
           <img
-            src={new URL(
-              "../../public/img/me.jpeg",
-              import.meta.url
-            ).toString()}
+            src={new URL("../../public/me2.png", import.meta.url).toString()}
             width={96}
             height={96}
             alt=""

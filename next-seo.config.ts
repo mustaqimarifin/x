@@ -7,16 +7,16 @@ export default {
   openGraph: {
     locale: "en_US",
     type: "website",
-    url: "https://alexcarpenter.me",
+    url: "https://eff1gy.xyz",
     site_name: "Mustaqim Arifin",
     images: [
       {
-        url: "https://alexcarpenter.me/apple-touch-icon.png",
+        url: "https://x-three-steel.vercel.app//logo.png",
       },
     ],
   },
   twitter: {
-    handle: "@hybrid_alex",
+    handle: "@vmprmyth",
     cardType: "summary",
   },
   additionalLinkTags: [
@@ -25,8 +25,8 @@ export default {
       href: "/favicon.svg",
     },
     {
-      rel: "apple-touch-icon",
-      href: "https://alexcarpenter.me/apple-touch-icon.png",
+      rel: "logo ",
+      href: "https://x-three-steel.vercel.app//logo.png",
       sizes: "180x180",
     },
   ],

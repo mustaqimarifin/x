@@ -33,16 +33,16 @@ const routes = [
 const connect = [
   {
     label: "Twitter",
-    href: "https://twitter.com/hybrid_alex",
+    href: "https://twitter.com/vmprmyth",
   },
   {
     label: "Github",
-    href: "https://github.com/alexcarpenter",
+    href: "https://github.com/mustaqimarifin",
   },
-  {
+  /* {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/imalexcarpenter",
-  },
+  }, */
 ];
 
 const Banner = () => {

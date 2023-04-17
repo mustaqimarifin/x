@@ -155,14 +155,14 @@ const CommandPalette = () => {
             </CommandItem>
             <CommandItem
               onSelect={() =>
-                window.open("https://github.com/alexcarpenter", "_blank")
+                window.open("https://github.com/mustaqimarifin", "_blank")
               }
               value="github"
             >
               <GitHub />
               <span>Github</span>
             </CommandItem>
-            <CommandItem
+            {/*             <CommandItem
               onSelect={() =>
                 window.open(
                   "https://www.linkedin.com/in/imalexcarpenter/",
@@ -173,7 +173,7 @@ const CommandPalette = () => {
             >
               <Linkedin />
               <span>LinkedIn</span>
-            </CommandItem>
+            </CommandItem> */}
           </Command.Group>
 
           <Command.Group heading="Appearance &not;">

@@ -42,10 +42,10 @@ const PostPage: NextPage<{ post: Post }> = ({ post }) => {
         openGraph={{
           title: post.title,
           description: post.description,
-          url: `https://alexcarpenter.me/posts/${post.slug}`,
+          url: `https://x-three-steel.vercel.app/posts/${post.slug}`,
           images: [
             {
-              url: `https://alexcarpenter.me/api/og?title=${post.title}`,
+              url: `https://x-three-steel.vercel.app/api/og?title=${post.title}`,
             },
           ],
         }}
