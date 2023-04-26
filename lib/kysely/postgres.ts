@@ -5,7 +5,7 @@ import { Pool } from "pg";
 export const db = new Kysely<DB>({
   dialect: new PostgresDialect({
     pool: new Pool({
-      connectionString: "postgresql://postgres@localhost:5432/ass",
+      connectionString: process.env.PGSQL2 as string,
     }),
   }),
 });

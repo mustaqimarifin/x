@@ -1,7 +1,6 @@
 import { defineDatabase, makeSource } from "contentlayer-source-notion";
 import * as notion from "@notionhq/client";
-import { NotionAPI } from "notion-client";
-import { NotionCompatAPI } from "notion-compat";
+
 
 const client = new notion.Client({
   auth: "secret_md9N3i45t36vB9dFWi6NukYEdagUNHKeqOKgjJ9hg0q",
