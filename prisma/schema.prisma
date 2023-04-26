@@ -1,10 +1,15 @@
-generator kysely {
-  provider = "prisma-kysely"
+//generator kysely {
+//  provider = "prisma-kysely"
 
   // Optionally provide a destination directory for the generated file
   // and a filename of your choice
-  output   = "../types"
-  fileName = "kysely.ts"
+//  output   = "../types"
+//  fileName = "kysely.ts"
+//}
+generator client {
+  provider     = "prisma-client-js"
+  relationMode = "foreignKeys"
+  //precountFeatures = "(array)"
 }
 
 datasource db {

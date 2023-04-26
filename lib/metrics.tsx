@@ -1,7 +1,7 @@
 import "server-only";
 import { db } from "lib/kysely/postgres";
 
-import { Octokit } from "@octokit/rest";
+//import { Octokit } from "@octokit/rest";
 import { cache } from "react";
 
 export const getBlogViews = cache(async () => {
