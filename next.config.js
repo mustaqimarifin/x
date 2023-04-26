@@ -1,5 +1,5 @@
 const { get } = require("@vercel/edge-config");
-const { withContentlayer } = require("next-contentlayer");
+//const { withContentlayer } = require("next-contentlayer");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -26,7 +26,7 @@ const nextConfig = {
 
   experimental: {
     appDir: true,
-   // serverComponentsExternalPackages: ["@prisma/client"],
+    // serverComponentsExternalPackages: ["@prisma/client"],
   },
   // @ts-ignore
   redirects() {
@@ -38,4 +38,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withContentlayer(nextConfig);
+module.exports = nextConfig;

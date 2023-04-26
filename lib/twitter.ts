@@ -1,4 +1,3 @@
-
 export const getTweets = async (ids) => {
   if (ids.length === 0) {
     return [];

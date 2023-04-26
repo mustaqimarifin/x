@@ -2,7 +2,6 @@
 //import { getPreviewImageMap } from "lib/notion/previewImages"
 //import { NotionAPI } from "notion-client"
 //import { getPage } from "lib/notion"
-import { getPage } from "lib/notion";
 import { NotionAPI } from "notion-client";
 import { Collection, Decoration, PageBlock } from "notion-types";
 import { getDateValue, getPageProperty } from "notion-utils";
@@ -98,7 +97,7 @@ export function processDatabaseItem<T>(
 //https://mstqmarfn.notion.site/e55363fd2d2441d0bc00b9a26cccf7a0?v=1b09afd3bd7f4961a620ea550c8a8368
 const notion = new NotionAPI();
 
-export const getPostDatabase = async () => {
+/* export const getPostDatabase = async () => {
   const recordMap = await notion.getPage("d60770573fee487984f182b3a72fa803");
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
@@ -107,7 +106,7 @@ export const getPostDatabase = async () => {
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<PostDatabaseItem>(pageBlock, collection)
     );
-};
+}; */
 
 export const getDatabasePage = cache(async <T>(id: string) => {
   const recordMap = await notion.getPage(id);

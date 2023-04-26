@@ -6,8 +6,8 @@ import { NotionText } from "./NotionText";
 import { textDecorationsToString } from "./NotionUtils";
 import { Spotify } from "react-spotify-embed";
 import { TweetEmbed } from "./TweetEmbed";
-//import Image from "next/image"
-import Image from "./Pics";
+import Image from "next/image";
+//import Image from "./Pics"
 import { Exercise } from "./Exercise";
 import { Audio } from "./audio";
 import { cx } from "lib/utils";
@@ -129,7 +129,13 @@ function BlockRenderer({
 
       return (
         <div className="aspect-square overflow-hidden rounded-md">
-          <Image src={imgSRC} alt={""} className="object-cover" />
+          <Image
+            src={imgSRC}
+            alt={""}
+            width={900}
+            height={900}
+            className="object-cover"
+          />
         </div>
       );
     }
@@ -341,18 +347,16 @@ export function NotionBlock({
 }) {
   const block = recordMap.block[blockId]?.value;
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <BlockRenderer block={block} recordMap={recordMap}>
-        {block.content?.map((childBlockId) => {
-          return (
-            <NotionBlock
-              blockId={childBlockId}
-              recordMap={recordMap}
-              key={childBlockId}
-            />
-          );
-        })}
-      </BlockRenderer>
-    </Suspense>
+    <BlockRenderer block={block} recordMap={recordMap}>
+      {block.content?.map((childBlockId) => {
+        return (
+          <NotionBlock
+            blockId={childBlockId}
+            recordMap={recordMap}
+            key={childBlockId}
+          />
+        );
+      })}
+    </BlockRenderer>
   );
 }
