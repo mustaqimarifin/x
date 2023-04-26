@@ -1,18 +1,21 @@
+const { get } = require("@vercel/edge-config");
 const { withContentlayer } = require("next-contentlayer");
-const { createVanillaExtractPlugin } = require("@vanilla-extract/next-plugin");
-const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ["ts", "tsx", "js", "jsx", "mdx"],
   swcMinify: true,
   reactStrictMode: true,
-
+  staticPageGenerationTimeout: 300,
   images: {
+    dangerouslyAllowSVG: true,
     formats: ["image/avif", "image/webp"],
+
     domains: [
       "i.scdn.co", // Spotify Album Art
       "pbs.twimg.com", // Twitter Profile Picture
       "cdn.sanity.io",
+      "www.notion.so",
       "flowbite.com",
       "lh3.googleusercontent.com",
       "i.ytimg.com",
@@ -20,16 +23,19 @@ const nextConfig = {
       "img1-tw.alphaxcdn.com",
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: "/posts/jon-gaffney-edc-winter-2021",
-        destination:
-          "https://gear.alexcarpenter.me/posts/jon-gaffney-edc-winter-2021",
-        permanent: true,
-      },
-    ];
+
+  experimental: {
+    appDir: true,
+    serverComponentsExternalPackages: ["@prisma/client"],
+  },
+  // @ts-ignore
+  redirects() {
+    try {
+      return get("redirects");
+    } catch {
+      return [];
+    }
   },
 };
 
-module.exports = withContentlayer(withVanillaExtract(nextConfig));
+module.exports = withContentlayer(nextConfig);
