@@ -1,29 +1,28 @@
-import type { NextApiRequest, NextApiResponse } from "next"
-import { authOptions } from "./auth/[...nextauth]"
-import { getServerSession } from "next-auth"
-import { db } from "lib/kysely/postgres"
-import { nanoid } from 'nanoid'
+import type { NextApiRequest, NextApiResponse } from "next";
+import { authOptions } from "./auth/[...nextauth]";
+import { getServerSession } from "next-auth";
+import { db } from "lib/kysely/postgres";
+import { nanoid } from "nanoid";
 
-export default async function handler (
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
-    return res.status(403).end()
+    return res.status(403).end();
   }
 
   if (req.method === "POST") {
     db.insertInto("Guestbook")
       .values({
-
         userId: session.user.id,
         body: (req.body.body || "").slice(0, 500),
       })
-      .execute()
+      .execute();
 
-    return res.status(200).json({ error: null })
+    return res.status(200).json({ error: null });
   }
 
   if (req.method === "DELETE") {
@@ -31,10 +30,10 @@ export default async function handler (
       .deleteFrom("Guestbook")
       .where("id", "=", req.body.id)
 
-      .execute()
+      .execute();
 
-    return res.status(204).json({})
+    return res.status(204).json({});
   }
 
-  return res.send("Method not allowed.")
+  return res.send("Method not allowed.");
 }

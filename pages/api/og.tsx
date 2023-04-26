@@ -24,7 +24,7 @@ export default async function handler(req: NextRequest) {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
-          backgroundImage: "url(http://localhost:3000/og-bg.png)",
+          backgroundImage: "url(https://x-three-steel.vercel.app/og-bg.png)",
         }}
       >
         <div

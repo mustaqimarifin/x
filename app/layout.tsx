@@ -50,11 +50,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mustaqim Arifin",
     description: "Developer, writer, and creator.",
-    url: "http://localhost:3000",
+    url: "https://x-three-steel.vercel.app",
     siteName: "Mustaqim Arifin",
     images: [
       {
-        url: "http://localhost:3000/og.jpg",
+        url: "https://x-three-steel.vercel.app/og.jpg",
         width: 1920,
         height: 1080,
       },
@@ -79,10 +79,6 @@ export const metadata: Metadata = {
   },
   icons: {
     shortcut: "/favicon.ico",
-  },
-  verification: {
-    google: "eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw",
-    yandex: "14d2e73487fa6c71",
   },
 };
 

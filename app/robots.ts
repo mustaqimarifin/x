@@ -5,7 +5,7 @@ export default function robots() {
         userAgent: "*",
       },
     ],
-    sitemap: "http://localhost:3000/sitemap.xml",
-    host: "http://localhost:3000",
+    sitemap: "https://x-three-steel.vercel.app/sitemap.xml",
+    host: "https://x-three-steel.vercel.app",
   };
 }
