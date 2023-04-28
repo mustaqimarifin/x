@@ -5,8 +5,8 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 export type Role = "BLOCKED" | "USER" | "ADMIN";
 export type Account = {
-  id: Generated<string>;
-  userId: string;
+  id: Generated<number>
+  userId: number;
   type: string;
   provider: string;
   providerAccountId: string;
@@ -23,20 +23,20 @@ export type Comment = {
   text: string;
   createdAt: Generated<Timestamp>;
   updatedAt: Timestamp | null;
-  userId: string | null;
-  parentId: string | null;
+  userId: number | null;
+  parentId: number | null;
   slug: string | null;
 };
 export type Guestbook = {
   id: Generated<number>;
-  userId: string | null;
+  userId: number | null;
   body: string;
   createdAt: Generated<Timestamp>;
   updatedAt: Generated<Timestamp>;
 };
 export type Like = {
-  userId: string;
-  commentId: string;
+  userId: number;
+  commentId: number;
 };
 export type Post = {
   id: Generated<number>;
@@ -44,13 +44,13 @@ export type Post = {
   count: Generated<number>;
 };
 export type Session = {
-  id: Generated<string>;
+  id: Generated<number>
   sessionToken: string;
-  userId: string;
+  userId: number;
   expires: Timestamp;
 };
 export type User = {
-  id: Generated<string>;
+  id: Generated<number>
   role: Generated<Role>;
   name: string;
   email: string | null;

@@ -1,7 +1,8 @@
-import type { GeneratedAlways } from "kysely";
+import type { Generated } from "kysely";
+import 'server-only'
 
 interface User {
-  id: string;
+  id: Generated<number>
   name: string | null;
   email: string;
   emailVerified: Date | string | null;
@@ -9,7 +10,7 @@ interface User {
 }
 
 interface Account {
-  id: string;
+  id: Generated<number>
   userId: string;
   type: string;
   provider: string;
@@ -26,7 +27,8 @@ interface Account {
 }
 
 interface Session {
-  id: string;
+  id: Generated<number>
+
   userId: string;
   sessionToken: string;
   expires: Date | string;

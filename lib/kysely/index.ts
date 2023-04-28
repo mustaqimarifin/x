@@ -1,3 +1,4 @@
+//@ts-nocheck
 /**
  * <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", padding: 16}}>
  *  <p style={{fontWeight: "normal"}}><a href="https://koskimas.github.io/kysely/">Kysely</a> adapter for Auth.js / NextAuth.js.</p>
@@ -14,11 +15,12 @@
  *
  * @module @next-auth/kysely-adapter
  */
-import { Kysely, SqliteAdapter } from "kysely";
-import type { Adapter } from "next-auth/adapters";
-import type { Database } from "./database";
+import { Kysely, SqliteAdapter } from "kysely"
+import type { Database } from "./database"
+import type { DB } from "types/kysely"
+import { Adapter } from "next-auth/adapters"
 
-type ReturnData<T = never> = Record<string, Date | string | T>;
+type ReturnData<T = never> = Record<string, Date | string | T>
 /**
  * ## Basic usage
  * This is the Kysely Adapter for [`next-auth`](https://authjs.dev). This package can only be used in conjunction with the primary `next-auth` package. It is not a standalone package.
@@ -202,10 +204,10 @@ type ReturnData<T = never> = Record<string, Date | string | T>;
  * ## Naming conventions
  * If mixed snake_case and camelCase column names is an issue for you and/or your underlying database system, we recommend using Kysely's `CamelCasePlugin` ([see the documentation here](https://koskimas.github.io/kysely/classes/CamelCasePlugin.html)) feature to change the field names. This won't affect NextAuth.js, but will allow you to have consistent casing when using Kysely.
  */
-export function KyselyAdapter(db: Kysely<Database>): Adapter {
-  const adapter = db.getExecutor().adapter;
-  const supportsReturning = adapter.supportsReturning;
-  const storeDatesAsISOStrings = adapter instanceof SqliteAdapter;
+export function KyselyAdapter (db: Kysely<Database>): Adapter {
+  const adapter = db.getExecutor().adapter
+  const supportsReturning = adapter.supportsReturning
+  const storeDatesAsISOStrings = adapter instanceof SqliteAdapter
 
   /** Helper function to return the passed in object and its specified prop
    * as an ISO string if SQLite is being used.
@@ -213,72 +215,72 @@ export function KyselyAdapter(db: Kysely<Database>): Adapter {
   function coerceInputData<
     T extends Partial<Record<K, Date | null>>,
     K extends keyof T
-  >(data: T, key: K) {
-    const value = data[key];
+  > (data: T, key: K) {
+    const value = data[key]
     return {
       ...data,
       [key]: value && storeDatesAsISOStrings ? value.toISOString() : value,
-    };
+    }
   }
 
   /**
    * Helper function to return the passed in object and its specified prop as a date.
    * Necessary because SQLite has no date type so we store dates as ISO strings.
    **/
-  function coerceReturnData<T extends Partial<ReturnData>, K extends keyof T>(
+  function coerceReturnData<T extends Partial<ReturnData>, K extends keyof T> (
     data: T,
     key: K
-  ): Omit<T, K> & Record<K, Date>;
+  ): Omit<T, K> & Record<K, Date>
   function coerceReturnData<
     T extends Partial<ReturnData<null>>,
     K extends keyof T
-  >(data: T, key: K): Omit<T, K> & Record<K, Date | null>;
+  > (data: T, key: K): Omit<T, K> & Record<K, Date | null>
   function coerceReturnData<
     T extends Partial<ReturnData<null>>,
     K extends keyof T
-  >(data: T, key: K) {
-    const value = data[key];
+  > (data: T, key: K) {
+    const value = data[key]
     return Object.assign(data, {
       [key]: value && typeof value === "string" ? new Date(value) : value,
-    });
+    })
   }
 
   return {
-    async createUser(data) {
-      const userData = coerceInputData(data, "emailVerified");
-      const query = db.insertInto("User").values(userData);
+    async createUser (data) {
+      const userData = coerceInputData(data, "emailVerified")
+      const query = db.insertInto("User").values(userData)
       const result = supportsReturning
         ? await query.returningAll().executeTakeFirstOrThrow()
         : await query.executeTakeFirstOrThrow().then(async () => {
-            return await db
-              .selectFrom("User")
-              .selectAll()
-              .where("email", "=", `${userData.email}`)
-              .executeTakeFirstOrThrow();
-          });
-      return coerceReturnData(result, "emailVerified");
+          return await db
+            .selectFrom("User")
+            .selectAll()
+            .where("email", "=", `${userData.email}`)
+            .executeTakeFirstOrThrow()
+        })
+      return coerceReturnData(result, "emailVerified")
     },
-    async getUser(id) {
+    async getUser (id) {
       const result =
         (await db
           .selectFrom("User")
           .selectAll()
           .where("id", "=", id)
-          .executeTakeFirst()) ?? null;
-      if (!result) return null;
-      return coerceReturnData(result, "emailVerified");
+          .executeTakeFirst()) ?? null
+      if (!result) return null
+      return coerceReturnData(result, "emailVerified")
     },
-    async getUserByEmail(email) {
+    async getUserByEmail (email) {
       const result =
         (await db
           .selectFrom("User")
           .selectAll()
           .where("email", "=", email)
-          .executeTakeFirst()) ?? null;
-      if (!result) return null;
-      return coerceReturnData(result, "emailVerified");
+          .executeTakeFirst()) ?? null
+      if (!result) return null
+      return coerceReturnData(result, "emailVerified")
     },
-    async getUserByAccount({ providerAccountId, provider }) {
+    async getUserByAccount ({ providerAccountId, provider }) {
       const result =
         (await db
           .selectFrom("User")
@@ -286,54 +288,54 @@ export function KyselyAdapter(db: Kysely<Database>): Adapter {
           .selectAll("User")
           .where("Account.providerAccountId", "=", providerAccountId)
           .where("Account.provider", "=", provider)
-          .executeTakeFirst()) ?? null;
-      if (!result) return null;
-      return coerceReturnData(result, "emailVerified");
+          .executeTakeFirst()) ?? null
+      if (!result) return null
+      return coerceReturnData(result, "emailVerified")
     },
-    async updateUser({ id, ...user }) {
-      if (!id) throw new Error("User not found");
-      const userData = coerceInputData(user, "emailVerified");
-      const query = db.updateTable("User").set(userData).where("id", "=", id);
+    async updateUser ({ id, ...user }) {
+      if (!id) throw new Error("User not found")
+      const userData = coerceInputData(user, "emailVerified")
+      const query = db.updateTable("User").set(userData).where("id", "=", id)
       const result = supportsReturning
         ? await query.returningAll().executeTakeFirstOrThrow()
         : await query.executeTakeFirstOrThrow().then(async () => {
-            return await db
-              .selectFrom("User")
-              .selectAll()
-              .where("id", "=", id)
-              .executeTakeFirstOrThrow();
-          });
-      return coerceReturnData(result, "emailVerified");
+          return await db
+            .selectFrom("User")
+            .selectAll()
+            .where("id", "=", id)
+            .executeTakeFirstOrThrow()
+        })
+      return coerceReturnData(result, "emailVerified")
     },
-    async deleteUser(userId) {
-      await db.deleteFrom("User").where("User.id", "=", userId).execute();
+    async deleteUser (userId) {
+      await db.deleteFrom("User").where("User.id", "=", userId).execute()
     },
-    async linkAccount(account) {
-      await db.insertInto("Account").values(account).executeTakeFirstOrThrow();
+    async linkAccount (account) {
+      await db.insertInto("Account").values(account).executeTakeFirstOrThrow()
     },
-    async unlinkAccount({ providerAccountId, provider }) {
+    async unlinkAccount ({ providerAccountId, provider }) {
       await db
         .deleteFrom("Account")
         .where("Account.providerAccountId", "=", providerAccountId)
         .where("Account.provider", "=", provider)
-        .executeTakeFirstOrThrow();
+        .executeTakeFirstOrThrow()
     },
-    async createSession(data) {
-      const sessionData = coerceInputData(data, "expires");
-      const query = db.insertInto("Session").values(sessionData);
+    async createSession (data) {
+      const sessionData = coerceInputData(data, "expires")
+      const query = db.insertInto("Session").values(sessionData)
       const result = supportsReturning
         ? await query.returningAll().executeTakeFirstOrThrow()
         : await (async () => {
-            await query.executeTakeFirstOrThrow();
-            return await db
-              .selectFrom("Session")
-              .selectAll()
-              .where("sessionToken", "=", sessionData.sessionToken)
-              .executeTakeFirstOrThrow();
-          })();
-      return coerceReturnData(result, "expires");
+          await query.executeTakeFirstOrThrow()
+          return await db
+            .selectFrom("Session")
+            .selectAll()
+            .where("sessionToken", "=", sessionData.sessionToken)
+            .executeTakeFirstOrThrow()
+        })()
+      return coerceReturnData(result, "expires")
     },
-    async getSessionAndUser(sessionTokenArg) {
+    async getSessionAndUser (sessionTokenArg) {
       const result = await db
         .selectFrom("Session")
         .innerJoin("User", "User.id", "Session.userId")
@@ -345,79 +347,79 @@ export function KyselyAdapter(db: Kysely<Database>): Adapter {
           "Session.expires",
         ])
         .where("Session.sessionToken", "=", sessionTokenArg)
-        .executeTakeFirst();
-      if (!result) return null;
-      const { sessionId: id, userId, sessionToken, expires, ...user } = result;
+        .executeTakeFirst()
+      if (!result) return null
+      const { sessionId: id, userId, sessionToken, expires, ...user } = result
       return {
         user: coerceReturnData({ ...user }, "emailVerified"),
         session: coerceReturnData(
           { id, userId, sessionToken, expires },
           "expires"
         ),
-      };
+      }
     },
-    async updateSession(session) {
-      const sessionData = coerceInputData(session, "expires");
+    async updateSession (session) {
+      const sessionData = coerceInputData(session, "expires")
       const query = db
         .updateTable("Session")
         .set(sessionData)
-        .where("Session.sessionToken", "=", session.sessionToken);
+        .where("Session.sessionToken", "=", session.sessionToken)
       const result = supportsReturning
         ? await query.returningAll().executeTakeFirstOrThrow()
         : await query.executeTakeFirstOrThrow().then(async () => {
-            return await db
-              .selectFrom("Session")
-              .selectAll()
-              .where("Session.sessionToken", "=", sessionData.sessionToken)
-              .executeTakeFirstOrThrow();
-          });
-      return coerceReturnData(result, "expires");
+          return await db
+            .selectFrom("Session")
+            .selectAll()
+            .where("Session.sessionToken", "=", sessionData.sessionToken)
+            .executeTakeFirstOrThrow()
+        })
+      return coerceReturnData(result, "expires")
     },
-    async deleteSession(sessionToken) {
+    async deleteSession (sessionToken) {
       await db
         .deleteFrom("Session")
         .where("Session.sessionToken", "=", sessionToken)
-        .executeTakeFirstOrThrow();
+        .executeTakeFirstOrThrow()
     },
-    async createVerificationToken(verificationToken) {
+    async createVerificationToken (verificationToken) {
       const verificationTokenData = coerceInputData(
         verificationToken,
         "expires"
-      );
+      )
       const query = db
         .insertInto("VerificationToken")
-        .values(verificationTokenData);
+        .values(verificationTokenData)
       const result = supportsReturning
         ? await query.returningAll().executeTakeFirstOrThrow()
         : await query.executeTakeFirstOrThrow().then(async () => {
-            return await db
-              .selectFrom("VerificationToken")
-              .selectAll()
-              .where("token", "=", verificationTokenData.token)
-              .executeTakeFirstOrThrow();
-          });
-      return coerceReturnData(result, "expires");
+          return await db
+            .selectFrom("VerificationToken")
+            .selectAll()
+            .where("token", "=", verificationTokenData.token)
+            .executeTakeFirstOrThrow()
+        })
+      return coerceReturnData(result, "expires")
     },
-    async useVerificationToken({ identifier, token }) {
+    async useVerificationToken ({ identifier, token }) {
       const query = db
         .deleteFrom("VerificationToken")
         .where("VerificationToken.token", "=", token)
-        .where("VerificationToken.identifier", "=", identifier);
+        .where("VerificationToken.identifier", "=", identifier)
       const result = supportsReturning
         ? (await query.returningAll().executeTakeFirst()) ?? null
         : await db
-            .selectFrom("VerificationToken")
-            .selectAll()
-            .where("token", "=", token)
-            .executeTakeFirst()
-            .then(async (res) => {
-              await query.executeTakeFirst();
-              return res;
-            });
-      if (!result) return null;
-      return coerceReturnData(result, "expires");
+          .selectFrom("VerificationToken")
+          .selectAll()
+          .where("token", "=", token)
+          .executeTakeFirst()
+          .then(async (res) => {
+            await query.executeTakeFirst()
+            return res
+          })
+      if (!result) return null
+      return coerceReturnData(result, "expires")
     },
-  };
+  }
 }
 
 /**
@@ -428,8 +430,8 @@ export function KyselyAdapter(db: Kysely<Database>): Adapter {
  * the second generic argument. The generated types will be used, and
  * `AuthedKysely` will only verify that the correct fields exist.
  **/
-export class AuthedKysely<DB extends T, T = Database> extends Kysely<DB> {}
+export class AuthedKysely<DB extends T, T = Database> extends Kysely<DB> { }
 
 export type Codegen = {
-  [K in keyof Database]: { [J in keyof Database[K]]: unknown };
-};
+  [K in keyof Database]: { [J in keyof Database[K]]: unknown }
+}

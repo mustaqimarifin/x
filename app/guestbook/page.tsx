@@ -9,8 +9,9 @@ import { cache } from "react";
 import { getCurrentUser } from "lib/session";
 import Avatar from "components/Avatar";
 import Balancer from "react-wrap-balancer";
-import { getServerSession } from "next-auth";
+import { Session, getServerSession } from "next-auth";
 import { authOptions } from "pages/api/auth/[...nextauth]";
+import { Post } from "types/kysely"
 
 /* const getGuestbook = cache(async () => {
   return await prisma.guestbook.findMany({
@@ -48,7 +49,7 @@ export const dynamic = "force-dynamic";
 
 export default async function GuestbookPage() {
   let entries;
-  let session;
+  let session : Session
 
   try {
     const [guestbookRes, sessionRes] = await Promise.allSettled([
