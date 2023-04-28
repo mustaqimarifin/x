@@ -16,7 +16,7 @@ export default function Form() {
     const form = e.currentTarget;
     const input = form.elements.namedItem("entry") as HTMLInputElement;
 
-    const res = await fetch("/api/guestbook", {
+    const res = await fetch("/api/hotline", {
       body: JSON.stringify({
         body: input.value,
       }),
@@ -27,7 +27,7 @@ export default function Form() {
     });
 
     input.value = "";
-    const { error } = await res.json();
+    await res.json();
 
     setIsFetching(false);
     startTransition(() => {

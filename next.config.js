@@ -16,7 +16,7 @@ const nextConfig = {
       "pbs.twimg.com", // Twitter Profile Picture
       "cdn.sanity.io",
       "www.notion.so",
-      "flowbite.com",
+      "flowbite.s3.amazonaws.com",
       "lh3.googleusercontent.com",
       "i.ytimg.com",
       "avatars.githubusercontent.com",

@@ -30,9 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".contentlayer/generated",
-    "types",
-    "lib/imgmeta.ts"
+    ".contentlayer/generated"
   ],
   "exclude": ["node_modules"]
 }

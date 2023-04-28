@@ -1,24 +1,24 @@
-import "./global.css"
-import "react-notion-x/src/styles.css"
-import "./notion.css"
-import "react-custom-soundcloud/dist/style.css"
-import "./prism.css"
+import "./global.css";
+import "react-notion-x/src/styles.css";
+import "./notion.css";
+import "react-custom-soundcloud/dist/style.css";
+//import "./prism.css";
 
-import type { Metadata } from "next"
-import localFont from "next/font/local"
-import Sidebar from "../components/sidebar"
-import { Analytics } from "@vercel/analytics/react"
-import { cx } from "lib/utils"
-import { Providers } from "components/SessionProvider"
-import { PageTransition } from "components/PageTransition"
-import SupabaseProvider from "components/supabase-provider"
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import Sidebar from "../components/sidebar";
+import { Analytics } from "@vercel/analytics/react";
+import { cx } from "lib/utils";
+import { PageTransition } from "components/PageTransition";
+import { AuthProvider } from "components/supabase-provider";
+import supabase from "lib/supabase";
 
 const kaisei = localFont({
   src: "../public/fonts/kaisei-tokumin-latin-700-normal.woff2",
   weight: "700",
   variable: "--font-kaisei",
   display: "swap",
-})
+});
 
 const sohne = localFont({
   src: [
@@ -40,7 +40,7 @@ const sohne = localFont({
   ],
   variable: "--font-sohne",
   display: "swap",
-})
+});
 
 export const metadata: Metadata = {
   title: {
@@ -81,33 +81,37 @@ export const metadata: Metadata = {
   icons: {
     shortcut: "/favicon.ico",
   },
-}
+};
 
-export default function RootLayout ({
+export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  const accessToken = session?.access_token || null;
   return (
-    <Providers>
+    <AuthProvider accessToken={accessToken}>
       <html
         lang="en"
-        className={ cx(
+        className={cx(
           "bg-white text-black dark:bg-[#111010] dark:text-white",
           kaisei.variable,
           sohne.variable
-        ) }
+        )}
       >
         <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col subpixel-antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
           <Sidebar />
           <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
-            <PageTransition>              <SupabaseProvider>{ children }</SupabaseProvider>
-            </PageTransition>
+            <PageTransition> {children}</PageTransition>
 
             <Analytics />
           </main>
         </body>
       </html>
-    </Providers>
-  )
+    </AuthProvider>
+  );
 }

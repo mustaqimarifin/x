@@ -5,20 +5,14 @@ import { HighlightedCode } from "./HighlightedCode";
 import { NotionText } from "./NotionText";
 import { textDecorationsToString } from "./NotionUtils";
 import { Spotify } from "react-spotify-embed";
-import { TweetEmbed } from "./TweetEmbed";
 import Image from "next/image";
 //import Image from "./Pics"
 import { Exercise } from "./Exercise";
 import { Audio } from "./audio";
 import { cx } from "lib/utils";
+import { NextTweet } from "next-tweet";
 import YoutubeEmbed from "./YoutubeEmbed";
-import Tweep from "./tweet";
-import { CodeBlock } from "./CodeBlock";
-import { Code } from "./Code";
-import { NotionComponents } from "react-notion-x";
-import src from "keyv";
-import { normalizeUrl } from "notion-utils";
-import { LoadingSpinner } from "./spinner";
+
 function BlockIcon({ block }: { block: BaseBlock }) {
   const pageIcon: string | undefined = block.format?.page_icon;
   if (pageIcon === undefined) {
@@ -74,6 +68,10 @@ export const getSCID = (url: string): string | null => {
   return null;
 };
 
+const Tweet = ({ id }: { id: string }) => {
+  return <NextTweet id={id} />;
+};
+
 function BlockRenderer({
   block,
   recordMap,
@@ -104,7 +102,10 @@ function BlockRenderer({
         return <div className=""> </div>;
       }
       return (
-        <div className="prose my-4 whitespace-pre-wrap dark:prose-invert">
+        /*         <div className="prose my-4 whitespace-pre-wrap dark:prose-invert">
+                  <NotionText value={block.properties.title} recordMap={recordMap} />
+                </div> */
+        <div className="my-4 whitespace-pre-wrap ">
           <NotionText value={block.properties.title} recordMap={recordMap} />
         </div>
       );
@@ -112,7 +113,10 @@ function BlockRenderer({
     case "sub_header":
     case "sub_sub_header":
       return (
-        <div className="prose mb-2 mt-6 text-xl font-semibold dark:prose-invert">
+        /*         <div className="prose mb-2 mt-6 text-xl font-semibold dark:prose-invert">
+          <NotionText value={ block.properties.title } recordMap={ recordMap } />
+        </div> */
+        <div className=" mb-2 mt-6 text-xl font-semibold ">
           <NotionText value={block.properties.title} recordMap={recordMap} />
         </div>
       );
@@ -120,12 +124,6 @@ function BlockRenderer({
       const imgSRC = `https://www.notion.so/image/${encodeURIComponent(
         block.properties.source[0][0]
       )}?table=block&id=${block.id}`;
-
-      /*     const previewImage =
-        recordMap?.preview_images?.[block.properties.source[0][0]] ??
-        recordMap?.preview_images?.[
-        normalizeUrl(block.properties.source[0][0])
-        ] */
 
       return (
         <div className="aspect-square overflow-hidden rounded-md">
@@ -139,7 +137,8 @@ function BlockRenderer({
         </div>
       );
     }
-    case "bulleted_list": {
+    case "bulleted_list":
+    case "numbered_list": {
       const wrapList = (content: React.ReactNode, start?: number) =>
         block.type === "bulleted_list" ? (
           <ul className="list-disc pl-6">{content}</ul>
@@ -187,6 +186,17 @@ function BlockRenderer({
       return (
         <hr className="my-16 h-10 w-full border-none text-center before:text-2xl before:text-[#D1D5DB] before:content-['∿∿∿']"></hr>
       );
+    /*     case "code": {
+          //const match = /language-(\w+)/.exec(block.properties.language || '')
+    
+          return (
+            <div className="-mx-2 my-6 md:-mx-4">
+              <CodeBlock text={ textDecorationsToString(block.properties.title) } language={ textDecorationsToString(
+                block.properties.language
+              ).toLowerCase() } />
+            </div>
+          )
+        } */
     case "code": {
       return (
         <div className="-mx-2 my-6 md:-mx-4">
@@ -263,12 +273,13 @@ function BlockRenderer({
       const source =
         recordMap.signed_urls?.[block.id] ?? block.properties?.source?.[0]?.[0];
       const id = source.split("?")[0].split("/").pop();
+
       if (id === undefined) {
         return null;
       }
       return (
         <div className="my-4">
-          <Tweep id={id} />
+          <Tweet id={id} />
         </div>
       );
     }
@@ -312,14 +323,6 @@ function BlockRenderer({
         return (
           <div className="my-4">
             <YoutubeEmbed embedId={youtubeVideoId} />
-            {/*             <iframe
-              src={ `https://www.youtube.com/embed/${youtubeVideoId}${startTime !== null ? `?t=${startTime}` : ""
-                }` }
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen={ true }
-              className="w-full aspect-video"
-            ></iframe> */}
           </div>
         );
       }

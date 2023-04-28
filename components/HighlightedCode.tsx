@@ -1,9 +1,13 @@
 "use client";
 import { highlight, languages } from "prismjs";
-import "prismjs/components/prism-haskell";
-import "prismjs/components/prism-json";
-import "prismjs/components/prism-reason";
-import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-json.min.js";
+import "prismjs/components/prism-css.min.js";
+import "prismjs/components/prism-xml-doc.min.js";
+import "prismjs/components/prism-typescript.min.js";
+import "prismjs/components/prism-markdown.min.js";
+import "prismjs/components/prism-sql.min.js";
+import "prismjs/components/prism-go.min.js";
+import "prismjs/components/prism-graphql.min.js";
 import "../app/prism.css";
 
 export function HighlightedCode({

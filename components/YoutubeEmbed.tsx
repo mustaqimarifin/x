@@ -5,18 +5,6 @@ import LiteYouTubeEmbed from "react-lite-youtube-embed";
 
 const YoutubeEmbed = ({ embedId }) => (
   <div className="aspect-video overflow-hidden rounded-md ">
-    {/*     <iframe width="560" height="315" src="https://www.youtube.com/embed/MmZTDHGreVI" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-    <iframe
-      width="768"
-      height="432"
-      src={ `https://www.youtube.com/embed/${embedId}` }
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      title="Embedded youtube"
-      style={{
-        borderRadius: '12px',
-      }}
-    /> */}
     <LiteYouTubeEmbed
       id={embedId} // Default none, id of the video or playlist
       adNetwork={false} // Default true, to preconnect or not to doubleclick addresses called by YouTube iframe (the adnetwork from Google)

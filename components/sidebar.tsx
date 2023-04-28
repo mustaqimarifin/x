@@ -28,7 +28,7 @@ const navItems = {
   /*   "/works": {
     name: "works",
   }, */
-  "/guestbook": {
+  "/hotline": {
     name: "guestbook",
   },
 };

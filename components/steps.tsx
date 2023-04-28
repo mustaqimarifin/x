@@ -1,8 +1,10 @@
+import Image from "./Pics";
+
 export const Steps = () => {
   return (
     <>
       <a href="#" className="group relative block bg-black">
-        <img
+        <Image
           alt="Developer"
           src="/marvel1.jpg"
           className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
@@ -34,7 +36,7 @@ export const Steps = () => {
           <div className="divide-y divide-gray-700">
             <div className="mx-auto grid grid-cols-4 justify-center space-y-8 p-8 lg:space-y-0">
               <div className="col-span-full flex items-center justify-center lg:col-span-1">
-                <img
+                <Image
                   alt="Developer"
                   src="/marvel1.jpg"
                   className=" h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"

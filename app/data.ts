@@ -27,7 +27,7 @@ export type ProjectDatabaseItem = {
   id: string;
   date: string;
   pageId: string;
-  title: Decoration[];
+  title: Decoration[] | string;
   URL: string;
   summary: Decoration[];
   status?: boolean;

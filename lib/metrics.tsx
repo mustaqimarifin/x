@@ -1,17 +1,17 @@
 import "server-only";
-import { db } from "lib/kysely/postgres";
 
 //import { Octokit } from "@octokit/rest";
 import { cache } from "react";
+import supabase from "./supabase-browser";
 
 export const getBlogViews = cache(async () => {
   if (!process.env.TWITTER_API_TOKEN) {
     return 0;
   }
 
-  const data = await db.selectFrom("Post").select(["count"]).execute();
+  const { data } = await supabase.from("pageviews").select("*");
 
-  return data.reduce((acc, curr) => acc + Number(curr.count), 0);
+  return data?.reduce((acc, row) => acc + row.view_count, 0);
 });
 
 export async function getTweetCount() {
