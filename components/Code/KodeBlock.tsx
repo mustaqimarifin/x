@@ -10,7 +10,7 @@ import "prismjs/components/prism-go.min.js";
 import "prismjs/components/prism-graphql.min.js";
 import "../app/prism.css";
 
-export function HighlightedCode({
+export function KodeBlock({
   language,
   code,
 }: {

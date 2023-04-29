@@ -1,11 +1,11 @@
-export default function robots() {
+export default function robots () {
   return {
     rules: [
       {
         userAgent: "*",
       },
     ],
-    sitemap: "https://x-three-steel.vercel.app/sitemap.xml",
-    host: "https://x-three-steel.vercel.app",
-  };
+    sitemap: "https://eff1gy.xyz/sitemap.xml",
+    host: "https://eff1gy.xyz",
+  }
 }
