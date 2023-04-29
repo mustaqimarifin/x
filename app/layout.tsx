@@ -7,7 +7,7 @@ import { cx } from "lib/utils";
 import { AuthProvider } from "components/supabase-provider";
 import supabase from "lib/supabase";
 import { PageTransition } from "components/UI/PageTransition";
-import { NAV } from "components/UI/Sidebar";
+import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 
 const kaisei = localFont({

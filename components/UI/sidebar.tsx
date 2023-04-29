@@ -33,55 +33,11 @@ const navItems = {
   },
 };
 
-function Logo() {
-  return (
-    <Link aria-label="Lee Robinson" href="/">
-      <motion.svg
-        className="h-[25px] text-black dark:text-white md:h-[37px]"
-        width="25"
-        height="37"
-        viewBox="0 0 232 316"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <motion.path
-          initial={{
-            opacity: 0,
-            pathLength: 0,
-          }}
-          animate={{
-            opacity: 1,
-            pathLength: 1,
-          }}
-          transition={{
-            duration: 0.5,
-            type: "spring",
-            stiffness: 50,
-          }}
-          d="M39 316V0"
-          stroke="currentColor"
-          strokeWidth={78}
-        />
-        <motion.path
-          initial={{ x: -200, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{
-            duration: 0.5,
-            type: "spring",
-            stiffness: 50,
-          }}
-          d="M232 314.998H129.852L232 232.887V314.998Z"
-          fill="currentColor"
-        />
-      </motion.svg>
-    </Link>
-  );
-}
 
 export const NAV = () => {
   let pathname = usePathname() || "/";
-  if (pathname.includes("/posts/")) {
-    pathname = "/posts";
+  if (pathname.includes("/projects/")) {
+    pathname = "/projects";
   }
 
   return (
