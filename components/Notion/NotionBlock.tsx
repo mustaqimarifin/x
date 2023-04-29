@@ -3,14 +3,13 @@ import React from "react";
 import { processDatabaseItem } from "../../app/data";
 import { NotionText } from "./NotionText";
 import { textDecorationsToString } from "./NotionUtils";
-import { Spotify } from "react-spotify-embed";
 import Image from "next/image";
 import { Exercise } from "../Code/Exercise";
-import { Audio } from "../audio";
+import { Audio } from "../Embed/audio";
 import { cx } from "lib/utils";
 import { NextTweet } from "next-tweet";
-import YoutubeEmbed from "../YoutubeEmbed";
 import { KodeBlock } from "components/Code/KodeBlock";
+import YoutubeEmbed from "components/Embed/YoutubeEmbed"
 
 function BlockIcon({ block }: { block: BaseBlock }) {
   const pageIcon: string | undefined = block.format?.page_icon;
@@ -319,7 +318,7 @@ function BlockRenderer({
       const youtubeVideoId = getYoutubeId(source);
       if (youtubeVideoId !== null) {
         const params = new URLSearchParams(source.split("?")[1]);
-        const startTime = params.get("t");
+        //const startTime = params.get("t");
         return (
           <div className="my-4">
             <YoutubeEmbed embedId={youtubeVideoId} />

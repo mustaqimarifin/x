@@ -78,7 +78,7 @@ function Logo() {
   );
 }
 
-export default function Navbar() {
+export default function Sidebar() {
   let pathname = usePathname() || "/";
   if (pathname.includes("/posts/")) {
     pathname = "/posts";
