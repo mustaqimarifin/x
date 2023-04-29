@@ -1,5 +1,5 @@
 "use client";
-import { openPane } from "components/UI/AppState"
+import { openPane } from "components/UI/AppState";
 import React from "react";
 
 export function NotionTextAnchor({

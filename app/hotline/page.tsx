@@ -10,6 +10,7 @@ import Balancer from "react-wrap-balancer";
 
 import type { Database } from "types/supabase";
 import { serverClient } from "lib/supabase-server";
+import { Hotline } from "components/HotlineBling";
 
 /* const getGuestbook = cache(async () => {
   return await prisma.guestbook.findMany({
@@ -134,26 +135,14 @@ export default async function HotlinePage() {
         <>
           {entries &&
             entries.map((post: HotlineBling) => (
-              <div key={Number(post.id)} className="rounded-lg p-4  text-base ">
-                <div className="mb-2 flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="mr-3 inline-flex items-center text-xs font-semibold text-gray-900 dark:text-white">
-                      <Avatar
-                        className="mr-2 h-4 w-4 rounded-full"
-                        src={post.avatar}
-                        alt={post?.username}
-                      />
-                      {post?.username ?? post?.fullname}
-                    </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">
-                      {formatDate(post?.posted_at)}
-                    </div>
-                  </div>
-                </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">
-                  {post?.body}
-                </div>
-              </div>
+              <Hotline
+                key={post.id}
+                avatar={post.avatar}
+                username={post.username}
+                posted_at={post.posted_at}
+                body={post.body}
+                id={post.id}
+              />
             ))}
         </>
       </section>

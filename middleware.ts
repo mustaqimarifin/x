@@ -11,6 +11,6 @@ export async function middleware(req: NextRequest) {
   return res;
 }
 
-/* export const config = {
+export const config = {
   matcher: ["/hotline", "/projects"],
-}; */
+};

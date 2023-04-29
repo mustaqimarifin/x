@@ -1,6 +1,5 @@
-
-import { Chat } from "components/Misc/Chat"
-import { Timeline } from "components/Misc/timeline"
+import { Chat } from "components/Misc/Chat";
+import { Timeline } from "components/Misc/timeline";
 import Balancer from "react-wrap-balancer";
 
 export default function AboutPage() {

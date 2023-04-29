@@ -1,5 +1,5 @@
 "use client";
-export function LoadingSpinner(...args) {
+export function LoadingSpinner(...args: any[]) {
   return (
     <svg
       className="text-primary h-3.5 w-3.5 animate-spin"

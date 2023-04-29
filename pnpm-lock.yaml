@@ -19,6 +19,9 @@ dependencies:
   "@supabase/supabase-js":
     specifier: ^2.21.0
     version: 2.21.0(encoding@0.1.13)
+  "@use-gesture/react":
+    specifier: ^10.2.26
+    version: 10.2.26(react@18.2.0)
   "@vercel/analytics":
     specifier: ^1.0.0
     version: 1.0.0(react@18.2.0)
@@ -52,6 +55,9 @@ dependencies:
   mobx:
     specifier: ^6.9.0
     version: 6.9.0
+  mobx-react-lite:
+    specifier: ^3.4.3
+    version: 3.4.3(mobx@6.9.0)(react-dom@18.2.0)(react@18.2.0)
   nanoid:
     specifier: ^4.0.2
     version: 4.0.2
@@ -126,6 +132,9 @@ devDependencies:
   "@types/node":
     specifier: 18.16.2
     version: 18.16.2
+  "@types/prismjs":
+    specifier: ^1.26.0
+    version: 1.26.0
   "@types/react":
     specifier: 18.2.0
     version: 18.2.0
@@ -1613,6 +1622,13 @@ packages:
       }
     dev: false
 
+  /@types/prismjs@1.26.0:
+    resolution:
+      {
+        integrity: sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==,
+      }
+    dev: true
+
   /@types/prop-types@15.7.5:
     resolution:
       {
@@ -1838,6 +1854,25 @@ packages:
       "@typescript-eslint/types": 5.59.1
       eslint-visitor-keys: 3.4.0
     dev: true
+
+  /@use-gesture/core@10.2.26:
+    resolution:
+      {
+        integrity: sha512-NyFpQ3iID9iFBROXyyvU1D0NK+t+dP+WAVByhCvqHUenpxLD2NlRLVRpoK3XGGwksr6mU3PvZ2Nm4q0q+gLJPA==,
+      }
+    dev: false
+
+  /@use-gesture/react@10.2.26(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-0QhaE5mhaQbFlip4MX7n1nwCX8gax6Da1LsP2fZ/BU6xW9zyEmV6NX7DPelDxq1rr2NiBJh30vx9RIp80YeA/A==,
+      }
+    peerDependencies:
+      react: ">= 16.8.0"
+    dependencies:
+      "@use-gesture/core": 10.2.26
+      react: 18.2.0
+    dev: false
 
   /@vercel/analytics@1.0.0(react@18.2.0):
     resolution:
@@ -4722,6 +4757,27 @@ packages:
       {
         integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==,
       }
+    dev: false
+
+  /mobx-react-lite@3.4.3(mobx@6.9.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-NkJREyFTSUXR772Qaai51BnE1voWx56LOL80xG7qkZr6vo8vEaLF3sz1JNUVh+rxmUzxYaqOhfuxTfqUh0FXUg==,
+      }
+    peerDependencies:
+      mobx: ^6.1.0
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: "*"
+      react-native: "*"
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      mobx: 6.9.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /mobx@6.9.0:

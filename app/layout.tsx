@@ -7,7 +7,8 @@ import { cx } from "lib/utils";
 import { AuthProvider } from "components/supabase-provider";
 import supabase from "lib/supabase";
 import { PageTransition } from "components/UI/PageTransition";
-import Sidebar from "components/UI/sidebar";
+import Sidebar from "components/UI/Sidebar";
+import { PanesLayer } from "components/UI/PanesLayer";
 
 const kaisei = localFont({
   src: "../public/fonts/kaisei-tokumin-latin-700-normal.woff2",
@@ -103,7 +104,7 @@ export default async function RootLayout({
           <Sidebar />
           <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
             <PageTransition> {children}</PageTransition>
-
+            <PanesLayer />
             <Analytics />
           </main>
         </body>

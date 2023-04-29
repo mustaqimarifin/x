@@ -1,8 +1,7 @@
 "use client";
-import { openPane } from "components/UI/AppState"
+import { openPane } from "components/UI/AppState";
 import dynamic from "next/dynamic";
 import { useState } from "react";
-
 
 const CodeEditor = dynamic(() => import("./CodeEditor"), { suspense: true });
 

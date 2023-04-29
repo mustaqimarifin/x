@@ -29,13 +29,19 @@ export const AuthContext = createContext<SupabaseContext | undefined>(
   undefined
 );
 
-export const AuthProvider = (props) => {
+export const AuthProvider = ({
+  accessToken,
+  children,
+}: {
+  accessToken: string;
+  children: React.ReactNode;
+}) => {
   const [initial, setInitial] = useState(true);
   const [session, setSession] = useState(null);
   const [user, setUser] = useState(null);
   const [view, setView] = useState(VIEWS.SIGN_IN);
   const router = useRouter();
-  const { accessToken, ...rest } = props;
+  // const { accessToken, ...rest } = props;
 
   useEffect(() => {
     async function getActiveSession() {
@@ -75,22 +81,26 @@ export const AuthProvider = (props) => {
     };
   }, []);
 
-  const value = useMemo(() => {
-    return {
-      initial,
-      session,
-      user,
-      view,
-      setView,
-      signOut: () => supabase.auth.signOut(),
-    };
-  }, [initial, session, user, view]);
+  /*   const value = useMemo(() => {
+      return {
+        initial,
+        session,
+        user,
+        view,
+        setView,
+        signOut: async () => await supabase.auth.signOut(),
+      }
+    }, [initial, session, user, view]) */
 
-  return <AuthContext.Provider value={value} {...rest} />;
+  return (
+    <AuthContext.Provider value={{ supabase }}>
+      <>{children}</>
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {
-  const context: SupabaseContext = useContext(AuthContext);
+  const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
   }

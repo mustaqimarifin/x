@@ -1,17 +1,16 @@
 import { AudioBlock, BaseBlock, ExtendedRecordMap } from "notion-types";
-import React, { Suspense } from "react";
+import React from "react";
 import { processDatabaseItem } from "../../app/data";
 import { NotionText } from "./NotionText";
 import { textDecorationsToString } from "./NotionUtils";
 import { Spotify } from "react-spotify-embed";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { Exercise } from "../Code/Exercise";
 import { Audio } from "../audio";
 import { cx } from "lib/utils";
 import { NextTweet } from "next-tweet";
 import YoutubeEmbed from "../YoutubeEmbed";
-//import { HighlightedCode } from "components/Code/KodeBlock"
+import { KodeBlock } from "components/Code/KodeBlock";
 
 function BlockIcon({ block }: { block: BaseBlock }) {
   const pageIcon: string | undefined = block.format?.page_icon;
@@ -72,10 +71,6 @@ const Tweet = ({ id }: { id: string }) => {
   return <NextTweet id={id} />;
 };
 
-const KodeBlock = dynamic(() =>
-  import("components/Code/KodeBlock").then((m) => m.KodeBlock)
-);
-
 function BlockRenderer({
   block,
   recordMap,
@@ -86,6 +81,7 @@ function BlockRenderer({
   children: React.ReactNode;
 }) {
   const { type, id } = block;
+  //@ts-ignore
   const value = block[type];
   switch (block.type) {
     case "page": {
