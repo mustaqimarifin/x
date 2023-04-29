@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getBlogViews, getTweetCount } from "lib/metrics";
-import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/icons";
+import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons";
 import { name, about, bio, avatar } from "lib/info";
 import Balancer from "react-wrap-balancer";
 
@@ -44,10 +44,10 @@ export default async function HomePage() {
             {`${tweetCount?.toString()} tweets all time`}
           </a>
 
-                     <Link href="/projects" className="flex items-center">
+          <Link href="/projects" className="flex items-center">
             <ViewsIcon />
             {`${views.toString()} blog views all time`}
-          </Link> 
+          </Link>
         </div>
       </div>
       <p className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">

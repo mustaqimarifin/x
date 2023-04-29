@@ -9,7 +9,7 @@ import Avatar from "components/Avatar";
 import Balancer from "react-wrap-balancer";
 
 import type { Database } from "types/supabase";
-import createClient from "lib/supabase-server";
+import { serverClient } from "lib/supabase-server";
 
 /* const getGuestbook = cache(async () => {
   return await prisma.guestbook.findMany({
@@ -50,7 +50,7 @@ type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"];
 export const revalidate = 0;
 
 const getHotline = cache(async () => {
-  const supabaseServer = createClient();
+  const supabaseServer = serverClient();
 
   const { data: entries } = await supabaseServer
     .from("hotline_bling")
@@ -59,7 +59,7 @@ const getHotline = cache(async () => {
 });
 
 const getUser = cache(async () => {
-  const supabaseServer = createClient();
+  const supabaseServer = serverClient();
 
   const {
     data: { user },

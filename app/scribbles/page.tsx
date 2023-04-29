@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getScribblesDatabase } from "../data";
-import { Parallax } from "components/Parallax";
+import { Parallax } from "components/UI/Parallax";
 
 export const revalidate = 300;
 

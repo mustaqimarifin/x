@@ -90,7 +90,7 @@ export const AuthProvider = (props) => {
 };
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
+  const context: SupabaseContext = useContext(AuthContext);
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
   }

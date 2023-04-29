@@ -1,7 +1,6 @@
 "use client";
+import { openPane } from "components/UI/AppState"
 import React from "react";
-import { openPane } from "./AppState";
-//import Link from "next/link"
 
 export function NotionTextAnchor({
   blockId,

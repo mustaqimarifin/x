@@ -2,7 +2,8 @@ import "server-only";
 
 //import { Octokit } from "@octokit/rest";
 import { cache } from "react";
-import supabase from "./supabase-browser";
+import supabase from "./supabase";
+//import supabase from "./supabase-browser";
 
 export const getBlogViews = cache(async () => {
   if (!process.env.TWITTER_API_TOKEN) {

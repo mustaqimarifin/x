@@ -1,4 +1,4 @@
-export default function robots () {
+export default function robots() {
   return {
     rules: [
       {
@@ -7,5 +7,5 @@ export default function robots () {
     ],
     sitemap: "https://eff1gy.xyz/sitemap.xml",
     host: "https://eff1gy.xyz",
-  }
+  };
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { GoogleIcon } from "components/icons";
+import { GoogleIcon } from "components/UI/icons";
+//import supabase from "lib/supabase"
 import supabase from "lib/supabase-browser";
 
 /* const getURL = () => {

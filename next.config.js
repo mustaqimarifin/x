@@ -23,7 +23,10 @@ const nextConfig = {
       "img1-tw.alphaxcdn.com",
     ],
   },
-
+  webpack(config) {
+    config.experiments = { ...config.experiments, topLevelAwait: true };
+    return config;
+  },
   experimental: {
     appDir: true,
     // serverComponentsExternalPackages: ["@prisma/client"],

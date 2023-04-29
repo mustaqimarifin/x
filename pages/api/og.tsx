@@ -1,23 +1,23 @@
-import { ImageResponse } from "@vercel/og"
-import { NextRequest } from "next/server"
+import { ImageResponse } from "@vercel/og";
+import { NextRequest } from "next/server";
 
 export const config = {
   runtime: "edge",
-}
+};
 
 const font = fetch(
   new URL("../../public/fonts/kaisei-tokumin-bold.ttf", import.meta.url)
-).then((res) => res.arrayBuffer())
+).then((res) => res.arrayBuffer());
 
-export default async function handler (req: NextRequest) {
-  const { searchParams } = req.nextUrl
-  const postTitle = searchParams.get("title")
-  const fontData = await font
+export default async function handler(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
+  const postTitle = searchParams.get("title");
+  const fontData = await font;
 
   return new ImageResponse(
     (
       <div
-        style={ {
+        style={{
           height: "100%",
           width: "100%",
           display: "flex",
@@ -25,10 +25,10 @@ export default async function handler (req: NextRequest) {
           alignItems: "flex-start",
           justifyContent: "center",
           backgroundImage: "url(https://eff1gy.xyz/og-bg.png)",
-        } }
+        }}
       >
         <div
-          style={ {
+          style={{
             marginLeft: 190,
             marginRight: 190,
             display: "flex",
@@ -39,9 +39,9 @@ export default async function handler (req: NextRequest) {
             color: "white",
             lineHeight: "120px",
             whiteSpace: "pre-wrap",
-          } }
+          }}
         >
-          { postTitle }
+          {postTitle}
         </div>
       </div>
     ),
@@ -56,5 +56,5 @@ export default async function handler (req: NextRequest) {
         },
       ],
     }
-  )
+  );
 }

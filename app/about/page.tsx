@@ -1,7 +1,6 @@
-//import { EXP } from "components/Career";
-import { Chat } from "components/Gallery";
-//import IMGC from "components/carousel";
-import { Timeline } from "components/timeline";
+
+import { Chat } from "components/Misc/Chat"
+import { Timeline } from "components/Misc/timeline"
 import Balancer from "react-wrap-balancer";
 
 export default function AboutPage() {

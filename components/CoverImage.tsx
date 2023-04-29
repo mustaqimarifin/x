@@ -1,5 +1,5 @@
 "use client";
-import clsx from "clsx";
+import { cx } from "lib/utils";
 import Image from "next/image";
 import React from "react";
 import { useState } from "react";
@@ -29,7 +29,7 @@ export default function CoverImage({ src, blurDataUrl }) {
           alt={""}
           width={680}
           height={503}
-          className={clsx(
+          className={cx(
             " mx-auto flex aspect-[21/9] w-full items-center justify-center object-cover object-top duration-700 ease-in-out group-hover:opacity-75 lg:max-w-7xl",
             isLoading
               ? "scale-110 blur-2xl grayscale"

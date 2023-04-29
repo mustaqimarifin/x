@@ -21,7 +21,7 @@ S/O to these spectacular devs whom I've taken incredible liberties stealing or b
 
 ## PREFACE
 
-Just a working-professional-amateur-dev that always planned on making his own page and finally got around to it. Thanks for stopping by 
+Just a working-professional-amateur-dev that always planned on making his own page and finally got around to it. Thanks for stopping by
 
 ## Running Locally
 

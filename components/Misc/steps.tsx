@@ -1,4 +1,4 @@
-import Image from "./Pics";
+import Image from "components/Pics";
 
 export const Steps = () => {
   return (

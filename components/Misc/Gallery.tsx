@@ -1,5 +1,4 @@
-import Image from "./Pics";
-
+import Image from "components/Pics";
 export const Chat = () => {
   //const items: Author[] = Array.from({ length: 5 }, (index) => index)
   return (

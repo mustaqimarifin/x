@@ -1,10 +1,10 @@
 "use client";
 
-import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutGroup, motion } from "framer-motion";
 import { KittyIcon } from "./icons";
+import { cx } from "lib/utils";
 
 const navItems = {
   "/": {
@@ -102,7 +102,7 @@ export default function Navbar() {
                   <Link
                     key={path}
                     href={path}
-                    className={clsx(
+                    className={cx(
                       "flex align-middle transition-all hover:text-neutral-800 dark:hover:text-neutral-200",
                       {
                         "text-neutral-500": !isActive,
