@@ -1,16 +1,16 @@
-import type { Metadata } from "next"
-import { SignIn, SignOut } from "./actions"
+import type { Metadata } from "next";
+import { SignIn, SignOut } from "./actions";
 
-import Form from "./form"
+import Form from "./form";
 
 //import { formatDate } from "lib/utils"
-import { cache } from "react"
+import { cache } from "react";
 //import Avatar from "components/HotlineBling/Avatar"
-import Balancer from "react-wrap-balancer"
+import Balancer from "react-wrap-balancer";
 
-import type { Database } from "types/supabase"
-import { serverClient } from "lib/supabase-server"
-import { Hotline } from "components/HotlineBling"
+import type { Database } from "types/supabase";
+import { serverClient } from "lib/supabase-server";
+import { Hotline } from "components/HotlineBling";
 
 /* const getGuestbook = cache(async () => {
   return await prisma.guestbook.findMany({
@@ -38,7 +38,7 @@ db
     .execute()
  */
 
-type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"]
+type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"];
 
 /* const getGuestbook = cache(async () => {
   const supabase = createServerComponentSupabaseClient<Database>({
@@ -48,25 +48,25 @@ type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"]
   return await supabase.from("hotline_bling").select("*")
 }) */
 
-export const revalidate = 0
+export const revalidate = 0;
 
 const getHotline = cache(async () => {
-  const supabaseServer = serverClient()
+  const supabaseServer = serverClient();
 
   const { data: entries } = await supabaseServer
     .from("hotline_bling")
-    .select("*")
-  return entries
-})
+    .select("*");
+  return entries;
+});
 
 const getUser = cache(async () => {
-  const supabaseServer = serverClient()
+  const supabaseServer = serverClient();
 
   const {
     data: { user },
-  } = await supabaseServer.auth.getUser()
-  return user
-})
+  } = await supabaseServer.auth.getUser();
+  return user;
+});
 
 /* async function getGuestBook () {
      const supabase = createServerComponentSupabaseClient<Database>({
@@ -88,11 +88,11 @@ const getUser = cache(async () => {
 const metadata: Metadata = {
   title: "Guestbook",
   description: "Leave a message!.",
-}
+};
 
-export default async function HotlinePage () {
-  const entries = await getHotline()
-  const user = await getUser()
+export default async function HotlinePage() {
+  const entries = await getHotline();
+  const user = await getUser();
 
   /*   try {
       const [guestbookRes, userRes] = await Promise.allSettled([
@@ -123,29 +123,29 @@ export default async function HotlinePage () {
         <h1 className="max-w-[650px mb-8 font-serif text-3xl font-bold">
           <Balancer>Guestbook</Balancer>
         </h1>
-        { user ? (
+        {user ? (
           <>
             <Form />
             <SignOut />
           </>
         ) : (
           <SignIn />
-        ) }
+        )}
 
         <>
-          { entries &&
+          {entries &&
             entries.map((post: HotlineBling) => (
               <Hotline
-                key={ post.id }
-                avatar={ post.avatar }
-                username={ post.username }
-                posted_at={ post.posted_at }
-                body={ post.body }
-                id={ post.id }
+                key={post.id}
+                avatar={post.avatar}
+                username={post.username}
+                posted_at={post.posted_at}
+                body={post.body}
+                id={post.id}
               />
-            )) }
+            ))}
         </>
       </section>
     </>
-  )
+  );
 }

@@ -8,8 +8,12 @@ import { Exercise } from "../Code/Exercise";
 import { Audio } from "../Embed/audio";
 import { cx } from "lib/utils";
 import { NextTweet } from "next-tweet";
-import { KodeBlock } from "components/Code/KodeBlock";
-import YoutubeEmbed from "components/Embed/YoutubeEmbed"
+//import { KodeBlock } from "components/Code/KodeBlock";
+import YoutubeEmbed from "components/Embed/YoutubeEmbed";
+import dynamic from "next/dynamic"
+
+
+const KodeBlock = dynamic(() => import('components/Code/KodeBlock'), { ssr: false })
 
 function BlockIcon({ block }: { block: BaseBlock }) {
   const pageIcon: string | undefined = block.format?.page_icon;

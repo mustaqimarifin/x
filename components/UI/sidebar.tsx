@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { usePathname } from "next/navigation"
-import Link from "next/link"
-import { LayoutGroup, motion } from "framer-motion"
-import { KittyIcon } from "./icons"
-import { cx } from "lib/utils"
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { LayoutGroup, motion } from "framer-motion";
+import { KittyIcon } from "./icons";
+import { cx } from "lib/utils";
 
 const navItems = {
   "/": {
@@ -31,9 +31,9 @@ const navItems = {
   "/hotline": {
     name: "guestbook",
   },
-}
+};
 
-function Logo () {
+function Logo() {
   return (
     <Link aria-label="Lee Robinson" href="/">
       <motion.svg
@@ -45,43 +45,43 @@ function Logo () {
         xmlns="http://www.w3.org/2000/svg"
       >
         <motion.path
-          initial={ {
+          initial={{
             opacity: 0,
             pathLength: 0,
-          } }
-          animate={ {
+          }}
+          animate={{
             opacity: 1,
             pathLength: 1,
-          } }
-          transition={ {
+          }}
+          transition={{
             duration: 0.5,
             type: "spring",
             stiffness: 50,
-          } }
+          }}
           d="M39 316V0"
           stroke="currentColor"
-          strokeWidth={ 78 }
+          strokeWidth={78}
         />
         <motion.path
-          initial={ { x: -200, opacity: 0 } }
-          animate={ { x: 0, opacity: 1 } }
-          transition={ {
+          initial={{ x: -200, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{
             duration: 0.5,
             type: "spring",
             stiffness: 50,
-          } }
+          }}
           d="M232 314.998H129.852L232 232.887V314.998Z"
           fill="currentColor"
         />
       </motion.svg>
     </Link>
-  )
+  );
 }
 
-export const Sidebar = () => {
-  let pathname = usePathname() || "/"
+export const NAV = () => {
+  let pathname = usePathname() || "/";
   if (pathname.includes("/posts/")) {
-    pathname = "/posts"
+    pathname = "/posts";
   }
 
   return (
@@ -96,41 +96,41 @@ export const Sidebar = () => {
             id="nav"
           >
             <div className="mb-2 mt-2 flex flex-row space-x-0 pr-10 md:mt-0 md:flex-col">
-              { Object.entries(navItems).map(([path, { name }]) => {
-                const isActive = path === pathname
+              {Object.entries(navItems).map(([path, { name }]) => {
+                const isActive = path === pathname;
                 return (
                   <Link
-                    key={ path }
-                    href={ path }
-                    className={ cx(
+                    key={path}
+                    href={path}
+                    className={cx(
                       "flex align-middle transition-all hover:text-neutral-800 dark:hover:text-neutral-200",
                       {
                         "text-neutral-500": !isActive,
                         "font-bold": isActive,
                       }
-                    ) }
+                    )}
                   >
                     <span className="relative px-[10px] py-[5px]">
-                      { name }
-                      { path === pathname ? (
+                      {name}
+                      {path === pathname ? (
                         <motion.div
                           className="absolute inset-0 z-[-1] rounded-md bg-neutral-100 dark:bg-neutral-800"
                           layoutId="sidebar"
-                          transition={ {
+                          transition={{
                             type: "spring",
                             stiffness: 350,
                             damping: 30,
-                          } }
+                          }}
                         />
-                      ) : null }
+                      ) : null}
                     </span>
                   </Link>
-                )
-              }) }
+                );
+              })}
             </div>
           </nav>
         </LayoutGroup>
       </div>
     </aside>
-  )
-}
+  );
+};

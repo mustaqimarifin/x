@@ -29,4 +29,12 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 0,
     "no-case-declarations": 0,
   },
+  settings: {
+    react: {
+      createClass: "createReactClass",
+      pragma: "React", 
+      fragment: "Fragment",
+      version: "detect", 
+    },
+  },
 };

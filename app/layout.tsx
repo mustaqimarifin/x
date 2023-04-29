@@ -1,21 +1,21 @@
-import "./global.css"
+import "./global.css";
 
-import type { Metadata } from "next"
-import localFont from "next/font/local"
-import { Analytics } from "@vercel/analytics/react"
-import { cx } from "lib/utils"
-import { AuthProvider } from "components/supabase-provider"
-import supabase from "lib/supabase"
-import { PageTransition } from "components/UI/PageTransition"
-import { Sidebar } from "components/UI/Sidebar"
-import { PanesLayer } from "components/UI/PanesLayer"
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
+import { cx } from "lib/utils";
+import { AuthProvider } from "components/supabase-provider";
+import supabase from "lib/supabase";
+import { PageTransition } from "components/UI/PageTransition";
+import { NAV } from "components/UI/Sidebar";
+import { PanesLayer } from "components/UI/PanesLayer";
 
 const kaisei = localFont({
   src: "../public/fonts/kaisei-tokumin-latin-700-normal.woff2",
   weight: "700",
   variable: "--font-kaisei",
   display: "swap",
-})
+});
 
 const sohne = localFont({
   src: [
@@ -37,7 +37,7 @@ const sohne = localFont({
   ],
   variable: "--font-sohne",
   display: "swap",
-})
+});
 
 export const metadata: Metadata = {
   title: {
@@ -78,37 +78,37 @@ export const metadata: Metadata = {
   icons: {
     shortcut: "/favicon.ico",
   },
-}
+};
 
-export default async function RootLayout ({
+export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   const {
     data: { session },
-  } = await supabase.auth.getSession()
+  } = await supabase.auth.getSession();
 
-  const accessToken = session?.access_token || null
+  const accessToken = session?.access_token || null;
   return (
-    <AuthProvider accessToken={ accessToken }>
+    <AuthProvider accessToken={accessToken}>
       <html
         lang="en"
-        className={ cx(
+        className={cx(
           "bg-white text-black dark:bg-[#111010] dark:text-white",
           kaisei.variable,
           sohne.variable
-        ) }
+        )}
       >
         <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col subpixel-antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
-          <Sidebar />
+          <NAV />
           <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
-            <PageTransition> { children }</PageTransition>
+            <PageTransition> {children}</PageTransition>
             <PanesLayer />
             <Analytics />
           </main>
         </body>
       </html>
     </AuthProvider>
-  )
+  );
 }

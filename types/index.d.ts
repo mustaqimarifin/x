@@ -1,3 +1,3 @@
 declare module "prismjs/components/*";
 
-declare module 'react-custom-soundcloud'
+declare module "react-custom-soundcloud";
