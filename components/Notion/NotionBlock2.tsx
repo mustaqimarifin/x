@@ -103,6 +103,7 @@ export const NotionBlock2 = ({
     <>
       <NotionRenderer
         recordMap={recordMap}
+        rootDomain={rootDomain}
         mapPageUrl={mapPageUrl}
         mapImageUrl={mapImageUrl}
         rootPageId={rootPageId}

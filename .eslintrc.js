@@ -32,9 +32,9 @@ module.exports = {
   settings: {
     react: {
       createClass: "createReactClass",
-      pragma: "React", 
+      pragma: "React",
       fragment: "Fragment",
-      version: "detect", 
+      version: "detect",
     },
   },
 };

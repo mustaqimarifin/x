@@ -104,9 +104,10 @@ export default async function RootLayout({
           <NAV />
           <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
             <PageTransition> {children}</PageTransition>
-            <PanesLayer />
+
             <Analytics />
           </main>
+          <PanesLayer />
         </body>
       </html>
     </AuthProvider>

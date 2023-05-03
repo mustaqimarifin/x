@@ -5,7 +5,7 @@ export type Pane = { id: string; content: React.ReactNode; z: number };
 
 export const panesMobx = observable.map<string, Pane>([], { deep: false });
 
-export function openPane(blockId: string, content: React.ReactNode) {
+export async function openPane(blockId: string, content: React.ReactNode) {
   runInAction(() => {
     const existingPanes = values(panesMobx);
     const newZ =

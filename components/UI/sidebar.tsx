@@ -13,9 +13,9 @@ const navItems = {
   "/about": {
     name: "about",
   },
-  /*   "/posts": {
-    name: "blog",
-  }, */
+  "/posts": {
+    name: "posts",
+  },
   "/projects": {
     name: "projects",
   },
@@ -32,7 +32,6 @@ const navItems = {
     name: "guestbook",
   },
 };
-
 
 export const NAV = () => {
   let pathname = usePathname() || "/";

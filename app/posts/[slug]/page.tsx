@@ -1,9 +1,6 @@
+import { notFound } from "next/navigation";
 import Balancer from "react-wrap-balancer";
-import {
-  ProjectDatabaseItem,
-  getDatabasePage,
-  getProjectsDatabase,
-} from "app/data";
+import { PostDatabaseItem, getDatabasePage, getPostDatabase } from "app/data";
 import { NotionBlock } from "components/Notion/NotionBlock";
 
 import PageViews from "components/PageViews";
@@ -11,32 +8,33 @@ import PageViews from "components/PageViews";
 import "react-custom-soundcloud/dist/style.css";
 import "react-notion-x/src/styles.css";
 import "./notion.css";
-import { NotionBlock2 } from "components/Notion/NotionBlock2";
-import { previewImagesEnabled, rootDomain } from "lib/notion/config";
+//import { NotionBlock2 } from "components/Notion/NotionBlock2";
+//import { previewImagesEnabled, rootDomain } from "lib/notion/config";
 import { textDecorationsToString } from "lib/utils";
 
-export const revalidate = 60;
-
 export async function generateStaticParams() {
-  const posts: ProjectDatabaseItem[] = await getProjectsDatabase();
+  const posts = await getPostDatabase();
 
   return posts.map((post) => ({
     id: post.id,
+    slug: post.slug[0][0],
   }));
 }
 
-export default async function ProjectsPage({
+export const revalidate = 60;
+
+export default async function PostPage({
   params,
 }: {
-  params: { pageId: string };
+  params: { slug: string };
 }) {
-  const posts = await getProjectsDatabase();
-  const postId = posts.find((p) => p.pageId[0][0] === params.pageId)?.id;
+  const posts = await getPostDatabase();
+  const postId = posts.find((p) => p.slug[0][0] === params.slug)?.id;
   if (postId === undefined) {
-    return <div>post not found</div>;
+    notFound();
   }
 
-  const { item: post, recordMap } = await getDatabasePage<ProjectDatabaseItem>(
+  const { item: post, recordMap } = await getDatabasePage<PostDatabaseItem>(
     postId
   );
 
@@ -50,7 +48,7 @@ export default async function ProjectsPage({
           {post.date}
         </div>
         <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800" />
-        <PageViews slug={post.pageId} trackView />
+        <PageViews slug={post.slug} trackView />
         {/*         { post.tags && (
           <div className="py-4 xl:py-8">
 

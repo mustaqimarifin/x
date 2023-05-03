@@ -3,9 +3,7 @@ import { SignIn, SignOut } from "./actions";
 
 import Form from "./form";
 
-//import { formatDate } from "lib/utils"
 import { cache } from "react";
-//import Avatar from "components/HotlineBling/Avatar"
 import Balancer from "react-wrap-balancer";
 
 import type { Database } from "types/supabase";
@@ -51,20 +49,18 @@ type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"];
 export const revalidate = 0;
 
 const getHotline = cache(async () => {
-  const supabaseServer = serverClient();
+  const supabase = serverClient();
 
-  const { data: entries } = await supabaseServer
-    .from("hotline_bling")
-    .select("*");
+  const { data: entries } = await supabase.from("hotline_bling").select("*");
   return entries;
 });
 
 const getUser = cache(async () => {
-  const supabaseServer = serverClient();
+  const supabase = serverClient();
 
   const {
     data: { user },
-  } = await supabaseServer.auth.getUser();
+  } = await supabase.auth.getUser();
   return user;
 });
 

@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import supabase from "lib/supabase-browser";
+import { supabase } from "lib/supabase-browser";
 import { SupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "types/supabase";
 
@@ -42,7 +42,6 @@ export const AuthProvider = ({
   const [view, setView] = useState(VIEWS.SIGN_IN);
   const router = useRouter();
   // const { accessToken, ...rest } = props;
-
   useEffect(() => {
     async function getActiveSession() {
       const {

@@ -1,13 +1,8 @@
 "use client";
-import {
-  DragBounds,
-  DragConfig,
-  DragState,
-  EventTypes,
-  useDrag,
-} from "@use-gesture/react";
+import { useDrag } from "@use-gesture/react";
 import { action, autorun, observable, values } from "mobx";
 import { observer } from "mobx-react-lite";
+
 import React, { useEffect, useRef, useState } from "react";
 import { Pane, panesMobx } from "./AppState";
 import { ArrowsCrossLines } from "@heathmont/moon-icons-tw";

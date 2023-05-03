@@ -1,9 +1,11 @@
 import { Decoration, ExtendedRecordMap } from "notion-types";
-import { formatDate } from "notion-utils";
+import { formatDate, parsePageId } from "notion-utils";
 import React from "react";
 import { NotionBlock } from "./NotionBlock";
 import { NotionTextAnchor } from "./NotionTextAnchor";
-import { textDecorationsToString } from "./NotionUtils";
+import { textDecorationsToString } from "lib/utils";
+import { rootDomain } from "lib/notion/config";
+import { getHashFragmentValue } from "react-notion-x";
 
 function addDashesToUUID(uuid: string) {
   return uuid
@@ -83,9 +85,11 @@ export function NotionText({
 
               case "a": {
                 const v = decorator[1];
+
                 if (v.startsWith("/")) {
                   const linkedBlock =
                     recordMap.block[addDashesToUUID(v.slice(1))].value;
+
                   return (
                     <NotionTextAnchor
                       blockId={linkedBlock.id}

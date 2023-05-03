@@ -2,18 +2,20 @@ import { AudioBlock, BaseBlock, ExtendedRecordMap } from "notion-types";
 import React from "react";
 import { processDatabaseItem } from "../../app/data";
 import { NotionText } from "./NotionText";
-import { textDecorationsToString } from "./NotionUtils";
 import Image from "next/image";
 import { Exercise } from "../Code/Exercise";
 import { Audio } from "../Embed/audio";
-import { cx } from "lib/utils";
-import { NextTweet } from "next-tweet";
-//import { KodeBlock } from "components/Code/KodeBlock";
+import { cx, textDecorationsToString } from "lib/utils";
 import YoutubeEmbed from "components/Embed/YoutubeEmbed";
-import dynamic from "next/dynamic"
+import dynamic from "next/dynamic";
 
+const KodeBlock = dynamic(() => import("components/Code/KodeBlock"), {
+  ssr: false,
+});
 
-const KodeBlock = dynamic(() => import('components/Code/KodeBlock'), { ssr: false })
+const MeatTweet = dynamic(() => import("components/Embed/Tweet"), {
+  ssr: false,
+});
 
 function BlockIcon({ block }: { block: BaseBlock }) {
   const pageIcon: string | undefined = block.format?.page_icon;
@@ -70,10 +72,6 @@ export const getSCID = (url: string): string | null => {
   return null;
 };
 
-const Tweet = ({ id }: { id: string }) => {
-  return <NextTweet id={id} />;
-};
-
 function BlockRenderer({
   block,
   recordMap,
@@ -87,6 +85,12 @@ function BlockRenderer({
   //@ts-ignore
   const value = block[type];
   switch (block.type) {
+    case "paragraph":
+      return (
+        <p>
+          <NotionText value={value.text} recordMap={recordMap} />
+        </p>
+      );
     case "page": {
       return (
         <div className=" text-sm leading-relaxed text-neutral-900 dark:text-neutral-100">
@@ -140,8 +144,7 @@ function BlockRenderer({
         </div>
       );
     }
-    case "bulleted_list":
-    case "numbered_list": {
+    case "bulleted_list": {
       const wrapList = (content: React.ReactNode, start?: number) =>
         block.type === "bulleted_list" ? (
           <ul className="list-disc pl-6">{content}</ul>
@@ -282,7 +285,7 @@ function BlockRenderer({
       }
       return (
         <div className="my-4">
-          <Tweet id={id} />
+          <MeatTweet id={id} />
         </div>
       );
     }
@@ -347,9 +350,11 @@ function BlockRenderer({
 export function NotionBlock({
   blockId,
   recordMap,
+  level,
 }: {
   blockId: string;
-  recordMap: ExtendedRecordMap;
+  recordMap?: ExtendedRecordMap;
+  level?: number;
 }) {
   const block = recordMap.block[blockId]?.value;
   return (

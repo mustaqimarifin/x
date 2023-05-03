@@ -3,8 +3,8 @@ import useSWR from "swr";
 import { FC, useEffect } from "react";
 
 interface PageViewsProps {
-  trackView: boolean;
   slug: string;
+  total: string;
 }
 
 const fetcher = async (input: RequestInfo) => {
@@ -12,8 +12,8 @@ const fetcher = async (input: RequestInfo) => {
   return await res.json();
 };
 
-const PageViews: FC<PageViewsProps> = ({ slug, trackView }) => {
-  const { data } = useSWR(`/api/page/${slug}`, fetcher);
+const PageViews = ({ slug, trackView }) => {
+  const { data } = useSWR<PageViewsProps>(`/api/page/${slug}`, fetcher);
 
   useEffect(() => {
     const registerView = () =>

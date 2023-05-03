@@ -1,8 +1,9 @@
 "use client";
 import { openPane } from "components/UI/AppState";
+import Link from "next/link";
 import React from "react";
 
-export function NotionTextAnchor({
+export const NotionTextAnchor = ({
   blockId,
   paneContent,
   children,
@@ -10,9 +11,14 @@ export function NotionTextAnchor({
   blockId: string;
   paneContent: React.ReactNode;
   children: React.ReactNode;
-}) {
+}) => {
+  // const [isPending, startTransition] = useTransition()
+  // const [isFetching, setIsFetching] = useState(false);
   return (
-    <a
+    <Link
+      shallow
+      prefetch={false}
+      passHref
       href={blockId}
       onClick={(e) => {
         openPane(blockId, paneContent);
@@ -21,6 +27,6 @@ export function NotionTextAnchor({
       className="underline decoration-neutral-600 decoration-dashed decoration-1 underline-offset-2 hover:decoration-neutral-700"
     >
       {children}
-    </a>
+    </Link>
   );
-}
+};

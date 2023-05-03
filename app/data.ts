@@ -11,10 +11,12 @@ export type DatabaseItem = { id: string } & { [key: string]: any };
 
 export type PostDatabaseItem = {
   id: string;
-  Slug: string;
-  Title: Decoration[];
-  Date: string;
-  Publish: boolean;
+  date: string;
+  slug: string;
+  title: Decoration[];
+  URL: string;
+  summary: Decoration[];
+  status?: boolean;
 };
 export type ScribbleDatabaseItem = {
   id: string;
@@ -27,7 +29,7 @@ export type ProjectDatabaseItem = {
   id: string;
   date: string;
   pageId: string;
-  title: Decoration[] | string;
+  title: Decoration[];
   URL: string;
   summary: Decoration[];
   status?: boolean;
@@ -94,19 +96,20 @@ export function processDatabaseItem<T>(
   return item;
 }
 //https://mstqmarfn.notion.site/a67d691f76a94b22ae50d2ebee843745?v=68618f81fc1c41b7ab58ff0e428602ce
-//https://mstqmarfn.notion.site/e55363fd2d2441d0bc00b9a26cccf7a0?v=1b09afd3bd7f4961a620ea550c8a8368
+//https://mstqmarfn.notion.site/7fbb331398e64512842d8e5d37f99681?v=3ab906f235c548689c180d54f8cd9007https://mstqmarfn.notion.site/e55363fd2d2441d0bc00b9a26cccf7a0?v=1b09afd3bd7f4961a620ea550c8a8368
 const notion = new NotionAPI();
 
-/* export const getPostDatabase = async () => {
-  const recordMap = await notion.getPage("d60770573fee487984f182b3a72fa803");
+export const getPostDatabase = async () => {
+  const recordMap = await notion.getPage("7fbb331398e64512842d8e5d37f99681");
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
     .filter((block): block is PageBlock => block?.type === "page")
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<PostDatabaseItem>(pageBlock, collection)
-    );
-}; */
+    )
+    .filter((item) => item.status);
+};
 
 export const getDatabasePage = cache(async <T>(id: string) => {
   const recordMap = await notion.getPage(id);
