@@ -1,5 +1,5 @@
 //import { createRouteHandlerSupabaseClient } from "@supabase/auth-helpers-nextjs"
-import { routerClient } from "lib/supabase-server";
+import { routerClient } from "lib/supabase/server";
 import { NextResponse } from "next/server";
 //import { headers, cookies } from "next/headers"
 //import { Database } from "types/supabase"

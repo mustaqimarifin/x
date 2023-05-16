@@ -1,7 +1,7 @@
 "use client";
 
 import { GoogleIcon } from "components/UI/icons";
-import { supabase } from "lib/supabase-browser";
+import { supabase } from "lib/supabase/browser";
 
 const getURL = () => {
   let url =

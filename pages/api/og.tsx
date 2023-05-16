@@ -25,6 +25,7 @@ export default async function handler(req: NextRequest) {
           alignItems: "flex-start",
           justifyContent: "center",
           backgroundImage: "url(https://eff1gy.xyz/og-bg.png)",
+          //backgroundImage: "url(http://localhost:3000/og-bg.png)",
         }}
       >
         <div
@@ -46,8 +47,8 @@ export default async function handler(req: NextRequest) {
       </div>
     ),
     {
-      width: 1920,
-      height: 1080,
+      width: 1200,
+      height: 626,
       fonts: [
         {
           name: "Kaisei Tokumin",

@@ -7,7 +7,7 @@ import { cache } from "react";
 import Balancer from "react-wrap-balancer";
 
 import type { Database } from "types/supabase";
-import { serverClient } from "lib/supabase-server";
+import { serverClient } from "lib/supabase/server";
 import { Hotline } from "components/HotlineBling";
 
 /* const getGuestbook = cache(async () => {

@@ -1,4 +1,4 @@
-import { routerClient } from "lib/supabase-server";
+import { routerClient } from "lib/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET() {

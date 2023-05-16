@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { cx } from "lib/utils";
 import { AuthProvider } from "components/supabase-provider";
-import supabase from "lib/supabase";
+import supabase from "lib/supabase/client";
 import { PageTransition } from "components/UI/PageTransition";
 import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
     siteName: "Mustaqim Arifin",
     images: [
       {
-        url: "https://eff1gy.xyz/og.jpg",
-        width: 1920,
-        height: 1080,
+        url: "https://eff1gy.xyz/og.png",
+        width: 1200,
+        height: 626,
       },
     ],
     locale: "en-US",
