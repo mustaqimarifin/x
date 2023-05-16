@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { supabase } from "lib/supabase/browser"
-import { SupabaseClient } from "@supabase/auth-helpers-nextjs"
-import { Database } from "types/supabase"
+import { supabase } from "lib/supabase/browser";
+import { SupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "types/supabase";
 
 export const EVENTS = {
   PASSWORD_RECOVERY: "PASSWORD_RECOVERY",
   SIGNED_OUT: "SIGNED_OUT",
   USER_UPDATED: "USER_UPDATED",
-}
+};
 
 export const VIEWS = {
   SIGN_IN: "sign_in",
@@ -19,66 +19,66 @@ export const VIEWS = {
   FORGOTTEN_PASSWORD: "forgotten_password",
   MAGIC_LINK: "magic_link",
   UPDATE_PASSWORD: "update_password",
-}
+};
 
 type SupabaseContext = {
-  supabase: SupabaseClient<Database>
-}
+  supabase: SupabaseClient<Database>;
+};
 
 export const AuthContext = createContext<SupabaseContext | undefined>(
   undefined
-)
+);
 
 export const AuthProvider = ({
   accessToken,
   children,
 }: {
-  accessToken: string
-  children: React.ReactNode
+  accessToken: string;
+  children: React.ReactNode;
 }) => {
-  const [initial, setInitial] = useState(true)
-  const [session, setSession] = useState(null)
-  const [user, setUser] = useState(null)
-  const [view, setView] = useState(VIEWS.SIGN_IN)
-  const router = useRouter()
+  const [initial, setInitial] = useState(true);
+  const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null);
+  const [view, setView] = useState(VIEWS.SIGN_IN);
+  const router = useRouter();
   // const { accessToken, ...rest } = props;
   useEffect(() => {
-    async function getActiveSession () {
+    async function getActiveSession() {
       const {
         data: { session: activeSession },
-      } = await supabase.auth.getSession()
-      setSession(activeSession)
-      setUser(activeSession?.user ?? null)
-      setInitial(false)
+      } = await supabase.auth.getSession();
+      setSession(activeSession);
+      setUser(activeSession?.user ?? null);
+      setInitial(false);
     }
-    getActiveSession()
+    getActiveSession();
 
     const {
       data: { subscription: authListener },
     } = supabase.auth.onAuthStateChange((event, currentSession) => {
       if (currentSession?.access_token !== accessToken) {
-        router.refresh()
+        router.refresh();
       }
 
-      setSession(currentSession)
-      setUser(currentSession?.user ?? null)
+      setSession(currentSession);
+      setUser(currentSession?.user ?? null);
 
       switch (event) {
         case EVENTS.PASSWORD_RECOVERY:
-          setView(VIEWS.UPDATE_PASSWORD)
-          break
+          setView(VIEWS.UPDATE_PASSWORD);
+          break;
         case EVENTS.SIGNED_OUT:
         case EVENTS.USER_UPDATED:
-          setView(VIEWS.SIGN_IN)
-          break
+          setView(VIEWS.SIGN_IN);
+          break;
         default:
       }
-    })
+    });
 
     return () => {
-      authListener?.unsubscribe()
-    }
-  }, [])
+      authListener?.unsubscribe();
+    };
+  }, []);
 
   /*   const value = useMemo(() => {
       return {
@@ -92,16 +92,16 @@ export const AuthProvider = ({
     }, [initial, session, user, view]) */
 
   return (
-    <AuthContext.Provider value={ { supabase } }>
-      <>{ children }</>
+    <AuthContext.Provider value={{ supabase }}>
+      <>{children}</>
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
 export const useAuth = () => {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider")
+    throw new Error("useAuth must be used within an AuthProvider");
   }
-  return context
-}
+  return context;
+};

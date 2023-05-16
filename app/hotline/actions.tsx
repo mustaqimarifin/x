@@ -38,7 +38,7 @@ export function SignIn() {
         await supabase.auth.signInWithOAuth({
           provider: "github",
           options: {
-            redirectTo: getURL(),
+            redirectTo: getURL2(),
           },
         })
       }
