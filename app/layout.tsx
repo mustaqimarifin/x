@@ -17,6 +17,13 @@ const kaisei = localFont({
   display: "swap",
 });
 
+const sfmono = localFont({
+  src: "../public/fonts/SFMono-300.woff2",
+  weight: "300",
+  variable: "--font-sfmono",
+  display: "swap",
+});
+
 const sohne = localFont({
   src: [
     {
@@ -97,7 +104,8 @@ export default async function RootLayout({
         className={cx(
           "bg-white text-black dark:bg-[#111010] dark:text-white",
           kaisei.variable,
-          sohne.variable
+          sohne.variable,
+          sfmono.variable
         )}
       >
         <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col subpixel-antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">

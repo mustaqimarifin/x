@@ -14,6 +14,7 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-sohne)"],
         serif: ["var(--font-kaisei)"],
+        mono: ["var(--font-sfmono)"],
       },
       typography: {
         quoteless: {
