@@ -1,5 +1,6 @@
 "use client";
 
+import { fetcher } from "lib/utils";
 import { useEffect } from "react";
 import useSWR from "swr";
 
@@ -8,14 +9,6 @@ type PostView = {
   count: string;
   total: string;
 };
-
-export async function fetcher<JSON = any>(
-  input: RequestInfo,
-  init?: RequestInit
-): Promise<JSON> {
-  const res = await fetch(input, init);
-  return res.json();
-}
 
 export default function ViewCounter({
   slug,

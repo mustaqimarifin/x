@@ -1,6 +1,5 @@
 import { PostDatabaseItem, getPostDatabase } from "app/data";
 import PageViews from "components/PageViews";
-import ViewCounter from "components/view-counter";
 import type { Metadata } from "next";
 import Link from "next/link";
 

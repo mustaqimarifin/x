@@ -1,16 +1,21 @@
+"use client";
 import * as React from "react";
-import SoundCloud from "react-custom-soundcloud";
+import ReactPlayer from "react-player/lazy";
 
 import { AudioBlock, ExtendedRecordMap } from "notion-types";
 
 import { Spotify } from "react-spotify-embed";
 
-export const Audio: React.FC<{
+const Audio = ({
+  block,
+  recordMap,
+}: {
   block: AudioBlock;
   recordMap: ExtendedRecordMap;
-}> = ({ block, recordMap }) => {
+}) => {
   const source =
     recordMap.signed_urls[block.id] || block.properties?.source?.[0]?.[0];
+  // console.log(source)
   //const scID = new URLSearchParams(source.slice(73, 83))
 
   if (source.startsWith("https://open")) {
@@ -20,11 +25,13 @@ export const Audio: React.FC<{
       </div>
     );
   }
-  if (source.startsWith("https://w" || "https://soundcloud")) {
+  if (source.startsWith("https://soundcloud" || "https://w.soundcloud")) {
     return (
       <div className="w-full">
-        <SoundCloud track={source.slice(73, 83)} mini={true} />;
+        <ReactPlayer url={source} />;
       </div>
     );
   }
 };
+
+export default Audio;

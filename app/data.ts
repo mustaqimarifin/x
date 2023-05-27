@@ -4,7 +4,7 @@
 //import { getPage } from "lib/notion"
 import { NotionAPI } from "notion-client";
 import { Collection, Decoration, PageBlock } from "notion-types";
-import { getDateValue, getPageProperty } from "notion-utils";
+import { getDateValue } from "notion-utils";
 import { cache } from "react";
 
 export type DatabaseItem = { id: string } & { [key: string]: any };

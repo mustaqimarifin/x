@@ -1,19 +1,16 @@
 "use client";
 import useSWR from "swr";
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
+import { fetcher } from "lib/utils";
 
-interface PageViewsProps {
+interface CounterProps {
   slug: string;
-  total: string;
+  total?: string;
+  trackView: boolean;
 }
 
-const fetcher = async (input: RequestInfo) => {
-  const res: Response = await fetch(input);
-  return await res.json();
-};
-
-const PageViews = ({ slug, trackView }) => {
-  const { data } = useSWR<PageViewsProps>(`/api/page/${slug}`, fetcher);
+const PageViews = ({ slug, trackView }: CounterProps) => {
+  const { data } = useSWR<CounterProps>(`/api/page/${slug}`, fetcher);
 
   useEffect(() => {
     const registerView = () =>

@@ -4,6 +4,7 @@ import { getBlogViews, getTweetCount } from "lib/metrics";
 import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons";
 import { name, about, bio, avatar } from "lib/info";
 import Balancer from "react-wrap-balancer";
+import NowPlaying from "components/UI/NowPlaying";
 
 export const revalidate = 60;
 
@@ -21,6 +22,9 @@ export default async function HomePage() {
       <h1 className="max-w-[650px] font-serif text-3xl font-bold">
         <Balancer>{name}</Balancer>
       </h1>
+      <div>
+        <NowPlaying />
+      </div>
       <p className="my-5 max-w-[460px] text-neutral-800 dark:text-neutral-200">
         {about()}
       </p>

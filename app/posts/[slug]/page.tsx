@@ -5,9 +5,8 @@ import { NotionBlock } from "components/Notion/NotionBlock";
 
 import PageViews from "components/PageViews";
 
-import "react-custom-soundcloud/dist/style.css";
-import "react-notion-x/src/styles.css";
-import "./notion.css";
+import "app/style/notion.css";
+import "app/style/override.css";
 //import { NotionBlock2 } from "components/Notion/NotionBlock2";
 //import { previewImagesEnabled, rootDomain } from "lib/notion/config";
 import { textDecorationsToString } from "lib/utils";

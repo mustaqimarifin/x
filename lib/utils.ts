@@ -26,3 +26,11 @@ import { Decoration } from "notion-types";
 export function textDecorationsToString(decorations: Decoration[]): string {
   return decorations.map((decoration) => decoration[0]).join("");
 }
+
+export async function fetcher<JSON = any>(
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<JSON> {
+  const res = await fetch(input, init);
+  return res.json();
+}

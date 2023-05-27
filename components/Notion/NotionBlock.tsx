@@ -2,18 +2,21 @@ import { AudioBlock, BaseBlock, ExtendedRecordMap } from "notion-types";
 import React from "react";
 import { processDatabaseItem } from "../../app/data";
 import { NotionText } from "./NotionText";
-import Image from "next/image";
+//import Image from "next/image";
 import { Exercise } from "../Code/Exercise";
-import { Audio } from "../Embed/audio";
 import { cx, textDecorationsToString } from "lib/utils";
 import YoutubeEmbed from "components/Embed/YoutubeEmbed";
 import dynamic from "next/dynamic";
-
+import Image from "components/Pics";
 const KodeBlock = dynamic(() => import("components/Code/KodeBlock"), {
   ssr: false,
 });
 
 const MeatTweet = dynamic(() => import("components/Embed/Tweet"), {
+  ssr: false,
+});
+
+const AudioBlok = dynamic(() => import("components/Embed/audio"), {
   ssr: false,
 });
 
@@ -134,13 +137,16 @@ function BlockRenderer({
 
       return (
         <div className="aspect-square overflow-hidden rounded-md">
-          <Image
+          <Image src={imgSRC} alt={""} width={900} height={900} />
+          {/*           <Image
             src={imgSRC}
             alt={""}
             width={900}
             height={900}
             className="object-cover"
-          />
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3NjggNDMyJz48ZmlsdGVyIGlkPSdiJyBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9J3NSR0InPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249JzIwJy8+PC9maWx0ZXI+PGltYWdlIHByZXNlcnZlQXNwZWN0UmF0aW89J25vbmUnIGZpbHRlcj0ndXJsKCNiKScgeD0nMCcgeT0nMCcgaGVpZ2h0PScxMDAlJyB3aWR0aD0nMTAwJScgaHJlZj0nZGF0YTppbWFnZS9naWY7YmFzZTY0LFIwbEdPRGxoQVFBQkFQQUFBUC9NbWYvLy95SDVCQUFBQUFBQUxBQUFBQUFCQUFFQUFBSUNSQUVBT3c9PScvPjwvc3ZnPg=="
+            placeholder="blur"
+          /> */}
         </div>
       );
     }
@@ -290,7 +296,7 @@ function BlockRenderer({
       );
     }
     case "embed": {
-      return <Audio block={block as AudioBlock} recordMap={recordMap} />;
+      return <AudioBlok block={block as AudioBlock} recordMap={recordMap} />;
     }
     case "column_list":
       return <div className={cx("notion-row", id)}>{children}</div>;

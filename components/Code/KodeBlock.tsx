@@ -8,7 +8,7 @@ import "prismjs/components/prism-markdown.min.js";
 import "prismjs/components/prism-sql.min.js";
 import "prismjs/components/prism-go.min.js";
 import "prismjs/components/prism-graphql.min.js";
-import "app/prism.css";
+import "app/style/prism.css";
 
 export default function KodeBlock({
   language,
