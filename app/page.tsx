@@ -9,10 +9,10 @@ import NowPlaying from "components/UI/NowPlaying";
 export const revalidate = 60;
 
 export default async function HomePage() {
-  let views, tweetCount;
+  let views: number; //tweetCount: number
 
   try {
-    [views, tweetCount] = await Promise.all([getBlogViews(), getTweetCount()]);
+    [views] = await Promise.all([getBlogViews()]);
   } catch (error) {
     console.error(error);
   }
@@ -22,9 +22,7 @@ export default async function HomePage() {
       <h1 className="max-w-[650px] font-serif text-3xl font-bold">
         <Balancer>{name}</Balancer>
       </h1>
-      <div>
-        <NowPlaying />
-      </div>
+
       <p className="my-5 max-w-[460px] text-neutral-800 dark:text-neutral-200">
         {about()}
       </p>
@@ -45,13 +43,16 @@ export default async function HomePage() {
             className="flex items-center gap-2"
           >
             <TwitterIcon />
-            {`${tweetCount?.toString()} tweets all time`}
+            {/*  { `${tweetCount?.toString()} tweets all time` } */}
           </a>
 
           <Link href="/projects" className="flex items-center">
             <ViewsIcon />
             {`${views.toString()} blog views all time`}
           </Link>
+          <div>
+            <NowPlaying />
+          </div>
         </div>
       </div>
       <p className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">
