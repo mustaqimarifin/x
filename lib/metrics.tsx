@@ -1,24 +1,23 @@
-import "server-only";
+//import "server-only"
 
-import { cache } from "react";
-import { serverClient } from "./supabase/server";
+import { cache } from "react"
+//import { serverClient } from "./supabase/server";
 //import supabase from "lib/supabase/client";
-//import supabase from "./supabase-browser";
+import { supabase } from "lib/supabase/browser"
 
 export const getBlogViews = cache(async () => {
   if (!process.env.TWITTER_API_TOKEN) {
-    return 0;
+    return 0
   }
-  const supabase = serverClient();
 
-  const { data } = await supabase.from("pageviews").select("*");
+  const { data } = await supabase.from("pageviews").select("*")
 
-  return data?.reduce((acc, row) => acc + row.view_count, 0);
-});
+  return data?.reduce((acc, row) => acc + row.view_count, 0)
+})
 
-export async function getTweetCount() {
+export async function getTweetCount () {
   if (!process.env.TWITTER_API_TOKEN) {
-    return 0;
+    return 0
   }
 
   const response = await fetch(
@@ -28,8 +27,8 @@ export async function getTweetCount() {
         Authorization: `Bearer ${process.env.TWITTER_API_TOKEN}`,
       },
     }
-  );
+  )
 
-  const { data } = await response.json();
-  return Number(data.public_metrics.tweet_count);
+  const { data } = await response.json()
+  return Number(data.public_metrics.tweet_count)
 }
