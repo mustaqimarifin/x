@@ -1,13 +1,15 @@
 import "server-only";
 
 import { cache } from "react";
-import supabase from "lib/supabase/client";
+import { serverClient } from "./supabase/server";
+//import supabase from "lib/supabase/client";
 //import supabase from "./supabase-browser";
 
 export const getBlogViews = cache(async () => {
   if (!process.env.TWITTER_API_TOKEN) {
     return 0;
   }
+  const supabase = serverClient();
 
   const { data } = await supabase.from("pageviews").select("*");
 
