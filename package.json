@@ -27,7 +27,7 @@
     "mobx": "^6.9.0",
     "mobx-react-lite": "^3.4.3",
     "motion": "^10.16.2",
-    "next": "13.4.5",
+    "next": "13.4.4",
     "next-tweet": "^0.8.1",
     "notion-client": "^6.16.0",
     "notion-types": "^6.16.0",
