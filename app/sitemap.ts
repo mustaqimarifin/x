@@ -9,7 +9,7 @@ export default async function sitemap() {
   }));
 
   const routes = [
-    "",
+    "/",
     "/about",
     "/posts",
     "/projects",
