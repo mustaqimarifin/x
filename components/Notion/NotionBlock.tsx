@@ -16,7 +16,7 @@ const MeatTweet = dynamic(() => import("components/Embed/Tweet"), {
   ssr: false,
 });
 
-const AudioBlok = dynamic(() => import("components/Embed/audio"), {
+const AudioBlok = dynamic(() => import("components/Embed/Audio"), {
   ssr: false,
 });
 
@@ -296,7 +296,11 @@ function BlockRenderer({
       );
     }
     case "embed": {
-      return <AudioBlok block={block as AudioBlock} recordMap={recordMap} />;
+      return (
+        <div className="w-full rounded-md">
+          <AudioBlok block={block as AudioBlock} recordMap={recordMap} />
+        </div>
+      );
     }
     case "column_list":
       return <div className={cx("notion-row", id)}>{children}</div>;

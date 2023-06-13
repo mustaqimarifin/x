@@ -222,3 +222,7 @@ table {
   opacity: 0;
   pointer-events: none;
 }
+
+#widget > div.singleSound.g-box-full > div > div.visualSoundContainer__sound {
+  border-radius: "15px";
+}

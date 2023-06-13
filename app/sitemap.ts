@@ -14,7 +14,7 @@ export default async function sitemap() {
     "/posts",
     "/projects",
     "/hotline",
-    "scribbles",
+    "/scribbles",
     "/uses",
   ].map((route) => ({
     url: `https://eff1gy.xyz${route}`,

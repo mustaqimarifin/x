@@ -27,8 +27,20 @@ const Audio = ({
   }
   if (source.startsWith("https://soundcloud" || "https://w.soundcloud")) {
     return (
-      <div className="w-full">
-        <ReactPlayer url={source} />;
+      <div className="w-full rounded-md">
+        <ReactPlayer
+          url={source}
+          config={{
+            soundcloud: {
+              options: {
+                width: "100%",
+                height: "300",
+                frameborder: "no",
+                borderRadius: "15px",
+              },
+            },
+          }}
+        />
       </div>
     );
   }
