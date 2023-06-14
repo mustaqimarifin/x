@@ -1,40 +1,38 @@
-import Link from "next/link";
-import Image from "next/image";
-import { getBlogViews, getTweetCount } from "lib/metrics";
-import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons";
-import { name, about, bio, avatar } from "lib/info";
-import Balancer from "react-wrap-balancer";
-import NowPlaying from "components/UI/NowPlaying";
+import Link from "next/link"
+import Image from "next/image"
+import { getBlogViews, getTweetCount } from "lib/metrics"
+import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons"
+import { name, about, bio, avatar } from "lib/info"
+import Balancer from "react-wrap-balancer"
+import NowPlaying from "components/UI/NowPlaying"
 
-export const revalidate = 60;
+export const revalidate = 60
 
-export default async function HomePage() {
-  const views = getBlogViews();
+export default async function HomePage () {
+  let views; let tweetCount
 
-  const tweetCount = getTweetCount();
-
-  /*   try {
-      [views, tweetCount] = await Promise.all([getBlogViews(), getTweetCount()])
-    } catch (error) {
-      console.error(error)
-    } */
+  try {
+    [views, tweetCount] = await Promise.all([getBlogViews(), getTweetCount()])
+  } catch (error) {
+    console.error(error)
+  }
 
   return (
     <section>
       <h1 className="max-w-[650px] font-serif text-3xl font-bold">
-        <Balancer>{name}</Balancer>
+        <Balancer>{ name }</Balancer>
       </h1>
 
       <p className="my-5 max-w-[460px] text-neutral-800 dark:text-neutral-200">
-        {about()}
+        { about() }
       </p>
       <div className="my-8 flex  flex-col items-start md:flex-row md:items-center">
         <Image
-          alt={name}
+          alt={ name }
           className="rounded-full grayscale transition hover:grayscale-0"
-          src={avatar}
+          src={ avatar }
           placeholder="blur"
-          width={100}
+          width={ 100 }
           priority
         />
         <div className="ml-0 mt-8 space-y-2 text-neutral-500 dark:text-neutral-400 md:ml-6 md:mt-0">
@@ -45,12 +43,12 @@ export default async function HomePage() {
             className="flex items-center gap-2"
           >
             <TwitterIcon />
-            {`${tweetCount.toLocaleString()} tweets all time`}
+            { `${tweetCount.toLocaleString()} tweets all time` }
           </a>
 
           <Link href="/projects" className="flex items-center">
             <ViewsIcon />
-            {`${views.toLocaleString()} blog views all time`}
+            { `${views.toLocaleString()} blog views all time` }
           </Link>
           <div>
             <NowPlaying />
@@ -58,7 +56,7 @@ export default async function HomePage() {
         </div>
       </div>
       <p className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">
-        {bio()}
+        { bio() }
       </p>
       <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-500 dark:text-neutral-400 md:flex-row md:space-x-4 md:space-y-0">
         <li>
@@ -85,5 +83,5 @@ export default async function HomePage() {
         </li>
       </ul>
     </section>
-  );
+  )
 }
