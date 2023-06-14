@@ -5,7 +5,7 @@ export type Song = {
   title: string;
 };
 
-export type NowPlaying = {
+export type PLAY = {
   album: string;
   albumImageUrl: string;
   artist: string;

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { LayoutGroup, motion } from "framer-motion";
 import { KittyIcon } from "./icons";
 import { cx } from "lib/utils";
-import NowPlaying from "./NowPlaying";
 
 const navItems = {
   "/": {

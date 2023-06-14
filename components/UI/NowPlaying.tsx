@@ -1,5 +1,5 @@
 "use client";
-import { type NowPlaying } from "types";
+import { type PLAY } from "types";
 import { animate } from "motion";
 import { useEffect } from "react";
 import useSWR from "swr";
@@ -73,8 +73,8 @@ function AnimatedBars() {
   );
 }
 
-export default function NowPlaying() {
-  const { data } = useSWR<NowPlaying>("/api/spotify", fetcher);
+export const NowPlaying = () => {
+  const { data } = useSWR<PLAY>("/api/nowplaying", fetcher);
 
   /*   const { data } = useQuery<NowPlayingSong>({
     queryKey: ['now_playing'],
@@ -95,7 +95,7 @@ export default function NowPlaying() {
       <div className="inline-flex w-full max-w-full flex-col truncate sm:flex-row">
         {data?.songUrl ? (
           <a
-            className=" max-w-max truncate font-medium  text-gray-800 dark:text-gray-200"
+            className=" max-w-max truncate text-sm   dark:text-gray-200"
             href={data.songUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -103,17 +103,15 @@ export default function NowPlaying() {
             {data.title}
           </a>
         ) : (
-          <p className=" font-medium text-gray-800 dark:text-gray-200">
-            Not Playing
-          </p>
+          <p className=" font-bold  dark:text-gray-200">Not Playing</p>
         )}
         <span className="mx-2 hidden text-gray-500 dark:text-gray-300 sm:block">
           {" – "}
         </span>
-        <p className=" max-w-max truncate text-gray-500 dark:text-gray-300">
+        <p className=" max-w-max truncate font-mono text-sm font-bold text-orange-400 dark:text-gray-300">
           {data?.artist ?? "Spotify"}
         </p>
       </div>
     </div>
   );
-}
+};

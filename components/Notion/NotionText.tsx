@@ -4,8 +4,6 @@ import React from "react";
 import { NotionBlock } from "./NotionBlock";
 import { NotionTextAnchor } from "./NotionTextAnchor";
 import { textDecorationsToString } from "lib/utils";
-import { rootDomain } from "lib/notion/config";
-import { getHashFragmentValue } from "react-notion-x";
 
 function addDashesToUUID(uuid: string) {
   return uuid
