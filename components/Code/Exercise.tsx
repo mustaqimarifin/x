@@ -6,7 +6,7 @@ import { Exercise } from "types";
 
 const CodeEditor = dynamic(() => import("./CodeEditor"));
 
-export function Exercise({
+export default function Exercise({
   blockId,
   prompt,
   exerciseCode,

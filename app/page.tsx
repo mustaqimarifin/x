@@ -1,21 +1,28 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getBlogViews, getTweetCount } from "lib/metrics"
 import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons"
 import { name, about, bio, avatar } from "lib/info"
 import Balancer from "react-wrap-balancer"
 import NowPlaying from "components/UI/NowPlaying"
+import { cache } from "react"
+import { serverClient } from "lib/supabase/server"
 
 export const revalidate = 60
 
-export default async function HomePage () {
-  let views; let tweetCount
+const getBlogViews = cache(async () => {
 
-  try {
-    [views, tweetCount] = await Promise.all([getBlogViews(), getTweetCount()])
-  } catch (error) {
-    console.error(error)
-  }
+  const supabase = serverClient()
+
+  const { data } = await supabase.from("pageviews").select("*")
+  const total = data?.reduce((acc, row) => acc + row.view_count, 0)
+
+  return total
+})
+
+
+
+export default async function HomePage () {
+  const views = await getBlogViews()
 
   return (
     <section>
@@ -36,19 +43,19 @@ export default async function HomePage () {
           priority
         />
         <div className="ml-0 mt-8 space-y-2 text-neutral-500 dark:text-neutral-400 md:ml-6 md:mt-0">
-          <a
+          { <a
             rel="noopener noreferrer"
             target="_blank"
             href="https://twitter.com/vmprmyth"
             className="flex items-center gap-2"
           >
             <TwitterIcon />
-            { `${tweetCount.toLocaleString()} tweets all time` }
-          </a>
+            { `9760 tweets all time` }
+          </a> }
 
           <Link href="/projects" className="flex items-center">
             <ViewsIcon />
-            { `${views.toLocaleString()} blog views all time` }
+            { views && `${views.toString()} blog views all time` }
           </Link>
           <div>
             <NowPlaying />

@@ -2,21 +2,26 @@ import { AudioBlock, BaseBlock, ExtendedRecordMap } from "notion-types";
 import React from "react";
 import { processDatabaseItem } from "../../app/data";
 import { NotionText } from "./NotionText";
-//import Image from "next/image";
-import { Exercise } from "../Code/Exercise";
 import { cx, textDecorationsToString } from "lib/utils";
-import YoutubeEmbed from "components/Embed/YoutubeEmbed";
 import dynamic from "next/dynamic";
 import Image from "components/Pics";
+
 const KodeBlock = dynamic(() => import("components/Code/KodeBlock"), {
   ssr: false,
 });
 
+const Exercise = dynamic(() => import("components/Code/Exercise"), {
+  ssr: false,
+});
 const MeatTweet = dynamic(() => import("components/Embed/Tweet"), {
   ssr: false,
 });
 
 const AudioBlok = dynamic(() => import("components/Embed/Audio"), {
+  ssr: false,
+});
+
+const YoutubeEmbed = dynamic(() => import("components/Embed/YoutubeEmbed"), {
   ssr: false,
 });
 
