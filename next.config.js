@@ -27,6 +27,10 @@ const nextConfig = {
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   },
+  experimental: {
+    appDir: true,
+    // serverComponentsExternalPackages: ["@prisma/client"],
+  },
   // @ts-ignore
   redirects() {
     try {

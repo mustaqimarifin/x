@@ -7,14 +7,14 @@ import NowPlaying from "components/UI/NowPlaying"
 import { cache } from "react"
 import { serverClient } from "lib/supabase/server"
 
-export const revalidate = 60
+export const revalidate = 0
 
 const getBlogViews = cache(async () => {
 
   const supabase = serverClient()
 
   const { data } = await supabase.from("pageviews").select("*")
-  const total = data?.reduce((acc, row) => acc + row.view_count, 0)
+  const total = data.reduce((acc, row) => acc + row.view_count, 0)
 
   return total
 })
@@ -23,6 +23,7 @@ const getBlogViews = cache(async () => {
 
 export default async function HomePage () {
   const views = await getBlogViews()
+  const vTotal = `${views.toString()} blog views all time`
 
   return (
     <section>
@@ -55,7 +56,7 @@ export default async function HomePage () {
 
           <Link href="/projects" className="flex items-center">
             <ViewsIcon />
-            { views && `${views.toString()} blog views all time` }
+            { vTotal ?? null }
           </Link>
           <div>
             <NowPlaying />
