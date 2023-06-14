@@ -9,13 +9,15 @@ import NowPlaying from "components/UI/NowPlaying";
 export const revalidate = 60;
 
 export default async function HomePage() {
-  let views: number; //tweetCount: number
+  const views = getBlogViews();
 
-  try {
-    [views] = await Promise.all([getBlogViews()]);
-  } catch (error) {
-    console.error(error);
-  }
+  const tweetCount = getTweetCount();
+
+  /*   try {
+      [views, tweetCount] = await Promise.all([getBlogViews(), getTweetCount()])
+    } catch (error) {
+      console.error(error)
+    } */
 
   return (
     <section>
@@ -43,12 +45,12 @@ export default async function HomePage() {
             className="flex items-center gap-2"
           >
             <TwitterIcon />
-            {/*  { `${tweetCount?.toString()} tweets all time` } */}
+            {`${tweetCount.toLocaleString()} tweets all time`}
           </a>
 
           <Link href="/projects" className="flex items-center">
             <ViewsIcon />
-            {`${views.toString()} blog views all time`}
+            {`${views.toLocaleString()} blog views all time`}
           </Link>
           <div>
             <NowPlaying />

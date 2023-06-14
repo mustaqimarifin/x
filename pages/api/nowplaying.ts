@@ -1,6 +1,5 @@
 import { getNowPlaying } from "lib/spotify";
 import { type NextRequest } from "next/server";
-import { Song } from "types/spotify";
 
 export const config = {
   runtime: "edge",

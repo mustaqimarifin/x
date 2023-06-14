@@ -2,12 +2,7 @@
 import useSWR from "swr";
 import { useEffect } from "react";
 import { fetcher } from "lib/utils";
-
-interface CounterProps {
-  slug: string;
-  total?: string;
-  trackView: boolean;
-}
+import { CounterProps } from "types";
 
 const PageViews = ({ slug, trackView }: CounterProps) => {
   const { data } = useSWR<CounterProps>(`/api/page/${slug}`, fetcher);

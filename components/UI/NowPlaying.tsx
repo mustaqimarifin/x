@@ -1,5 +1,5 @@
 "use client";
-import { type NowPlaying } from "types/spotify";
+import { type NowPlaying } from "types";
 import { animate } from "motion";
 import { useEffect } from "react";
 import useSWR from "swr";

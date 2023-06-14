@@ -1,7 +1,6 @@
 import { getNowPlaying } from "lib/spotify";
-import { NowPlaying } from "types/spotify";
 
-export const runtime = "edge"; // 'nodejs' is the default
+export const runtime = "edge";
 
 export async function POST() {
   const response = await getNowPlaying();

@@ -15,9 +15,8 @@ const getURL = () => {
   return url;
 };
 
-const getURL2 = () =>
-  (window.location.href =
-    location.protocol + "//" + location.host + location.pathname);
+const getURL2 = (window.location.href =
+  location.protocol + "//" + location.host + location.pathname);
 
 export function SignOut() {
   return (
@@ -36,9 +35,9 @@ export function SignIn() {
       className="mb-4 flex rounded-md border border-gray-800 bg-black px-4 py-3 text-sm font-semibold text-neutral-200 transition-all hover:text-white"
       onClick={async () =>
         await supabase.auth.signInWithOAuth({
-          provider: "github",
+          provider: "google",
           options: {
-            redirectTo: getURL2(),
+            redirectTo: getURL2,
           },
         })
       }

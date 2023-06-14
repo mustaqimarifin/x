@@ -1,15 +1,8 @@
+import { type Bling } from "types";
 import Avatar from "./Avatar";
 import { formatDate } from "lib/utils";
 
-interface Props {
-  id: number;
-  avatar: string;
-  username: string;
-  posted_at: string;
-  body: string;
-}
-
-export const Hotline = ({ avatar, username, posted_at, body }: Props) => {
+export const Hotline = ({ avatar, username, posted_at, body }: Bling) => {
   return (
     <div className="rounded-lg p-4  text-base ">
       <div className="mb-2 flex items-center justify-between">

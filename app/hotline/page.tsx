@@ -10,41 +10,7 @@ import type { Database } from "types/supabase";
 import { serverClient } from "lib/supabase/server";
 import { Hotline } from "components/HotlineBling";
 
-/* const getGuestbook = cache(async () => {
-  return await prisma.guestbook.findMany({
-    include: {
-      user: true
-    },
-    orderBy: {
-      updatedAt: "desc",
-    },
-  })
-})
-
-db
-    .selectFrom("Guestbook")
-    .innerJoin("User", "User.id", "Guestbook.userId")
-    .select([
-      "Guestbook.id",
-      "body",
-      "User.name as username",
-      "User.image as avatar",
-      "updatedAt",
-    ])
-    .orderBy("updatedAt", "desc")
-    .limit(100)
-    .execute()
- */
-
 type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"];
-
-/* const getGuestbook = cache(async () => {
-  const supabase = createServerComponentSupabaseClient<Database>({
-    headers,
-    cookies,
-  })
-  return await supabase.from("hotline_bling").select("*")
-}) */
 
 export const revalidate = 0;
 
@@ -64,23 +30,6 @@ const getUser = cache(async () => {
   return user;
 });
 
-/* async function getGuestBook () {
-     const supabase = createServerComponentSupabaseClient<Database>({
-      headers,
-      cookies,
-    }) 
-  const { data: entries } = await supabase.from("hotline_bling").select('*')
-  return entries
-} */
-/* export async function getUser () {
-  const supabase = createServerComponentSupabaseClient<Database>({
-    headers,
-    cookies,
-  })
-  const { data: { user } } = await supabase.auth.getUser()
-  return user
-} */
-
 const metadata: Metadata = {
   title: "Guestbook",
   description: "Leave a message!.",
@@ -89,29 +38,6 @@ const metadata: Metadata = {
 export default async function HotlinePage() {
   const entries = await getHotline();
   const user = await getUser();
-
-  /*   try {
-      const [guestbookRes, userRes] = await Promise.allSettled([
-        getHotline(),
-        getUser()
-  
-      ])
-  
-      if (guestbookRes.status === "fulfilled" && guestbookRes.value[0]) {
-        entries = guestbookRes.value
-      } else {
-        console.error(guestbookRes)
-      }
-  
-      if (userRes.status === "fulfilled") {
-        user = userRes.value
-      } else {
-        console.error(userRes)
-      }
-  
-    } catch (error) {
-      console.error(error)
-    } */
 
   return (
     <>
@@ -145,3 +71,35 @@ export default async function HotlinePage() {
     </>
   );
 }
+
+/* //^PRISMA 
+
+const getGuestbook = cache(async () => {
+  return await prisma.guestbook.findMany({
+    include: {
+      user: true
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+  })
+})
+
+*/
+
+/* //^KYSELY
+db
+    .selectFrom("Guestbook")
+    .innerJoin("User", "User.id", "Guestbook.userId")
+    .select([
+      "Guestbook.id",
+      "body",
+      "User.name as username",
+      "User.image as avatar",
+      "updatedAt",
+    ])
+    .orderBy("updatedAt", "desc")
+    .limit(100)
+    .execute()
+    
+ */

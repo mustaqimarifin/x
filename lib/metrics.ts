@@ -13,7 +13,7 @@ export const getBlogViews = cache(async () => {
   return data?.reduce((acc, row) => acc + row.view_count, 0);
 });
 
-export async function getTweetCount() {
+export const getTweetCount = cache(async () => {
   if (!process.env.TWITTER_API_TOKEN) {
     return null;
   }
@@ -29,4 +29,4 @@ export async function getTweetCount() {
 
   const { data } = await response.json();
   return Number(data.public_metrics.tweet_count);
-}
+});

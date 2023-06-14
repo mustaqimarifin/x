@@ -2,6 +2,7 @@
 import { openPane } from "components/UI/AppState";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { Exercise } from "types";
 
 const CodeEditor = dynamic(() => import("./CodeEditor"));
 
@@ -10,12 +11,7 @@ export function Exercise({
   prompt,
   exerciseCode,
   solutionCode,
-}: {
-  blockId: string;
-  prompt: React.ReactNode;
-  exerciseCode: string;
-  solutionCode: React.ReactNode;
-}) {
+}: Exercise) {
   const [showSolution, setShowSolution] = useState(false);
   return (
     <div className="bg-tan -mx-2 my-4 rounded-md p-2 md:-mx-4 md:p-4">
