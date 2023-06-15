@@ -92,32 +92,30 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  const accessToken = session?.access_token || null;
+  /*   const {
+      data: { session },
+    } = await supabase.auth.getSession()
+  
+    const accessToken = session?.access_token || null */
   return (
-    <AuthProvider accessToken={accessToken}>
-      <html
-        lang="en"
-        className={cx(
-          "bg-white text-black dark:bg-[#111010] dark:text-white",
-          kaisei.variable,
-          sohne.variable,
-          sfmono.variable
-        )}
-      >
-        <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col subpixel-antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
-          <NAV />
-          <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
-            <PageTransition> {children}</PageTransition>
+    <html
+      lang="en"
+      className={cx(
+        "bg-white text-black dark:bg-[#111010] dark:text-white",
+        kaisei.variable,
+        sohne.variable,
+        sfmono.variable
+      )}
+    >
+      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col subpixel-antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
+        <NAV />
+        <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
+          <PageTransition> {children}</PageTransition>
 
-            <Analytics />
-          </main>
-          <PanesLayer />
-        </body>
-      </html>
-    </AuthProvider>
+          <Analytics />
+        </main>
+        <PanesLayer />
+      </body>
+    </html>
   );
 }

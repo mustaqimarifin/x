@@ -1,39 +1,42 @@
-"use client"
+"use client";
 
-import { GoogleIcon } from "components/UI/icons"
-import { supabase } from "lib/supabase/browser"
+import { GoogleIcon } from "components/UI/icons";
+import { supabase } from "lib/supabase/browser";
+import { useRouter } from "next/navigation";
 
 const getURL = () => {
   let url =
     process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
     process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
-    "http://localhost:3000/"
+    "http://localhost:3000/";
   // Make sure to include `https://` when not localhost.
-  url = url.includes("http") ? url : `https://${url}`
+  url = url.includes("http") ? url : `https://${url}`;
   // Make sure to including trailing `/`.
-  url = url.charAt(url.length - 1) === "/" ? url : `${url}/`
-  return url
-}
+  url = url.charAt(url.length - 1) === "/" ? url : `${url}/`;
+  return url;
+};
 
 const getURL2 = `window.location.href =
-  location.protocol + "//" + location.host + location.pathname`
+  location.protocol + "//" + location.host + location.pathname`;
 
-export function SignOut () {
+export function SignOut() {
+  const router = useRouter();
+
   return (
     <button
       className="mb-6 mt-2 text-xs text-neutral-700 dark:text-neutral-300"
-      onClick={ async () => await supabase.auth.signOut() }
+      onClick={async () => await supabase.auth.signOut()}
     >
       → Sign out
     </button>
-  )
+  );
 }
 
-export function SignIn () {
+export function SignIn() {
   return (
     <button
       className="mb-4 flex rounded-md border border-gray-800 bg-black px-4 py-3 text-sm font-semibold text-neutral-200 transition-all hover:text-white"
-      onClick={ async () =>
+      onClick={async () =>
         await supabase.auth.signInWithOAuth({
           provider: "google",
           options: {
@@ -45,5 +48,5 @@ export function SignIn () {
       <GoogleIcon />
       <div className="ml-3">Sign in with Google</div>
     </button>
-  )
+  );
 }

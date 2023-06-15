@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Pane, panesMobx } from "./AppState";
-import { ArrowsCrossLines } from "@heathmont/moon-icons-tw";
+import { ControlsEyeCrossed } from "@heathmont/moon-icons-tw";
 
 function PaneResizers({
   dimensionsMobx,
@@ -105,7 +105,7 @@ export const PaneComponent = observer(
               ? Math.max(...values(panesMobx).map((pane) => pane.z)) + 1
               : 1;
         })}
-        className="absolute left-0 top-0 flex flex-col overflow-hidden rounded bg-white shadow-lg"
+        className="absolute left-0 top-0 flex flex-col overflow-hidden rounded bg-white shadow-lg dark:bg-neutral-800"
         ref={rootRef}
       >
         <div
@@ -121,7 +121,7 @@ export const PaneComponent = observer(
             })}
             className="text-white opacity-80 hover:opacity-100"
           >
-            <ArrowsCrossLines />
+            <ControlsEyeCrossed />
           </button>
         </div>
         <div className="grow overflow-auto text-sm">{children}</div>

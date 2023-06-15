@@ -18,7 +18,7 @@ const PageViews = ({ slug, trackView }: CounterProps) => {
   }, [slug]);
 
   return (
-    <p className="font-mono text-sm tracking-tighter text-neutral-500">
+    <p className="font-mono text-sm tracking-tighter text-rose-300 ">
       {data?.total ? `${data.total} views` : `–––`}
     </p>
   );
