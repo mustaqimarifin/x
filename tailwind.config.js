@@ -24,6 +24,9 @@ module.exports = {
           },
         },
       },
+      colors:{
+        codeblack : "#171717"
+      }
     },
   },
   future: {
