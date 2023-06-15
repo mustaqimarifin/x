@@ -7,8 +7,7 @@ import PageViews from "components/PageViews";
 
 import "app/style/notion.css";
 //import "app/style/override.css";
-//import { NotionBlock2 } from "components/Notion/NotionBlock2";
-//import { previewImagesEnabled, rootDomain } from "lib/notion/config";
+
 import { textDecorationsToString } from "lib/utils";
 
 export async function generateStaticParams() {

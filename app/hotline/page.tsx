@@ -9,6 +9,7 @@ import Balancer from "react-wrap-balancer";
 import type { Database } from "types/supabase";
 import { serverClient } from "lib/supabase/server";
 import { Hotline } from "components/HotlineBling";
+import LOGIN from "components/Auth";
 
 type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"];
 
