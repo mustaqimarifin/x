@@ -1,11 +1,8 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-
 import { supabase } from "lib/supabase/browser";
-import { SupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { Database } from "types/supabase";
 
 export const EVENTS = {
   PASSWORD_RECOVERY: "PASSWORD_RECOVERY",
@@ -21,13 +18,7 @@ export const VIEWS = {
   UPDATE_PASSWORD: "update_password",
 };
 
-type SupabaseContext = {
-  supabase: SupabaseClient<Database>;
-};
-
-export const AuthContext = createContext<SupabaseContext | undefined>(
-  undefined
-);
+export const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({
   accessToken,
@@ -80,19 +71,19 @@ export const AuthProvider = ({
     };
   }, []);
 
-  /*   const value = useMemo(() => {
-      return {
-        initial,
-        session,
-        user,
-        view,
-        setView,
-        signOut: async () => await supabase.auth.signOut(),
-      }
-    }, [initial, session, user, view]) */
+  const value = useMemo(() => {
+    return {
+      initial,
+      session,
+      user,
+      view,
+      setView,
+      signOut: async () => await supabase.auth.signOut(),
+    };
+  }, [initial, session, user, view]);
 
   return (
-    <AuthContext.Provider value={{ supabase }}>
+    <AuthContext.Provider value={value}>
       <>{children}</>
     </AuthContext.Provider>
   );

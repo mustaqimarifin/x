@@ -4,7 +4,7 @@ import { GoogleIcon } from "components/UI/icons";
 import { supabase } from "lib/supabase/browser";
 import { useRouter } from "next/navigation";
 
-const getURL = () => {
+export const getURL = () => {
   let url =
     process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
     process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
@@ -20,8 +20,6 @@ const getURL2 = `window.location.href =
   location.protocol + "//" + location.host + location.pathname`;
 
 export function SignOut() {
-  const router = useRouter();
-
   return (
     <button
       className="mb-6 mt-2 text-xs text-neutral-700 dark:text-neutral-300"

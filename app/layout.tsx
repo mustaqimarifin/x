@@ -7,6 +7,8 @@ import { cx } from "lib/utils";
 import { PageTransition } from "components/UI/PageTransition";
 import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
+import { AuthProvider } from "components/supabase-provider";
+import { serverClient } from "lib/supabase/server";
 
 const kaisei = localFont({
   src: "../public/fonts/kaisei-tokumin-latin-700-normal.woff2",
@@ -85,16 +87,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  /*   const {
-      data: { session },
-    } = await supabase.auth.getSession()
-  
-    const accessToken = session?.access_token || null */
+  const supabase = serverClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  const accessToken = session?.access_token || null;
   return (
     <html
       lang="en"
@@ -105,15 +108,17 @@ export default function RootLayout({
         sfmono.variable
       )}
     >
-      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col subpixel-antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
-        <NAV />
-        <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
-          <PageTransition> {children}</PageTransition>
+      <AuthProvider accessToken={accessToken}>
+        <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col subpixel-antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
+          <NAV />
+          <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
+            <PageTransition> {children}</PageTransition>
 
-          <Analytics />
-        </main>
-        <PanesLayer />
-      </body>
+            <Analytics />
+          </main>
+          <PanesLayer />
+        </body>
+      </AuthProvider>
     </html>
   );
 }
