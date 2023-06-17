@@ -9,9 +9,7 @@ import Balancer from "react-wrap-balancer";
 import type { Database } from "types/supabase";
 import { serverClient } from "lib/supabase/server";
 import { Hotline } from "components/HotlineBling";
-import LOGIN from "components/Auth";
 import LoginForm from "./login-form";
-import Login from "./login";
 
 type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"];
 
@@ -33,19 +31,30 @@ const getUser = cache(async () => {
   return user;
 });
 
+ async function HotlineForm() {
+  const supabase = serverClient();
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  return <LoginForm session={session} />;
+}
+
+
 const metadata: Metadata = {
   title: "Guestbook",
   description: "Leave a message!.",
 };
 
 export default async function HotlinePage() {
-  //const entries = await getHotline()
+  const entries = await getHotline()
   //const user = await getUser()
 
-  let entries;
-  let user;
+ // let entries;
+ // let user;
 
-  try {
+/*   try {
     const [entriesRes, userRes] = await Promise.allSettled([
       getHotline(),
       getUser(),
@@ -65,7 +74,7 @@ export default async function HotlinePage() {
   } catch (error) {
     console.error(error);
   }
-
+ */
   return (
     <>
       <section>
@@ -80,7 +89,7 @@ export default async function HotlinePage() {
         ) : (
           <SignIn />
         ) } */}
-        <Login />
+        <HotlineForm />
 
         <>
           {entries &&
@@ -88,6 +97,7 @@ export default async function HotlinePage() {
               <Hotline
                 key={post.id}
                 avatar={post.avatar}
+                fullname={post.fullname}
                 username={post.username}
                 posted_at={post.posted_at}
                 body={post.body}

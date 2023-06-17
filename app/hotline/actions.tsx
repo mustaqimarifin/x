@@ -16,7 +16,7 @@ export const getURL = () => {
   return url;
 };
 
-const getURL2 = `window.location.href =
+export const getURL2 = () => `window.location.href =
   location.protocol + "//" + location.host + location.pathname`;
 
 export function SignOut() {
@@ -38,7 +38,7 @@ export function SignIn() {
         await supabase.auth.signInWithOAuth({
           provider: "google",
           options: {
-            redirectTo: getURL2,
+            redirectTo: getURL2(),
           },
         })
       }

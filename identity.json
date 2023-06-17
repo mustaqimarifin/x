@@ -1,0 +1,11 @@
+{
+  "iss": "https://www.googleapis.com/userinfo/v2/me",
+  "sub": "111700381928287611455",
+  "name": "Mustaqim Arifin",
+  "email": "vmprmyth@gmail.com",
+  "picture": "https://lh3.googleusercontent.com/a/AAcHTtdUPEG5c2a3i1bgK7wMNAS5dy6dGoMQZbFOOxV6cbs=s96-c",
+  "full_name": "Mustaqim Arifin",
+  "avatar_url": "https://lh3.googleusercontent.com/a/AAcHTtdUPEG5c2a3i1bgK7wMNAS5dy6dGoMQZbFOOxV6cbs=s96-c",
+  "provider_id": "111700381928287611455",
+  "email_verified": true
+}

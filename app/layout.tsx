@@ -8,7 +8,7 @@ import { PageTransition } from "components/UI/PageTransition";
 import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 import { AuthProvider } from "components/supabase-provider";
-import { serverClient } from "lib/supabase/server";
+import supabase from "lib/supabase/client";
 
 const kaisei = localFont({
   src: "../public/fonts/kaisei-tokumin-latin-700-normal.woff2",
@@ -92,7 +92,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = serverClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();

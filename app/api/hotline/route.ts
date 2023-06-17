@@ -16,8 +16,8 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const { content } = await request.json();
+  const { comment } = await request.json();
   const supabase = routerClient();
-  const { data } = await supabase.from("hotline").delete().eq("id", content.id);
+  const { data } = await supabase.from("hotline").delete().eq("id", comment);
   return NextResponse.json(data);
 }

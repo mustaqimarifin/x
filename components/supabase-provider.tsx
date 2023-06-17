@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "lib/supabase/browser";
-
 export const EVENTS = {
   PASSWORD_RECOVERY: "PASSWORD_RECOVERY",
   SIGNED_OUT: "SIGNED_OUT",

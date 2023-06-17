@@ -4,10 +4,11 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
 import type { Session } from "@supabase/auth-helpers-nextjs";
-import { getURL } from "./actions";
+import { getURL, getURL2 } from "./actions";
 import { GoogleIcon } from "components/UI/icons";
 import Form from "./form";
 import { supabase } from "lib/supabase/browser";
+import SignOut from "components/Auth/SignOut"
 
 export default function LoginForm({ session }: { session: Session | null }) {
   const router = useRouter();
@@ -16,7 +17,9 @@ export default function LoginForm({ session }: { session: Session | null }) {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${location.origin}/auth/callback`,
+        //redirectTo: `${location.origin}/auth/callback`,
+        redirectTo: getURL2(),
+
       },
     });
     router.refresh();
@@ -32,12 +35,13 @@ export default function LoginForm({ session }: { session: Session | null }) {
   return session ? (
     <>
       <Form />
-      <button
+      <SignOut/>
+{/*       <button
         className="mb-6 mt-2 text-xs text-neutral-700 dark:text-neutral-300"
         onClick={handleSignOut}
       >
         Sign out
-      </button>
+      </button> */}
     </>
   ) : (
     <>

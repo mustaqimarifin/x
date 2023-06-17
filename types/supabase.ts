@@ -31,6 +31,26 @@ export interface Database {
           parent_id?: number | null;
           posted_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "hotline_author_id_fkey";
+            columns: ["author_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "hotline_parent_id_fkey";
+            columns: ["parent_id"];
+            referencedRelation: "hotline";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "hotline_parent_id_fkey";
+            columns: ["parent_id"];
+            referencedRelation: "hotline_bling";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       pageviews: {
         Row: {
@@ -48,6 +68,7 @@ export interface Database {
           slug?: string;
           view_count?: number;
         };
+        Relationships: [];
       };
       profiles: {
         Row: {
@@ -74,6 +95,14 @@ export interface Database {
           updated_at?: string;
           user_name?: string | null;
         };
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey";
+            columns: ["id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
     Views: {
@@ -87,6 +116,14 @@ export interface Database {
           posted_at: string | null;
           username: string | null;
         };
+        Relationships: [
+          {
+            foreignKeyName: "hotline_author_id_fkey";
+            columns: ["author_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
     Functions: {
