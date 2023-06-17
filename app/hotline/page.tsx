@@ -31,7 +31,7 @@ const getUser = cache(async () => {
   return user;
 });
 
- async function HotlineForm() {
+async function HotlineForm() {
   const supabase = serverClient();
 
   const {
@@ -41,56 +41,35 @@ const getUser = cache(async () => {
   return <LoginForm session={session} />;
 }
 
-
 const metadata: Metadata = {
   title: "Guestbook",
   description: "Leave a message!.",
 };
 
 export default async function HotlinePage() {
-  const entries = await getHotline()
+  const entries = await getHotline();
   //const user = await getUser()
 
- // let entries;
- // let user;
+  /*   let entries;
 
-/*   try {
-    const [entriesRes, userRes] = await Promise.allSettled([
-      getHotline(),
-      getUser(),
-    ]);
+  try {
+    [entries] = await Promise.allSettled([getHotline()]);
 
-    if (entriesRes.status === "fulfilled" && entriesRes.value[0]) {
-      entries = entriesRes.value;
+    if (entries.status === "fulfilled" && entries.value[0]) {
+      entries = entries.value;
     } else {
-      console.error(entriesRes);
-    }
-
-    if (userRes.status === "fulfilled") {
-      user = userRes.value;
-    } else {
-      console.error(userRes);
+      console.error(entries);
     }
   } catch (error) {
     console.error(error);
-  }
- */
+  } */
   return (
     <>
       <section>
         <h1 className="max-w-[650px mb-8 font-serif text-3xl font-bold">
           <Balancer>Guestbook</Balancer>
         </h1>
-        {/*         { user ? (
-          <>
-            <Form />
-            <SignOut />
-          </>
-        ) : (
-          <SignIn />
-        ) } */}
         <HotlineForm />
-
         <>
           {entries &&
             entries.map((post: HotlineBling) => (

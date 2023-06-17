@@ -36,7 +36,7 @@ export type Bling = {
   id: number;
   avatar: string;
   username: string;
-  fullname: string ;
+  fullname: string;
   posted_at: string;
   body: string;
 };

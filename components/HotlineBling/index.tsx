@@ -1,9 +1,15 @@
-"use client"
+"use client";
 import { type Bling } from "types";
 import Avatar from "./Avatar";
 import { formatDate } from "lib/utils";
 
-export const Hotline = ({ avatar, username, fullname, posted_at, body }: Bling) => {
+export const Hotline = ({
+  avatar,
+  username,
+  fullname,
+  posted_at,
+  body,
+}: Bling) => {
   return (
     <div className="rounded-lg p-4  text-base ">
       <div className="mb-2 flex items-center justify-between">

@@ -4,20 +4,19 @@ import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons";
 import { name, about, bio, avatar } from "lib/info";
 import Balancer from "react-wrap-balancer";
 import { NowPlaying } from "components/UI/NowPlaying";
-//import { cache } from "react"
-
+import { cache } from "react";
 import supabase from "lib/supabase/client";
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
-async function getBlogViews() {
+const getBlogViews = cache(async () => {
   const { data: totalSHIT } = await supabase.from("pageviews").select("*");
   return totalSHIT;
-}
+});
 
 export default async function HomePage() {
   const views = await getBlogViews();
-  const vTotal = views.reduce((acc, row) => acc + row.view_count, 0);
+  const vTotal = views?.reduce((acc, row) => acc + row.view_count, 0);
 
   return (
     <section>
@@ -52,7 +51,7 @@ export default async function HomePage() {
 
           <Link href="/projects" className="flex items-center">
             <ViewsIcon />
-            {vTotal && `${vTotal.toString()} blog views all time`}
+            {vTotal && `${vTotal?.toString()} blog views all time`}
           </Link>
           <div>
             <NowPlaying />

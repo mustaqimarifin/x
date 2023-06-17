@@ -8,8 +8,10 @@ import { NotionBlock } from "components/Notion/NotionBlock";
 
 import PageViews from "components/PageViews";
 import "app/style/notion.css";
-import "app/style/override.css";
+//import "app/style/override.css";
 import { textDecorationsToString } from "lib/utils";
+import { LoadingSpinner } from "components/UI/spinner";
+import { Suspense } from "react";
 
 export const revalidate = 60;
 
@@ -62,7 +64,9 @@ export default async function ProjectsPage({
         suppressHydrationWarning
         className=" prose max-w-2xl dark:prose-invert"
       >
-        <NotionBlock recordMap={recordMap} blockId={postId} />
+        <Suspense fallback={<LoadingSpinner />}>
+          <NotionBlock recordMap={recordMap} blockId={postId} />
+        </Suspense>
       </div>
       {/*  <div suppressHydrationWarning className=" max-w-2xl">
         <NotionBlock2

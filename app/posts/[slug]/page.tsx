@@ -9,6 +9,8 @@ import "app/style/notion.css";
 //import "app/style/override.css";
 
 import { textDecorationsToString } from "lib/utils";
+import { Suspense } from "react";
+import { LoadingSpinner } from "components/UI/spinner";
 
 export async function generateStaticParams() {
   const posts = await getPostDatabase();
@@ -62,7 +64,9 @@ export default async function PostPage({
         suppressHydrationWarning
         className=" prose max-w-2xl dark:prose-invert"
       >
-        <NotionBlock recordMap={recordMap} blockId={postId} />
+        <Suspense fallback={<LoadingSpinner />}>
+          <NotionBlock recordMap={recordMap} blockId={postId} />
+        </Suspense>
       </div>
       {/*  <div suppressHydrationWarning className=" max-w-2xl">
         <NotionBlock2

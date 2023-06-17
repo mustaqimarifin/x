@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "format": "pnpm dlx prettier --write . --ignore-path .gitignore",
+    "format": "pnpm prettier --write . --ignore-path .gitignore",
     "lint": "next lint -- --ignore-path .gitignore",
     "lint:fix": "pnpm run format && pnpm run lint --fix",
     "build": "next build",
