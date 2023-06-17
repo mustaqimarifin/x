@@ -1,4 +1,4 @@
-import me from "../app/avatar2.png";
+import me from "../app/avatar2.webp";
 
 export const name = "Mustaqim Arifin";
 export const avatar = me;
