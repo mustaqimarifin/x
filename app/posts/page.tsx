@@ -24,7 +24,7 @@ export default async function Projectsindex() {
             href={`/posts/${post.slug}`}
           >
             <div className="flex w-full flex-col">
-              <p>{post.title}</p>
+              <div className="font-bold">{post.title}</div>
               <PageViews slug={post.slug} trackView={false} />
             </div>
           </Link>

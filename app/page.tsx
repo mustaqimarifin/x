@@ -53,9 +53,7 @@ export default async function HomePage() {
             <ViewsIcon />
             {vTotal && `${vTotal?.toString()} blog views all time`}
           </Link>
-          <div>
-            <NowPlaying />
-          </div>
+          <NowPlaying />
         </div>
       </div>
       <p className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">

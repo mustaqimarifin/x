@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { useEffect } from "react";
 import { fetcher } from "lib/utils";
 import { CounterProps } from "types";
+import { LoadingSpinner } from "./UI/spinner";
 
 const PageViews = ({ slug, trackView }: CounterProps) => {
   const { data } = useSWR<CounterProps>(`/api/page/${slug}`, fetcher);
@@ -18,8 +19,8 @@ const PageViews = ({ slug, trackView }: CounterProps) => {
   }, [slug]);
 
   return (
-    <p className="font-mono text-sm tracking-tighter text-rose-300 ">
-      {data?.total ? `${data.total} views` : `–––`}
+    <p className=" text-sm font-light tracking-tighter text-red-400 ">
+      {data?.total ? `${data.total} views` : <LoadingSpinner />}
     </p>
   );
 };

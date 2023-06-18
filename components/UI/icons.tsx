@@ -189,3 +189,97 @@ export function GoogleIcon() {
     </svg>
   );
 }
+
+export function Bean() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ margin: "auto", background: "none" }}
+      width="197"
+      height="197"
+      display="block"
+      preserveAspectRatio="xMidYMid"
+      viewBox="0 0 100 100"
+    >
+      <g fill="#1b2124">
+        <circle cx="60" cy="50" r="4">
+          <animate
+            attributeName="cx"
+            begin="-0.67s"
+            dur="1s"
+            keyTimes="0;1"
+            repeatCount="indefinite"
+            values="95;35"
+          ></animate>
+          <animate
+            attributeName="fill-opacity"
+            begin="-0.67s"
+            dur="1s"
+            keyTimes="0;0.2;1"
+            repeatCount="indefinite"
+            values="0;1;1"
+          ></animate>
+        </circle>
+        <circle cx="60" cy="50" r="4">
+          <animate
+            attributeName="cx"
+            begin="-0.33s"
+            dur="1s"
+            keyTimes="0;1"
+            repeatCount="indefinite"
+            values="95;35"
+          ></animate>
+          <animate
+            attributeName="fill-opacity"
+            begin="-0.33s"
+            dur="1s"
+            keyTimes="0;0.2;1"
+            repeatCount="indefinite"
+            values="0;1;1"
+          ></animate>
+        </circle>
+        <circle cx="60" cy="50" r="4">
+          <animate
+            attributeName="cx"
+            begin="0s"
+            dur="1s"
+            keyTimes="0;1"
+            repeatCount="indefinite"
+            values="95;35"
+          ></animate>
+          <animate
+            attributeName="fill-opacity"
+            begin="0s"
+            dur="1s"
+            keyTimes="0;0.2;1"
+            repeatCount="indefinite"
+            values="0;1;1"
+          ></animate>
+        </circle>
+      </g>
+      <g fill="#e86e38">
+        <path d="M50 50V20a30 30 0 000 60z" transform="translate(-15)"></path>
+        <path d="M50 50H20a30 30 0 0060 0z" transform="translate(-15)">
+          <animateTransform
+            attributeName="transform"
+            dur="1s"
+            keyTimes="0;0.5;1"
+            repeatCount="indefinite"
+            type="rotate"
+            values="0 50 50;45 50 50;0 50 50"
+          ></animateTransform>
+        </path>
+        <path d="M50 50H20a30 30 0 0160 0z" transform="translate(-15)">
+          <animateTransform
+            attributeName="transform"
+            dur="1s"
+            keyTimes="0;0.5;1"
+            repeatCount="indefinite"
+            type="rotate"
+            values="0 50 50;-45 50 50;0 50 50"
+          ></animateTransform>
+        </path>
+      </g>
+    </svg>
+  );
+}

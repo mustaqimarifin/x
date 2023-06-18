@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "components/Providers/supabase-provider"
+import { useAuth } from "components/Providers/supabase-provider";
 
 export default function SignOut() {
   const { signOut } = useAuth();

@@ -62,11 +62,9 @@ export default async function PostPage({
       </div>
       <div
         suppressHydrationWarning
-        className=" prose max-w-2xl dark:prose-invert"
+        className="prose max-w-2xl dark:prose-invert"
       >
-        <Suspense fallback={<LoadingSpinner />}>
-          <NotionBlock recordMap={recordMap} blockId={postId} />
-        </Suspense>
+        <NotionBlock recordMap={recordMap} blockId={postId} />
       </div>
       {/*  <div suppressHydrationWarning className=" max-w-2xl">
         <NotionBlock2

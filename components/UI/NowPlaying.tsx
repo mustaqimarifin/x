@@ -74,7 +74,7 @@ function AnimatedBars() {
 }
 
 export const NowPlaying = () => {
-  const { data } = useSWR<PLAY>("/api/nowplaying", fetcher);
+  const { data } = useSWR<PLAY>(`/api/spotify`, fetcher);
 
   /*   const { data } = useQuery<NowPlayingSong>({
     queryKey: ['now_playing'],

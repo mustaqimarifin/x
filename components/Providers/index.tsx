@@ -1,8 +1,6 @@
-"use client";
-
 import React from "react";
 import { AuthProvider } from "./supabase-provider";
-import { supabase } from "lib/supabase/browser";
+import supabase from "lib/supabase/client";
 
 export async function Providers({ children }: { children: React.ReactNode }) {
   const {
