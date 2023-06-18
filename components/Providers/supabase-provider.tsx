@@ -77,6 +77,15 @@ export const AuthProvider = ({
       user,
       view,
       setView,
+      signIn: async () =>
+        await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            //redirectTo: `${location.origin}/auth/callback`,
+            redirectTo: (window.location.href =
+              location.protocol + "//" + location.host + location.pathname),
+          },
+        }),
       signOut: async () => await supabase.auth.signOut(),
     };
   }, [initial, session, user, view]);

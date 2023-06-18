@@ -16,14 +16,14 @@ type HotlineBling = Database["public"]["Views"]["hotline_bling"]["Row"];
 export const dynamic = "force-dynamic";
 
 const getHotline = cache(async () => {
-  const supabase = serverClient();
+  const supabase = await serverClient();
 
   const { data: entries } = await supabase.from("hotline_bling").select("*");
   return entries;
 });
 
 const getUser = cache(async () => {
-  const supabase = serverClient();
+  const supabase = await serverClient();
 
   const {
     data: { user },
@@ -32,7 +32,7 @@ const getUser = cache(async () => {
 });
 
 async function HotlineForm() {
-  const supabase = serverClient();
+  const supabase = await serverClient();
 
   const {
     data: { session },

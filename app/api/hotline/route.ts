@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const { body } = await request.json();
-  const supabase = routerClient();
+  const supabase = await routerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   const { comment } = await request.json();
-  const supabase = routerClient();
+  const supabase = await routerClient();
   const { data } = await supabase.from("hotline").delete().eq("id", comment);
   return NextResponse.json(data);
 }

@@ -4,8 +4,9 @@ export function TwitterIcon() {
       width="20"
       height="16"
       viewBox="0 0 24 20"
-      fill="none"
+      fill=""
       xmlns="http://www.w3.org/2000/svg"
+      className="fill-[#1d9bf0] grayscale transition delay-150 ease-in-out hover:scale-110 hover:grayscale-0"
     >
       <g clipPath="url(#a)">
         <path

@@ -30,7 +30,7 @@ export default async function HomePage() {
       <div className="my-8 flex  flex-col items-start md:flex-row md:items-center">
         <Image
           alt={name}
-          className="rounded-full grayscale transition hover:grayscale-0"
+          className="rounded-full grayscale transition duration-1000 ease-out hover:grayscale-0 hover:duration-75"
           src={avatar}
           placeholder="blur"
           width={100}
@@ -53,7 +53,9 @@ export default async function HomePage() {
             <ViewsIcon />
             {vTotal && `${vTotal?.toString()} blog views all time`}
           </Link>
-          <NowPlaying />
+          <div className="flex items-center">
+            <NowPlaying />
+          </div>
         </div>
       </div>
       <p className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">

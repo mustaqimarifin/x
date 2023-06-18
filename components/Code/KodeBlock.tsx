@@ -1,4 +1,3 @@
-"use client";
 import { highlight, languages } from "prismjs";
 import "prismjs/components/prism-json.min.js";
 import "prismjs/components/prism-css.min.js";

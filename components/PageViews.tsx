@@ -19,7 +19,7 @@ const PageViews = ({ slug, trackView }: CounterProps) => {
   }, [slug]);
 
   return (
-    <p className=" text-sm font-light tracking-tighter text-red-400 ">
+    <p className=" text-sm font-semibold tracking-tighter text-red-400 ">
       {data?.total ? `${data.total} views` : <LoadingSpinner />}
     </p>
   );

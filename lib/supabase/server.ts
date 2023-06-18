@@ -7,12 +7,12 @@ import { Database } from "types/supabase";
 
 //! This needs to export a function, as the headers and cookies are not populated with values until the Server Component is requesting data.
 
-export const serverClient = () =>
+export const serverClient = async () =>
   createServerComponentClient<Database>({
     cookies,
   });
 
-export const routerClient = () =>
+export const routerClient = async () =>
   createRouteHandlerClient<Database>({
     cookies,
   });

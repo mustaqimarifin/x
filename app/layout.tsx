@@ -1,57 +1,13 @@
 import "app/style/global.css";
 
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { cx } from "lib/utils";
 import { PageTransition } from "components/UI/PageTransition";
 import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 import { Providers } from "components/Providers";
-import { NextFontWithVariable } from "next/dist/compiled/@next/font";
-
-const inter = localFont({
-  src: "../public/fonts/RobotoFlex.woff2",
-  weight: "variable",
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const kaisei: NextFontWithVariable = localFont({
-  src: "../public/fonts/kaisei-tokumin-latin-700-normal.woff2",
-  weight: "700",
-  variable: "--font-kaisei",
-  display: "swap",
-});
-
-const sfmono: NextFontWithVariable = localFont({
-  src: "../public/fonts/SFMono-300.woff2",
-  weight: "300",
-  variable: "--font-sfmono",
-  display: "swap",
-});
-
-const sohne: NextFontWithVariable = localFont({
-  src: [
-    {
-      path: "../public/fonts/Sohne-400.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Sohne-500.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Sohne-600.woff2",
-      weight: "600",
-      style: "normal",
-    },
-  ],
-  variable: "--font-sohne",
-  display: "swap",
-});
+import { kaisei, sohne, inter, sfmono } from "./style/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -103,14 +59,14 @@ export default async function RootLayout({
     <html
       lang="en"
       className={cx(
-        "bg-white text-black subpixel-antialiased dark:bg-[#111010] dark:text-white",
+        "bg-white text-black dark:bg-[#111010] dark:text-white",
         kaisei.variable,
         sohne.variable,
         inter.variable,
         sfmono.variable
       )}
     >
-      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col  md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
+      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col md:mt-20  md:flex-row lg:mx-auto lg:mt-32 lg:max-w-6xl">
         <NAV />
         <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
           <PageTransition>

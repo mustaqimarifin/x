@@ -1,4 +1,3 @@
-"use client";
 import NextImage, { ImageProps } from "next/image";
 
 const orange =

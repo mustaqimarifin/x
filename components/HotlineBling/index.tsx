@@ -1,4 +1,3 @@
-"use client";
 import { type Bling } from "types";
 import Avatar from "./Avatar";
 import { formatDate } from "lib/utils";

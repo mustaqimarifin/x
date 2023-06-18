@@ -5,7 +5,7 @@ import { NotionBlock } from "components/Notion/NotionBlock";
 
 import PageViews from "components/PageViews";
 
-import "app/style/notion.css";
+import "app/style/notion2.css";
 //import "app/style/override.css";
 
 import { textDecorationsToString } from "lib/utils";
