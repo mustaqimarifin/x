@@ -83,7 +83,7 @@ export const PaneComponent = observer(
             positionMobx[0]
           )}px, ${Math.floor(positionMobx[1])}px)`;
         }),
-      []
+      [positionMobx]
     );
     useEffect(
       () =>
@@ -93,7 +93,7 @@ export const PaneComponent = observer(
           rootElement.style.height = `${dimensionsMobx.height}px`;
           rootElement.style.zIndex = `${pane.z}`;
         }),
-      []
+      [dimensionsMobx.height, dimensionsMobx.width, pane.z]
     );
 
     return (

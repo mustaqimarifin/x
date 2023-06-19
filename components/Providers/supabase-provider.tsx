@@ -68,7 +68,7 @@ export const AuthProvider = ({
     return () => {
       authListener?.unsubscribe();
     };
-  }, []);
+  }, [accessToken, router]);
 
   const value = useMemo(() => {
     return {

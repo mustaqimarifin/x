@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import { SignIn, SignOut } from "./actions";
-
-import Form from "./form";
 
 import { cache } from "react";
 import Balancer from "react-wrap-balancer";
@@ -20,15 +17,6 @@ const getHotline = cache(async () => {
 
   const { data: entries } = await supabase.from("hotline_bling").select("*");
   return entries;
-});
-
-const getUser = cache(async () => {
-  const supabase = await serverClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  return user;
 });
 
 async function HotlineForm() {

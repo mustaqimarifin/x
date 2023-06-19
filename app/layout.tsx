@@ -1,4 +1,5 @@
 import "app/style/global.css";
+import { kaisei, sohne, inter, sfmono } from "app/style/fonts";
 
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
@@ -7,7 +8,6 @@ import { PageTransition } from "components/UI/PageTransition";
 import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 import { Providers } from "components/Providers";
-import { kaisei, sohne, inter, sfmono } from "./style/fonts";
 
 export const metadata: Metadata = {
   title: {

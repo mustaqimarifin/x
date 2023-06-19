@@ -16,7 +16,7 @@ const PageViews = ({ slug, trackView }: CounterProps) => {
     if (trackView) {
       registerView();
     }
-  }, [slug]);
+  }, [slug, trackView]);
 
   return (
     <p className=" text-sm font-semibold tracking-tighter text-red-400 ">

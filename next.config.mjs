@@ -1,5 +1,4 @@
-const { get } = require("@vercel/edge-config");
-//const { withContentlayer } = require("next-contentlayer");
+import { get } from "@vercel/edge-config";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -27,6 +26,7 @@ const nextConfig = {
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   }, */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   redirects() {
     try {
@@ -37,4 +37,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

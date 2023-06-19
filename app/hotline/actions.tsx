@@ -2,7 +2,6 @@
 
 import { GoogleIcon } from "components/UI/icons";
 import { supabase } from "lib/supabase/browser";
-import { useRouter } from "next/navigation";
 
 export const getURL = () => {
   let url =
