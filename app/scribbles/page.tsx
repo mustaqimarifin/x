@@ -4,7 +4,7 @@ import { Parallax } from "components/UI/Parallax";
 import { LoadingSpinner } from "components/UI/spinner";
 import { Suspense } from "react";
 
-export const revalidate = 300;
+export const revalidate = "force";
 
 export default async function ScribblesPage() {
   const scribbles = await getScribblesDatabase();

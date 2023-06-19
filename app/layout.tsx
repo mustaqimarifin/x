@@ -66,7 +66,7 @@ export default async function RootLayout({
         sfmono.variable
       )}
     >
-      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col md:mt-20  md:flex-row lg:mx-auto lg:mt-32 lg:max-w-6xl">
+      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col md:mt-20  md:flex-row lg:mx-auto lg:mt-32 ">
         <NAV />
         <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
           <PageTransition>
