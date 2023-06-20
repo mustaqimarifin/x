@@ -62,7 +62,7 @@ export const getYoutubeId = (url: string): string | null => {
   return null;
 };
 
-async function BlockRenderer({
+const BlockRenderer = ({
   block,
   recordMap,
   children,
@@ -70,7 +70,7 @@ async function BlockRenderer({
   block: BaseBlock;
   recordMap: ExtendedRecordMap;
   children: React.ReactNode;
-}) {
+}) => {
   const { type, id } = block;
   //@ts-ignore
   const value = block[type];
@@ -333,9 +333,9 @@ async function BlockRenderer({
 
       return null;
   }
-}
+};
 
-export async function NotionBlock({
+export const NotionBlock = ({
   blockId,
   recordMap,
   level,
@@ -343,7 +343,7 @@ export async function NotionBlock({
   blockId: string;
   recordMap?: ExtendedRecordMap;
   level?: number;
-}) {
+}) => {
   const block = recordMap.block[blockId]?.value;
   return (
     <BlockRenderer block={block} recordMap={recordMap}>
@@ -358,4 +358,4 @@ export async function NotionBlock({
       })}
     </BlockRenderer>
   );
-}
+};
