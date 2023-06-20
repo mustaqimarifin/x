@@ -5,11 +5,12 @@ import { NotionText } from "./NotionText";
 import { cx, textDecorationsToString } from "lib/utils";
 import dynamic from "next/dynamic";
 import Image from "components/Pics";
+import KodeBlock from "components/Code/KodeBlock";
 
-const KodeBlock = dynamic(() => import("components/Code/KodeBlock"), {
+/* const KodeBlock = dynamic(() => import("components/Code/KodeBlock"), {
   ssr: false,
 });
-
+ */
 const Exercise = dynamic(() => import("components/Code/Exercise"), {
   ssr: false,
 });
@@ -61,7 +62,7 @@ export const getYoutubeId = (url: string): string | null => {
   return null;
 };
 
-function BlockRenderer({
+async function BlockRenderer({
   block,
   recordMap,
   children,
@@ -334,7 +335,7 @@ function BlockRenderer({
   }
 }
 
-export function NotionBlock({
+export async function NotionBlock({
   blockId,
   recordMap,
   level,

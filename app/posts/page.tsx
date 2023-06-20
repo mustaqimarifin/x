@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Read my thoughts on software development, design, and more.",
 };
 
-export default async function Projectsindex() {
+export default async function PostIndex() {
   const works: PostDatabaseItem[] = await getPostDatabase();
 
   return (

@@ -6,11 +6,11 @@ import { CounterProps } from "types";
 import { LoadingSpinner } from "./UI/spinner";
 
 export const PageViews = ({ slug, trackView }: CounterProps) => {
-  const { data } = useSWR<CounterProps>(`/api/page/${slug}`, fetcher);
+  const { data } = useSWR<CounterProps>(`/api/pageviews/${slug}`, fetcher);
 
   useEffect(() => {
     const registerView = () =>
-      fetch(`/api/page/${slug}`, {
+      fetch(`/api/pageviews/${slug}`, {
         method: "POST",
       });
     if (trackView) {

@@ -1,9 +1,7 @@
 "use client";
 
-//import { useRouter } from "next/navigation";
 import type { Session } from "@supabase/auth-helpers-nextjs";
 import Form from "./form";
-//import { supabase } from "lib/supabase/browser";
 import SignOut from "components/Auth/SignOut";
 import SignIN from "components/Auth/Signin";
 

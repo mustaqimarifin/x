@@ -22,26 +22,6 @@ const sfmono: NextFontWithVariable = localFont({
   display: "swap",
 });
 
-const sohne: NextFontWithVariable = localFont({
-  src: [
-    {
-      path: "../../public/fonts/Sohne-400.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Sohne-500.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Sohne-600.woff2",
-      weight: "600",
-      style: "normal",
-    },
-  ],
-  variable: "--font-sohne",
-  display: "swap",
-});
 
-export { inter, kaisei, sfmono, sohne };
+
+export { inter, kaisei, sfmono};

@@ -2,36 +2,54 @@ import { routerClient } from "lib/supabase/server";
 //import supabase  from "lib/supabase/client"
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
-  const getSlug = new URL(request.url);
-  const slug = getSlug.pathname.substring(
-    getSlug.pathname.lastIndexOf("/") + 1
-  );
-    const { body } = await request.json();
+export const dynamic = "force-dynamic";
 
-  const supabase = await routerClient();
-  const { data } = await supabase.rpc("increment_page_view", {
-    page_slug: body,
-  });
-  console.log(data);
- return new NextResponse(data, { status: 204 });
- 
+export async function POST(req: Request) {
+  let slug: string;
+  try {
+    const { searchParams } = new URL(req.url);
+    slug = searchParams.get("slug");
+    if (!slug) {
+      const url = new URL(req.url);
+      slug = url.pathname.substring(url.pathname.lastIndexOf("/") + 1);
+    }
+
+    const supabase = await routerClient();
+    await supabase.rpc("increment_page_view", {
+      page_slug: slug,
+    });
+    return new NextResponse("OK!");
+  } catch (e: any) {
+    console.log(`${e.message}`);
+    return new Response(`Failed to increment page`, {
+      status: 500,
+    });
+  }
 }
 
-export async function GET(request: Request) {
-  const getSlug = new URL(request.url);
-  const slug = getSlug.pathname.substring(
-    getSlug.pathname.lastIndexOf("/") + 1
-  );
-    const { body } = await request.json();
+export async function GET(req: Request) {
+  let slug: string;
+  try {
+    const { searchParams } = new URL(req.url);
+    slug = searchParams.get("slug");
+    if (!slug) {
+      const url = new URL(req.url);
+      slug = url.pathname.substring(url.pathname.lastIndexOf("/") + 1);
+    }
 
-  const supabase = await routerClient();
-  const { data } = await supabase
-    .from("pageviews")
-    .select("view_count")
-    .eq("slug", body);
-    
-    const views = !data.length ? 0 : Number(data[0].view_count);
+    const supabase = await routerClient();
+    const { data } = await supabase
+      .from("pageviews")
+      .select("view_count")
+      .eq("slug", slug);
 
-  return NextResponse.json(views);
+    const total = data?.reduce((acc, row) => acc + row.view_count, 0);
+
+    return NextResponse.json({ total });
+  } catch (e: any) {
+    console.log(`${e.message}`);
+    return new Response(`Failed to increment page`, {
+      status: 500,
+    });
+  }
 }

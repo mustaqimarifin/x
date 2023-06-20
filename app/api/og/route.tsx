@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { ImageResponse } from "next/server";
 // App router includes @vercel/og.
 // No need to install it.
+
+import { ImageResponse } from "next/server.js";
 
 export const runtime = "edge";
 
@@ -9,12 +10,15 @@ const font = fetch(
   new URL("../../../public/fonts/kaisei-tokumin-bold.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
-export async function GET(request: Request) {
+export async function GET(req: Request) {
+  let slug: string;
   try {
-    const getSlug = new URL(request.url);
-    const slug = getSlug.pathname.substring(
-      getSlug.pathname.lastIndexOf("/") + 1
-    );
+    const { searchParams } = new URL(req.url);
+    slug = searchParams.get("slug");
+    if (!slug) {
+      const url = new URL(req.url);
+      slug = url.pathname.substring(url.pathname.lastIndexOf("/") + 1);
+    }
 
     // ?title=<title>
     const fontData = await font;
@@ -143,7 +147,7 @@ export async function GET(request: Request) {
           </div>
           <div
             style={{
-              fontSize: 15,
+              fontSize: 18,
               fontStyle: "normal",
               color: "black",
               marginTop: 30,

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import Balancer from "react-wrap-balancer";
+import { Balancer } from "react-wrap-balancer";
 import { PostDatabaseItem, getDatabasePage, getPostDatabase } from "app/data";
 import { NotionBlock } from "components/Notion/NotionBlock";
 

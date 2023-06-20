@@ -2,17 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons";
 import { name, about, bio, avatar } from "lib/info";
-import Balancer from "react-wrap-balancer";
+import { Balancer } from "react-wrap-balancer";
 import { NowPlaying } from "components/UI/NowPlaying";
 import { cache } from "react";
 //import supabase from "lib/supabase/client";
-import { serverClient} from "lib/supabase/server"
+import { serverClient } from "lib/supabase/server";
 
 export const dynamic = "force-static";
 const getBlogViews = cache(async () => {
-  const supabase = await serverClient()
-  const { data: totalSHIT } = await supabase.from("pageviews").select("*");
-  return totalSHIT;
+  const supabase = await serverClient();
+  const { data: total } = await supabase.from("pageviews").select("*");
+  return total;
 });
 
 export default async function HomePage() {

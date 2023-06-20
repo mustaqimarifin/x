@@ -4,7 +4,7 @@ import { Parallax } from "components/UI/Parallax";
 import { LoadingSpinner } from "components/UI/spinner";
 import { Suspense } from "react";
 
-export const revalidate = "force";
+export const dynamic = "force-static";
 
 export default async function ScribblesPage() {
   const scribbles = await getScribblesDatabase();
@@ -17,17 +17,15 @@ export default async function ScribblesPage() {
             className="relative aspect-square overflow-hidden"
             key={scribble.id}
           >
-            <Suspense fallback={<LoadingSpinner />}>
-              <Image
-                src={`https://www.notion.so/image/${encodeURIComponent(
-                  scribble.Image
-                )}?table=block&id=${scribble.id}`}
-                alt="drawing"
-                className="object-cover"
-                width={500}
-                height={500}
-              ></Image>
-            </Suspense>
+            <Image
+              src={`https://www.notion.so/image/${encodeURIComponent(
+                scribble.Image
+              )}?table=block&id=${scribble.id}`}
+              alt="drawing"
+              className="object-cover"
+              width={500}
+              height={500}
+            ></Image>
           </div>
         ))}
       </div>

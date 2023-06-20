@@ -89,23 +89,23 @@ export function processDatabaseItem<T>(
         console.log(`unsupported schema type: ${collection.schema[key].type}`);
     }
   }
-  // @ts-ignore
-  return item;
+
+  return item as any;
 }
 
 const notion = new NotionAPI();
 
-export const getPostDatabase = async () => {
+export const getPostDatabase = cache(async () => {
   const recordMap = await notion.getPage(PostDB);
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
-    .filter((block): block is PageBlock => block?.type === "page")
+    .filter((block) => block?.type === "page")
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<PostDatabaseItem>(pageBlock, collection)
     )
     .filter((item) => item.status);
-};
+});
 
 export const getDatabasePage = cache(async <T,>(id: string) => {
   const recordMap = await notion.getPage(id);
@@ -127,7 +127,7 @@ export const getScribblesDatabase = cache(async () => {
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
-    .filter((block): block is PageBlock => block?.type === "page")
+    .filter((block) => block?.type === "page")
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<ScribbleDatabaseItem>(pageBlock, collection)
     );
@@ -138,7 +138,7 @@ export const getProjectsDatabase = cache(async () => {
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
-    .filter((block): block is PageBlock => block?.type === "page")
+    .filter((block) => block?.type === "page")
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<ProjectDatabaseItem>(pageBlock, collection)
     )

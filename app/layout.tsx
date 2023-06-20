@@ -1,5 +1,5 @@
 import "app/style/global.css";
-import { kaisei, sohne, inter, sfmono } from "app/style/fonts";
+import { kaisei, inter, sfmono } from "app/style/fonts";
 
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
@@ -61,7 +61,6 @@ export default async function RootLayout({
       className={cx(
         "bg-white text-black dark:bg-[#111010] dark:text-white",
         kaisei.variable,
-        sohne.variable,
         inter.variable,
         sfmono.variable
       )}

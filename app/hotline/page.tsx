@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { cache } from "react";
-import Balancer from "react-wrap-balancer";
+import { Balancer } from "react-wrap-balancer";
 
 import type { Database } from "types/supabase";
 import { serverClient } from "lib/supabase/server";

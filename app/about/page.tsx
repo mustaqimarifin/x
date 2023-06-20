@@ -1,4 +1,4 @@
-import Balancer from "react-wrap-balancer";
+import { Balancer } from "react-wrap-balancer";
 
 export default function AboutPage() {
   return (
