@@ -5,11 +5,12 @@ import { name, about, bio, avatar } from "lib/info";
 import Balancer from "react-wrap-balancer";
 import { NowPlaying } from "components/UI/NowPlaying";
 import { cache } from "react";
-import supabase from "lib/supabase/client";
+//import supabase from "lib/supabase/client";
+import { serverClient} from "lib/supabase/server"
 
-export const revalidate = 3600;
-
+export const dynamic = "force-static";
 const getBlogViews = cache(async () => {
+  const supabase = await serverClient()
   const { data: totalSHIT } = await supabase.from("pageviews").select("*");
   return totalSHIT;
 });

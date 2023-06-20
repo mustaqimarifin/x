@@ -20,7 +20,7 @@ export type TopTracks = {
 
 //^UI^//
 export type CounterProps = {
-  slug: string;
+  slug?: string;
   total?: string;
   trackView: boolean;
 };

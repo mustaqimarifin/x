@@ -11,15 +11,13 @@ const font = fetch(
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const getSlug = new URL(request.url);
+    const slug = getSlug.pathname.substring(
+      getSlug.pathname.lastIndexOf("/") + 1
+    );
 
     // ?title=<title>
     const fontData = await font;
-
-    const hasTitle = searchParams.has("title");
-    const title = hasTitle
-      ? searchParams.get("title")?.slice(0, 100)
-      : "My default title";
 
     return new ImageResponse(
       (
@@ -141,7 +139,7 @@ export async function GET(request: Request) {
               whiteSpace: "pre-wrap",
             }}
           >
-            {title}
+            {slug || "Default Title"}
           </div>
           <div
             style={{

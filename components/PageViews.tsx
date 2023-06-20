@@ -5,7 +5,7 @@ import { fetcher } from "lib/utils";
 import { CounterProps } from "types";
 import { LoadingSpinner } from "./UI/spinner";
 
-const PageViews = ({ slug, trackView }: CounterProps) => {
+export const PageViews = ({ slug, trackView }: CounterProps) => {
   const { data } = useSWR<CounterProps>(`/api/page/${slug}`, fetcher);
 
   useEffect(() => {
@@ -24,5 +24,3 @@ const PageViews = ({ slug, trackView }: CounterProps) => {
     </p>
   );
 };
-
-export default PageViews;

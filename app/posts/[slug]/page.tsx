@@ -3,7 +3,7 @@ import Balancer from "react-wrap-balancer";
 import { PostDatabaseItem, getDatabasePage, getPostDatabase } from "app/data";
 import { NotionBlock } from "components/Notion/NotionBlock";
 
-import PageViews from "components/PageViews";
+import { PageViews } from "components/PageViews";
 
 import "app/style/notion2.css";
 //import "app/style/override.css";

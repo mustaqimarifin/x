@@ -1,5 +1,5 @@
 import { PostDatabaseItem, getPostDatabase } from "app/data";
-import PageViews from "components/PageViews";
+import { PageViews } from "components/PageViews";
 import type { Metadata } from "next";
 import Link from "next/link";
 
