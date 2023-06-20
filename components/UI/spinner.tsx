@@ -1,4 +1,3 @@
-"use client";
 export function LoadingSpinner(...args: any[]) {
   return (
     <svg

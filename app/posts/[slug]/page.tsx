@@ -6,7 +6,6 @@ import { NotionBlock } from "components/Notion/NotionBlock";
 import { PageViews } from "components/PageViews";
 
 import "app/style/notion2.css";
-//import "app/style/override.css";
 
 import { textDecorationsToString } from "lib/utils";
 import { Suspense } from "react";
@@ -43,8 +42,8 @@ export default async function PostPage({
       <h1 className="max-w-[650px] font-serif text-3xl font-bold">
         <Balancer>{textDecorationsToString(post.title)}</Balancer>
       </h1>
-      <div className="mb-8 mt-4 grid max-w-[650px] grid-cols-[auto_1fr_auto] items-center font-mono text-sm">
-        <div className="rounded-md bg-neutral-100 px-2 py-1 tracking-tighter dark:bg-neutral-800">
+      <div className="mb-8 mt-4 grid max-w-[650px] grid-cols-[auto_1fr_auto] items-center ">
+        <div className=" rounded-md bg-neutral-100 px-2 py-1 text-sm font-semibold tracking-tighter dark:bg-neutral-800">
           {post.date}
         </div>
         <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800" />
@@ -60,12 +59,15 @@ export default async function PostPage({
           </div>
         ) } */}
       </div>
-      <div
-        suppressHydrationWarning
-        className="prose max-w-2xl dark:prose-invert"
-      >
-        <NotionBlock recordMap={recordMap} blockId={postId} />
-      </div>
+      <Suspense fallback={<LoadingSpinner />}>
+        <div
+          suppressHydrationWarning
+          className="prose max-w-2xl dark:prose-invert"
+        >
+          <NotionBlock recordMap={recordMap} blockId={postId} />
+        </div>
+      </Suspense>
+
       {/*  <div suppressHydrationWarning className=" max-w-2xl">
         <NotionBlock2
           recordMap={recordMap}

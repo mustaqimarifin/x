@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { getScribblesDatabase } from "../data";
-import { Parallax } from "components/UI/Parallax";
-import { LoadingSpinner } from "components/UI/spinner";
 import { Suspense } from "react";
+import { LoadingSpinner } from "components/UI/spinner";
 
 export const dynamic = "force-static";
 
@@ -10,7 +9,7 @@ export default async function ScribblesPage() {
   const scribbles = await getScribblesDatabase();
 
   return (
-    <Parallax>
+    <Suspense fallback={<LoadingSpinner />}>
       <div className="grid gap-2 px-8 py-8 max-md:px-4  md:grid-cols-2">
         {scribbles.map((scribble) => (
           <div
@@ -29,6 +28,6 @@ export default async function ScribblesPage() {
           </div>
         ))}
       </div>
-    </Parallax>
+    </Suspense>
   );
 }

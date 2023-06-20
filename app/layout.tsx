@@ -4,7 +4,7 @@ import { kaisei, inter, sfmono } from "app/style/fonts";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { cx } from "lib/utils";
-import { PageTransition } from "components/UI/PageTransition";
+//import { PageTransition } from "components/UI/PageTransition";
 import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 import { Providers } from "components/Providers";
@@ -50,6 +50,53 @@ export const metadata: Metadata = {
   },
 };
 
+/* export const metadata2 = {
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "Server Components",
+    "Radix UI",
+  ],
+  authors: [
+    {
+      name: "shadcn",
+      url: "https://shadcn.com",
+    },
+  ],
+  creator: "shadcn",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [`${siteConfig.url}/og.jpg`],
+    creator: "@shadcn",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: `${siteConfig.url}/site.webmanifest`,
+}; */
+
 export default async function RootLayout({
   children,
 }: {
@@ -68,9 +115,7 @@ export default async function RootLayout({
       <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col md:mt-20  md:flex-row lg:mx-auto lg:mt-32 ">
         <NAV />
         <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
-          <PageTransition>
-            <Providers>{children}</Providers>
-          </PageTransition>
+          <Providers>{children}</Providers>
           <Analytics />
         </main>
         <PanesLayer />

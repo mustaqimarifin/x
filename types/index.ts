@@ -6,10 +6,10 @@ export type Song = {
 };
 
 export type PLAY = {
+  isPlaying: boolean;
   album: string;
   albumImageUrl: string;
   artist: string;
-  isPlaying: boolean;
   songUrl: string;
   title: string;
 };

@@ -1,5 +1,5 @@
 import { Decoration, ExtendedRecordMap } from "notion-types";
-import { formatDate, parsePageId } from "notion-utils";
+import { formatDate } from "notion-utils";
 import React from "react";
 import { NotionBlock } from "./NotionBlock";
 import { NotionTextAnchor } from "./NotionTextAnchor";

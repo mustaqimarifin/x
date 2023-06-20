@@ -6,8 +6,6 @@ import { ExtendedRecordMap } from "notion-types";
 import { getPageTitle } from "notion-utils";
 import { NotionRenderer } from "react-notion-x";
 
-import { mapImageUrl } from "lib/notion/mapImageUrl";
-
 const mapPageUrl = (id: string) => {
   return "https://www.notion.so/" + id.replace(/-/g, "");
 };
@@ -105,7 +103,6 @@ export const NotionBlock2 = ({
         recordMap={recordMap}
         rootDomain={rootDomain}
         mapPageUrl={mapPageUrl}
-        mapImageUrl={mapImageUrl}
         rootPageId={rootPageId}
         previewImages={!!recordMap.preview_images}
         components={{

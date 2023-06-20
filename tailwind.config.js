@@ -1,11 +1,10 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
   content: [
     "./app/**/*.{ts,tsx}",
-    "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "./content/**/*.mdx",
     "./node_modules/@heathmont/moon-core-tw/**/*.{js,ts,jsx,tsx}",
   ],
   presets: [
@@ -14,7 +13,6 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["var(--font-sohne)"],
         sans: ["var(--font-inter)"],
         serif: ["var(--font-kaisei)"],
         mono: ["var(--font-sfmono)"],

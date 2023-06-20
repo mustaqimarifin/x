@@ -22,6 +22,4 @@ const sfmono: NextFontWithVariable = localFont({
   display: "swap",
 });
 
-
-
-export { inter, kaisei, sfmono};
+export { inter, kaisei, sfmono };
