@@ -1,5 +1,7 @@
+// @ts-nocheck
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   content: [
@@ -12,10 +14,15 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["var(--font-inter)"],
+      /*       fontFamily: {
+        sans: ["var(--font-robotoFlex)"],
         serif: ["var(--font-kaisei)"],
         mono: ["var(--font-sfmono)"],
+      }, */
+      fontFamily: {
+        sans: ["RobotoFlex", ...fontFamily.sans],
+        serif: ["Kaisei", ...fontFamily.serif],
+        mono: ["SFMono", ...fontFamily.mono],
       },
       typography: {
         quoteless: {

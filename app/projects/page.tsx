@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "*IN PROGRESS*",
 };
 
-export const revalidate = 60;
+export const revalidate = 14400;
 
 export default async function Projectsindex() {
   const works: ProjectDatabaseItem[] = await getProjectsDatabase();
@@ -16,16 +16,22 @@ export default async function Projectsindex() {
   return (
     <section>
       <h1 className="mb-5 font-serif text-3xl font-bold">Projects</h1>
-      {works &&
-        works.map((post) => (
+      {works
+        .sort((a, b) => {
+          if (new Date(a.date) > new Date(b.date)) {
+            return -1;
+          }
+          return 1;
+        })
+        .map((project) => (
           <Link
-            key={post.id}
+            key={project.id}
             className="mb-4 flex flex-col space-y-1"
-            href={`/projects/${post.pageId}`}
+            href={`/projects/${project.pageId}`}
           >
-            <div className="flex w-full flex-col font-bold">
-              <p>{post.title}</p>
-              <PageViews slug={post.pageId} trackView={false} />
+            <div className="w-full flex-none flex-col">
+              <div className="font-bold">{project.title}</div>
+              <PageViews slug={project.pageId} trackView={false} />
             </div>
           </Link>
         ))}

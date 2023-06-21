@@ -2,8 +2,13 @@ import Image from "next/image";
 import { getScribblesDatabase } from "../data";
 import { Suspense } from "react";
 import { LoadingSpinner } from "components/UI/spinner";
+import { Metadata } from "next/types";
 
 export const dynamic = "force-static";
+export const metadata: Metadata = {
+  title: "Scribbles",
+  description: "Gallery of wolves",
+};
 
 export default async function ScribblesPage() {
   const scribbles = await getScribblesDatabase();

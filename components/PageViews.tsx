@@ -19,7 +19,7 @@ export const PageViews = ({ slug, trackView }: CounterProps) => {
   }, [slug, trackView]);
 
   return (
-    <p className=" text-sm font-semibold tracking-tighter text-red-400 ">
+    <p className=" flex-none text-sm font-semibold tracking-tighter text-red-400 ">
       {data?.total ? `${data.total} views` : <LoadingSpinner />}
     </p>
   );

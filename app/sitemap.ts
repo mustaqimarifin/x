@@ -1,3 +1,4 @@
+import { CurrentENV } from "lib/env";
 import {
   PostDatabaseItem,
   ProjectDatabaseItem,
@@ -9,15 +10,15 @@ export default async function sitemap() {
   const posts: PostDatabaseItem[] = await getPostDatabase();
 
   posts.map((post) => ({
-    url: `https://eff1gy.xyz/posts/${post.slug}`,
+    url: `${CurrentENV}/posts/${post.slug}`,
     lastModified: post.date,
   }));
 
   const projects: ProjectDatabaseItem[] = await getProjectsDatabase();
 
-  projects.map((post) => ({
-    url: `https://eff1gy.xyz/projects/${post.pageId}`,
-    lastModified: post.date,
+  projects.map((project) => ({
+    url: `${CurrentENV}/projects/${project.pageId}`,
+    lastModified: project.date,
   }));
 
   const routes = [
@@ -29,7 +30,7 @@ export default async function sitemap() {
     "/scribbles",
     "/uses",
   ].map((route) => ({
-    url: `https://eff1gy.xyz${route}`,
+    url: `${CurrentENV}/${route}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));
 

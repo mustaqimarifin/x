@@ -9,13 +9,13 @@ import { NotionBlock } from "components/Notion/NotionBlock";
 import { PageViews } from "components/PageViews";
 import "app/style/notion2.css";
 import { textDecorationsToString } from "lib/utils";
-import { KittyColor } from "components/UI/icons";
 import { Suspense } from "react";
 import { LoadingSpinner } from "components/UI/spinner";
 import { Metadata } from "next/types";
 import { CurrentENV } from "lib/env";
+import { notFound } from "next/navigation";
 
-export const revalidate = 60;
+export const revalidate = 14400;
 
 interface ProjectPageProps {
   params: {
@@ -93,7 +93,7 @@ export default async function ProjectsPage({
   const projects = await getProjectsDatabase();
   const projectId = projects.find((p) => p.pageId[0][0] === params.pageId)?.id;
   if (projectId === undefined) {
-    return <div>project not found</div>;
+    notFound();
   }
 
   const { item: project, recordMap } =

@@ -11,8 +11,6 @@ export const previewURL =
   process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
 export const domain = process.env.NODE_ENV === "production" ? "eff1gy.xyz" : "";
 
-export const CurrentENV = isDev
+export const CurrentENV: string | URL = isDev
   ? `http://localhost:3000`
-  : isPreview
-  ? `https://${previewURL}`
-  : `https://${domain}`;
+  : `https://${previewURL || domain}`;
