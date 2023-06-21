@@ -12,6 +12,7 @@ import { textDecorationsToString } from "lib/utils";
 import { Suspense } from "react";
 import { LoadingSpinner } from "components/UI/spinner";
 import { Metadata } from "next/types";
+import { CurrentENV } from "lib/env";
 
 interface PostPageProps {
   params: {
@@ -19,7 +20,7 @@ interface PostPageProps {
   };
 }
 
-async function getPostFromParams(params: { slug: any }) {
+async function getPostParams(params: { slug: any }) {
   const slug = params?.slug;
   const posts = await getPostDatabase();
   const post = posts?.find((post) => post.slug[0][0] === slug);
@@ -34,7 +35,7 @@ async function getPostFromParams(params: { slug: any }) {
 export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
-  const post = await getPostFromParams(params);
+  const post = await getPostParams(params);
   const postTitle = post.title[0][0];
   const postSlug = post.slug[0][0];
   //console.log(postSlug);
@@ -43,24 +44,8 @@ export async function generateMetadata({
     return {};
   }
 
-  const environment = process.env.NODE_ENV || "development";
-  const isDev = environment === "development";
-  const isPreview =
-    process.env.VERCEL_ENV === "preview" ||
-    process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
-  const preview = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
-  const domain = "eff1gy.xyz";
-
-  const host = isDev
-    ? `http://localhost:${process.env.PORT || 3000}`
-    : isPreview
-    ? `https://${preview}`
-    : `https://${domain}`;
-
-  const ogUrl = new URL(`${host}/api/og`);
-  //console.log(ogUrl);
+  const ogUrl = new URL(`${CurrentENV}/api/og`);
   ogUrl.searchParams.set("title", postTitle);
-  //console.log(postTitle);
 
   return {
     title: postTitle,
@@ -69,7 +54,7 @@ export async function generateMetadata({
       title: postTitle,
       description: post.summary,
       type: "article",
-      url: `${host}/${postSlug}`,
+      url: `${CurrentENV}/posts/${postSlug}`,
 
       images: [
         {

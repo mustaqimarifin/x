@@ -9,9 +9,9 @@ import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 import { Providers } from "components/Providers";
 import { meta } from "data/meta";
+import { CurrentENV } from "lib/env";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(meta.url),
   title: {
     default: meta.name,
     template: `%s | ${meta.name}`,
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: meta.url,
+    url: CurrentENV,
     title: meta.name,
     description: meta.description,
     siteName: meta.name,
     images: [
       {
-        url: `${meta.url}/og.png`,
+        url: `${CurrentENV}/og.png`,
         width: 1200,
         height: 626,
       },
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: meta.name,
     description: meta.description,
-    images: [`${meta.url}/og.png`],
+    images: [`${CurrentENV}/og.png`],
     creator: "@vmprmyth",
   },
   robots: {
@@ -63,11 +63,11 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-icon.png",
+    icon: `${CurrentENV}/favicon.ico`,
+    shortcut: `${CurrentENV}/icon.svg`,
+    apple: `${CurrentENV}/apple-icon.png`,
   },
-  manifest: `${meta.url}/site.webmanifest`,
+  manifest: `${CurrentENV}/manifest.json`,
 };
 
 export default function RootLayout({

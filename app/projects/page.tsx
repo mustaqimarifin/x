@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Read my thoughts on software development, design, and more.",
+  description: "*IN PROGRESS*",
 };
 
 export const revalidate = 60;

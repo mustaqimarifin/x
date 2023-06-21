@@ -13,6 +13,7 @@ import { KittyColor } from "components/UI/icons";
 import { Suspense } from "react";
 import { LoadingSpinner } from "components/UI/spinner";
 import { Metadata } from "next/types";
+import { CurrentENV } from "lib/env";
 
 export const revalidate = 60;
 
@@ -22,7 +23,7 @@ interface ProjectPageProps {
   };
 }
 
-async function getPostFromParams(params: { pageID: any }) {
+async function getProjectParams(params: { pageID: any }) {
   const pageID = params?.pageID;
   const projects = await getProjectsDatabase();
   const project = projects?.find((p) => p.pageId[0][0] === pageID);
@@ -37,33 +38,17 @@ async function getPostFromParams(params: { pageID: any }) {
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
-  const project = await getPostFromParams(params);
-  const projectTitle = project.title[0][0];
-  const projectID = project.pageId[0][0];
+  const project = await getProjectParams(params);
+  const projectTitle = project?.title[0][0];
+  const projectID = project?.pageId;
   //console.log(projectproject);
 
   if (!project) {
     return {};
   }
 
-  const environment = process.env.NODE_ENV || "development";
-  const isDev = environment === "development";
-  const isPreview =
-    process.env.VERCEL_ENV === "preview" ||
-    process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
-  const preview = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
-  const domain = "eff1gy.xyz";
-
-  const host = isDev
-    ? `http://localhost:${process.env.PORT || 3000}`
-    : isPreview
-    ? `https://${preview}`
-    : `https://${domain}`;
-
-  const ogUrl = new URL(`${host}/api/og`);
-  //console.log(ogUrl);
+  const ogUrl = new URL(`${CurrentENV}/api/og`);
   ogUrl.searchParams.set("title", projectTitle);
-  //console.log(projectTitle);
 
   return {
     title: projectTitle,
@@ -72,7 +57,7 @@ export async function generateMetadata({
       title: projectTitle,
       description: project.summary,
       type: "article",
-      url: `${host}/${projectID}`,
+      url: `${CurrentENV}/projects/${projectID}`,
 
       images: [
         {

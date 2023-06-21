@@ -6,8 +6,8 @@ import Link from "next/link";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Projects",
-  description: "Read my thoughts on software development, design, and more.",
+  title: "Posts",
+  description: "Web thoughts",
 };
 
 export default async function PostIndex() {
