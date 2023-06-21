@@ -8,33 +8,48 @@ import { cx } from "lib/utils";
 import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 import { Providers } from "components/Providers";
+import { meta } from "data/meta";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(meta.url),
   title: {
-    default: "Mustaqim Arifin",
-    template: "%s | Mustaqim Arifin",
+    default: meta.name,
+    template: `%s | ${meta.name}`,
   },
+  description: meta.description,
+  keywords: ["Music Production", "Audio Engineering", "Editorial", "Blog"],
   authors: [
     {
-      name: "Mustaqim Arifin",
-      url: "https://eff1gy.xyz",
+      name: meta.name,
+      url: meta.url,
     },
   ],
-  description: "Developer, writer, and creator.",
+  creator: meta.name,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
   openGraph: {
-    title: "Mustaqim Arifin",
-    description: "Developer, writer, and creator.",
-    url: "https://eff1gy.xyz",
-    siteName: "Mustaqim Arifin",
+    type: "website",
+    locale: "en_US",
+    url: meta.url,
+    title: meta.name,
+    description: meta.description,
+    siteName: meta.name,
     images: [
       {
-        url: "https://eff1gy.xyz/og.png",
+        url: `${meta.url}/og.png`,
         width: 1200,
         height: 626,
       },
     ],
-    locale: "en-US",
-    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: meta.name,
+    description: meta.description,
+    images: [`${meta.url}/og.png`],
+    creator: "@vmprmyth",
   },
   robots: {
     index: true,
@@ -47,63 +62,15 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  twitter: {
-    title: "Mustaqim Arifin",
-    card: "summary_large_image",
-  },
-  icons: {
-    shortcut: "/favicon.ico",
-  },
-};
-
-/* export const metadata2 = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  keywords: [
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Server Components",
-    "Radix UI",
-  ],
-  authors: [
-    {
-      name: "shadcn",
-      url: "https://shadcn.com",
-    },
-  ],
-  creator: "shadcn",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
-    creator: "@shadcn",
-  },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    apple: "/apple-icon.png",
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
-}; */
+  manifest: `${meta.url}/site.webmanifest`,
+};
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;

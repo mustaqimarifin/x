@@ -1,9 +1,21 @@
-import { ProjectDatabaseItem, getProjectsDatabase } from "./data";
+import {
+  PostDatabaseItem,
+  ProjectDatabaseItem,
+  getPostDatabase,
+  getProjectsDatabase,
+} from "./data";
 
 export default async function sitemap() {
-  const posts: ProjectDatabaseItem[] = await getProjectsDatabase();
+  const posts: PostDatabaseItem[] = await getPostDatabase();
 
   posts.map((post) => ({
+    url: `https://eff1gy.xyz/posts/${post.slug}`,
+    lastModified: post.date,
+  }));
+
+  const projects: ProjectDatabaseItem[] = await getProjectsDatabase();
+
+  projects.map((post) => ({
     url: `https://eff1gy.xyz/projects/${post.pageId}`,
     lastModified: post.date,
   }));
@@ -21,5 +33,5 @@ export default async function sitemap() {
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
-  return [...routes, ...posts];
+  return [...routes, ...posts, ...projects];
 }

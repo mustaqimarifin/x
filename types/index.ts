@@ -43,6 +43,7 @@ export type Bling = {
 
 export type SiteConfig = {
   name: string;
+  siteName: string;
   description: string;
   url: string;
   ogImage: string;
