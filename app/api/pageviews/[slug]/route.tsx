@@ -1,10 +1,10 @@
 import { routerClient } from "lib/supabase/server";
 //import supabase  from "lib/supabase/client"
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   let slug: string;
   try {
     const { searchParams } = new URL(req.url);

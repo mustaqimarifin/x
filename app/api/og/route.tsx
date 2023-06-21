@@ -14,6 +14,7 @@ export async function GET(req: Request) {
   let slug: string;
   try {
     const { searchParams } = new URL(req.url);
+    const postTitle = searchParams.get("title");
     slug = searchParams.get("slug");
     if (!slug) {
       const url = new URL(req.url);
@@ -143,7 +144,7 @@ export async function GET(req: Request) {
               whiteSpace: "pre-wrap",
             }}
           >
-            {slug || "Default Title"}
+            {postTitle || slug || "Default Title"}
           </div>
           <div
             style={{

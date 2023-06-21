@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { notFound } from "next/navigation";
 import { Balancer } from "react-wrap-balancer";
 import { PostDatabaseItem, getDatabasePage, getPostDatabase } from "app/data";
@@ -10,11 +11,88 @@ import "app/style/notion2.css";
 import { textDecorationsToString } from "lib/utils";
 import { Suspense } from "react";
 import { LoadingSpinner } from "components/UI/spinner";
+import { Metadata } from "next/types";
+
+interface PostPageProps {
+  params: {
+    slug: string[];
+  };
+}
+
+async function getPostFromParams(params: { slug: any }) {
+  const slug = params?.slug;
+  const posts = await getPostDatabase();
+  const post = posts?.find((post) => post.slug[0][0] === slug);
+
+  if (!post) {
+    null;
+  }
+
+  return post;
+}
+
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
+  const post = await getPostFromParams(params);
+  const postTitle = post.title[0][0];
+  const postSlug = post.slug[0][0];
+  //console.log(postSlug);
+
+  if (!post) {
+    return {};
+  }
+
+  const environment = process.env.NODE_ENV || "development";
+  const isDev = environment === "development";
+  const isPreview =
+    process.env.VERCEL_ENV === "preview" ||
+    process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
+  const preview = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
+  const domain = "eff1gy.xyz";
+
+  const host = isDev
+    ? `http://localhost:${process.env.PORT || 3000}`
+    : isPreview
+    ? `https://${preview}`
+    : `https://${domain}`;
+
+  const ogUrl = new URL(`${host}/api/og`);
+  //console.log(ogUrl);
+  ogUrl.searchParams.set("title", postTitle);
+  //console.log(postTitle);
+
+  return {
+    title: postTitle,
+    description: post.summary,
+    openGraph: {
+      title: postTitle,
+      description: post.summary,
+      type: "article",
+      url: `${host}/${postSlug}`,
+
+      images: [
+        {
+          url: ogUrl.toString(),
+          width: 1200,
+          height: 626,
+          alt: postTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: postTitle,
+      description: post.summary,
+      images: [ogUrl.toString()],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const posts = await getPostDatabase();
 
-  return posts.map((post) => ({
+  return posts?.map((post) => ({
     id: post.id,
     slug: post.slug[0][0],
   }));

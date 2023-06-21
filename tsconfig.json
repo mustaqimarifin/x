@@ -10,7 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "moduleDetection": "auto",
     "resolveJsonModule": true,
     "isolatedModules": true,

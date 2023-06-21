@@ -60,19 +60,14 @@ export default async function ProjectsPage({
           </div>
         ) } */}
       </div>
-      <div
-        suppressHydrationWarning
-        className="prose max-w-2xl dark:prose-invert"
-      >
-        <Suspense fallback={<LoadingSpinner />}>
-          <div
-            suppressHydrationWarning
-            className="prose max-w-2xl dark:prose-invert"
-          >
-            <NotionBlock recordMap={recordMap} blockId={postId} />
-          </div>
-        </Suspense>
-      </div>
+      <Suspense fallback={<LoadingSpinner />}>
+        <div
+          suppressHydrationWarning
+          className="prose max-w-2xl dark:prose-invert"
+        >
+          <NotionBlock recordMap={recordMap} blockId={postId} />
+        </div>
+      </Suspense>
       {/*  <div suppressHydrationWarning className=" max-w-2xl">
         <NotionBlock2
           recordMap={recordMap}

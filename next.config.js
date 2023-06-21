@@ -1,4 +1,4 @@
-import { get } from "@vercel/edge-config";
+const { get } = require("@vercel/edge-config");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -37,4 +37,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

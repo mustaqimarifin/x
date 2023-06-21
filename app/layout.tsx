@@ -14,6 +14,12 @@ export const metadata: Metadata = {
     default: "Mustaqim Arifin",
     template: "%s | Mustaqim Arifin",
   },
+  authors: [
+    {
+      name: "Mustaqim Arifin",
+      url: "https://eff1gy.xyz",
+    },
+  ],
   description: "Developer, writer, and creator.",
   openGraph: {
     title: "Mustaqim Arifin",

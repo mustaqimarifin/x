@@ -10,10 +10,11 @@ export type PostDatabaseItem = {
   id: string;
   date: string;
   slug: string;
-  title: Decoration[];
+  title: string & Decoration[];
   URL: string;
-  summary: Decoration[];
+  summary: string & Decoration[];
   status?: boolean;
+  authors?: string[];
 };
 export type ScribbleDatabaseItem = {
   id: string;
@@ -26,9 +27,9 @@ export type ProjectDatabaseItem = {
   id: string;
   date: string;
   pageId: string;
-  title: Decoration[];
+  title: string & Decoration[];
   URL: string;
-  summary: Decoration[];
+  summary: string & Decoration[];
   status?: boolean;
 };
 

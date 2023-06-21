@@ -18,6 +18,7 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "no-case-declarations": 0,
+    "no-undef": 0,
   },
   root: true,
 };
