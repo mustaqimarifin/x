@@ -2,6 +2,7 @@ import { PostDatabaseItem, getPostDatabase } from "app/data";
 import { PageViews } from "components/PageViews";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Balancer } from "react-wrap-balancer";
 
 export const revalidate = 14400;
 
@@ -15,7 +16,9 @@ export default async function PostIndex() {
 
   return (
     <section>
-      <h1 className="mb-5 font-serif text-3xl font-bold">Posts</h1>
+      <h1 className="mb-5 font-serif text-3xl font-bold">
+        <Balancer>Posts</Balancer>
+      </h1>
       {works
         .sort((a, b) => {
           if (new Date(a.date) > new Date(b.date)) {
@@ -29,7 +32,7 @@ export default async function PostIndex() {
             className="mb-4 flex flex-col space-y-1"
             href={`/posts/${post.slug}`}
           >
-            <div className="w-full flex-none flex-col">
+            <div className="flex w-full flex-col">
               <div className="font-bold">{post.title}</div>
               <PageViews slug={post.slug} trackView={false} />
             </div>

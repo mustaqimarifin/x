@@ -102,7 +102,7 @@ export default async function PostPage({
 
   return (
     <section>
-      <h1 className="max-w-[650px] font-serif text-3xl font-bold">
+      <h1 className="mb-5 font-serif text-3xl font-bold">
         <Balancer>{textDecorationsToString(post.title)}</Balancer>
       </h1>
       <div className="mb-8 mt-4 grid max-w-[650px] grid-cols-[auto_1fr_auto] items-center ">
@@ -112,7 +112,7 @@ export default async function PostPage({
         <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800" />
         <PageViews slug={post.slug} trackView />
         {/*         { post.tags && (
-          <div className="py-4 xl:py-8">
+          <div className="py-4 xl:py-8">s
 
             <div className="flex flex-wrap">
               { post.tags.map((tag) => (
@@ -122,14 +122,7 @@ export default async function PostPage({
           </div>
         ) } */}
       </div>
-      <Suspense fallback={<LoadingSpinner />}>
-        <div
-          suppressHydrationWarning
-          className="prose max-w-2xl dark:prose-invert"
-        >
-          <NotionBlock recordMap={recordMap} blockId={postId} />
-        </div>
-      </Suspense>
+      <NotionBlock recordMap={recordMap} blockId={postId} />
 
       {/*  <div suppressHydrationWarning className=" max-w-2xl">
         <NotionBlock2

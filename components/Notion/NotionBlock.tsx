@@ -62,7 +62,7 @@ export const getYoutubeId = (url: string): string | null => {
   return null;
 };
 
-async function BlockRenderer({
+function BlockRenderer({
   block,
   recordMap,
   children,
@@ -312,7 +312,6 @@ async function BlockRenderer({
         recordMap.signed_urls?.[block.id] ?? block.properties?.source?.[0]?.[0];
       const youtubeVideoId = getYoutubeId(source);
       if (youtubeVideoId !== null) {
-        const params = new URLSearchParams(source.split("?")[1]);
         //const startTime = params.get("t");
         return (
           <div className="my-4">
@@ -335,7 +334,7 @@ async function BlockRenderer({
   }
 }
 
-export async function NotionBlock({
+export function NotionBlock({
   blockId,
   recordMap,
   level,
@@ -346,16 +345,18 @@ export async function NotionBlock({
 }) {
   const block = recordMap.block[blockId]?.value;
   return (
-    <BlockRenderer block={block} recordMap={recordMap}>
-      {block.content?.map((childBlockId) => {
-        return (
-          <NotionBlock
-            blockId={childBlockId}
-            recordMap={recordMap}
-            key={childBlockId}
-          />
-        );
-      })}
-    </BlockRenderer>
+    <article className="prose prose-neutral prose-quoteless max-w-3xl dark:prose-invert">
+      <BlockRenderer block={block} recordMap={recordMap}>
+        {block.content?.map((childBlockId) => {
+          return (
+            <NotionBlock
+              blockId={childBlockId}
+              recordMap={recordMap}
+              key={childBlockId}
+            />
+          );
+        })}
+      </BlockRenderer>
+    </article>
   );
 }

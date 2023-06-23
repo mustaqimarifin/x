@@ -2,7 +2,6 @@
 
 import React from "react";
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
-//import PropTypes from "prop-types"
 
 const YoutubeEmbed = ({ embedId }: { embedId: string }) => (
   <div className="aspect-video overflow-hidden rounded-md ">

@@ -21,7 +21,7 @@ export default async function HomePage() {
 
   return (
     <section>
-      <h1 className="max-w-[650px] font-serif text-3xl font-bold">
+      <h1 className="mb-5 font-serif text-3xl font-bold">
         <Balancer>{name}</Balancer>
       </h1>
 

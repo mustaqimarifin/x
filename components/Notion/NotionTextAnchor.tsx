@@ -12,8 +12,6 @@ export const NotionTextAnchor = ({
   paneContent: React.ReactNode;
   children: React.ReactNode;
 }) => {
-  // const [isPending, startTransition] = useTransition()
-  // const [isFetching, setIsFetching] = useState(false);
   return (
     <Link
       shallow

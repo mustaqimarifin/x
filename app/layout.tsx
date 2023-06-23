@@ -1,15 +1,14 @@
 import "app/style/global.css";
-//import { kaisei, robotoFlex, sfmono } from "app/style/fonts";
 
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { cx } from "lib/utils";
-//import { PageTransition } from "components/UI/PageTransition";
 import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 import { Providers } from "components/Providers";
 import { meta } from "data/meta";
 import { CurrentENV } from "lib/env";
+import { kK, rFlex, sfmono } from "./style/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -70,7 +69,7 @@ export const metadata: Metadata = {
   manifest: `${CurrentENV}/manifest.json`,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -79,19 +78,19 @@ export default function RootLayout({
     <html
       lang="en"
       className={cx(
-        "bg-white text-black dark:bg-[#111010] dark:text-white"
-        /*      kaisei.variable,
-        robotoFlex.variable,
-        sfmono.variable */
+        "bg-white text-black dark:bg-[#111010] dark:text-white",
+        rFlex.variable,
+        kK.variable,
+        sfmono.variable
       )}
     >
-      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col subpixel-antialiased md:mt-20  md:flex-row lg:mx-auto lg:mt-32 ">
+      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
         <NAV />
         <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
           <Providers>{children}</Providers>
           <Analytics />
+          <PanesLayer />
         </main>
-        <PanesLayer />
       </body>
     </html>
   );

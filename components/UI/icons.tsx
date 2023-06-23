@@ -104,7 +104,7 @@ export function YoutubeIcon() {
 export function KittyIcon() {
   return (
     <svg
-      className=" h-11 w-11 dark:invert  "
+      className=" h-11 dark:invert"
       viewBox="0 0 500 500"
       xmlns="http://www.w3.org/2000/svg"
     >

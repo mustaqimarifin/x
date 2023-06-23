@@ -16,7 +16,7 @@ function ClientOnly({ children, ...delegated }) {
   return <div {...delegated}>{children}</div>;
 }
 
-export default function CoverImage({ src, blurDataUrl }) {
+export default function CoverImage({ src }) {
   const [isLoading, setLoading] = useState(true);
 
   return (
@@ -28,16 +28,15 @@ export default function CoverImage({ src, blurDataUrl }) {
         <Image
           src={src}
           alt={""}
-          width={680}
+          width={503}
           height={503}
           className={cx(
-            " mx-auto flex aspect-[21/9] w-full items-center justify-center object-cover object-top duration-700 ease-in-out group-hover:opacity-75 lg:max-w-7xl",
+            " aspect-square w-full items-center justify-center object-cover object-top duration-700 ease-in-out group-hover:opacity-75",
             isLoading
-              ? "scale-110 blur-2xl grayscale"
+              ? "scale-95 blur-2xl grayscale"
               : "scale-100 blur-0 grayscale-0"
           )}
           onLoadingComplete={() => setLoading(false)}
-          blurDataURL={blurDataUrl}
         />
         {/*       <figcaption className="text-center ">
         {caption && (

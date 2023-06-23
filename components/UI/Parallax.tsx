@@ -41,10 +41,7 @@ export const Parallax = ({
   useLayoutEffect(() => {
     const element = ref.current;
     const onResize = () => {
-      setElementTop(
-        element.getBoundingClientRect().top + window.scrollY ||
-          window.pageYOffset
-      );
+      setElementTop(element.getBoundingClientRect().top + window.scrollY);
       setClientHeight(window.innerHeight);
     };
     onResize();

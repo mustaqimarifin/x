@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { getScribblesDatabase } from "../data";
-import { Suspense } from "react";
-import { LoadingSpinner } from "components/UI/spinner";
 import { Metadata } from "next/types";
+import "app/style/notion2.css";
+import Image from "components/Pics";
+import CoverImage from "components/CoverImage";
 
 export const dynamic = "force-static";
 export const metadata: Metadata = {
@@ -12,27 +12,23 @@ export const metadata: Metadata = {
 
 export default async function ScribblesPage() {
   const scribbles = await getScribblesDatabase();
+  console.log(scribbles);
 
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <div className="grid gap-2 px-8 py-8 max-md:px-4  md:grid-cols-2">
-        {scribbles.map((scribble) => (
-          <div
-            className="relative aspect-square overflow-hidden"
-            key={scribble.id}
-          >
-            <Image
+    <section>
+      <h1 className="mb-5 font-serif text-3xl font-bold">Scribbles</h1>
+      <div className="container w-full">
+        <div className="prose mx-auto mb-8 mt-4 gap-2  ">
+          {scribbles.map((scribble) => (
+            <CoverImage
               src={`https://www.notion.so/image/${encodeURIComponent(
                 scribble.Image
               )}?table=block&id=${scribble.id}`}
-              alt="drawing"
-              className="object-cover"
-              width={500}
-              height={500}
-            ></Image>
-          </div>
-        ))}
+              //alt={""}
+            />
+          ))}
+        </div>
       </div>
-    </Suspense>
+    </section>
   );
 }

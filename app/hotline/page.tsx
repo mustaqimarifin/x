@@ -29,7 +29,7 @@ async function HotlineForm() {
   return <LoginForm session={session} />;
 }
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "Guestbook",
   description: "Leave a message!.",
 };
@@ -54,7 +54,7 @@ export default async function HotlinePage() {
   return (
     <>
       <section>
-        <h1 className="max-w-[650px mb-8 font-serif text-3xl font-bold">
+        <h1 className="mb-5 font-serif text-3xl font-bold">
           <Balancer>Guestbook</Balancer>
         </h1>
         <HotlineForm />

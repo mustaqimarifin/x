@@ -1,10 +1,7 @@
 "use client";
 import { Carousel } from "@heathmont/moon-core-tw";
-import {
-  ControlsChevronLeft,
-  ControlsChevronRight,
-} from "@heathmont/moon-icons-tw";
-import { Author, authors } from "data/authors";
+
+import { authors } from "data/authors";
 import Image from "next/image";
 
 const IMGC = () => {

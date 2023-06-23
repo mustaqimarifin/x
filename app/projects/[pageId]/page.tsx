@@ -101,7 +101,7 @@ export default async function ProjectsPage({
 
   return (
     <section>
-      <h1 className="max-w-[650px] font-serif text-3xl font-bold">
+      <h1 className="mb-5 font-serif text-3xl font-bold">
         <Balancer>{textDecorationsToString(project.title)}</Balancer>
       </h1>
       <div className="mb-8 mt-4 grid max-w-[650px] grid-cols-[auto_1fr_auto] items-center ">
@@ -121,14 +121,8 @@ export default async function ProjectsPage({
           </div>
         ) } */}
       </div>
-      <Suspense fallback={<LoadingSpinner />}>
-        <div
-          suppressHydrationWarning
-          className="prose max-w-2xl dark:prose-invert"
-        >
-          <NotionBlock recordMap={recordMap} blockId={projectId} />
-        </div>
-      </Suspense>
+      <NotionBlock recordMap={recordMap} blockId={projectId} />
+
       {/*  <div suppressHydrationWarning className=" max-w-2xl">
         <NotionBlock2
           recordMap={recordMap}
