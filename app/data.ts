@@ -1,37 +1,38 @@
 import { PostDB, GalleryDB, ProjectsDB } from "lib/env";
-import { NotionAPI } from "notion-client";
+import { getPage } from "lib/notion";
 import { Collection, Decoration, PageBlock } from "notion-types";
-import { getDateValue } from "notion-utils";
-import { cache } from "react";
+import { getDateValue, getPageImageUrls } from "notion-utils";
+import "server-only";
 
-export type DatabaseItem = { id: string } & { [key: string]: any };
+export type DatabaseItem = Record<string, any> & { id: string };
 
-export type PostDatabaseItem = {
+export interface PostDatabaseItem {
   id: string;
   date: string;
   slug: string;
-  title: string & Decoration[];
+  title: Decoration[] & string;
   URL: string;
-  summary: string & Decoration[];
+  summary: Decoration[] & string;
   status?: boolean;
   authors?: string[];
-};
-export type ScribbleDatabaseItem = {
+}
+export interface ScribbleDatabaseItem {
   id: string;
+  pic: string;
   Image: string;
-};
+}
 
 export type PostStatus = "Draft" | "Published";
 
-export type ProjectDatabaseItem = {
+export interface ProjectDatabaseItem {
   id: string;
   date: string;
   pageId: string;
-  title: string & Decoration[];
+  title: Decoration[] & string;
   URL: string;
-  summary: string & Decoration[];
-  status?: boolean;
-};
+  summary: Decoration[] & string;
+  status: boolean;
+}
 
 const MONTHS = [
   "January",
@@ -48,10 +49,10 @@ const MONTHS = [
   "December",
 ];
 
-export function processDatabaseItem<T>(
+export function processDatabaseItem<P>(
   page: PageBlock,
   collection: Collection
-): T {
+): P {
   const item: DatabaseItem = {
     id: page.id,
   };
@@ -91,13 +92,11 @@ export function processDatabaseItem<T>(
     }
   }
 
-  return item as any;
+  return item as P;
 }
 
-const notion = new NotionAPI();
-
-export const getPostDatabase = cache(async () => {
-  const recordMap = await notion.getPage(PostDB);
+export const getPostDatabase = async () => {
+  const recordMap = await getPage(PostDB);
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
@@ -106,10 +105,10 @@ export const getPostDatabase = cache(async () => {
       processDatabaseItem<PostDatabaseItem>(pageBlock, collection)
     )
     .filter((item) => item.status);
-});
+};
 
-export const getDatabasePage = cache(async <T,>(id: string) => {
-  const recordMap = await notion.getPage(id);
+export const getDatabasePage = async <T>(id: string) => {
+  const recordMap = await getPage(id);
 
   const pageBlock = recordMap.block[id].value;
   const collection = Object.values(recordMap.collection)[0].value;
@@ -120,10 +119,14 @@ export const getDatabasePage = cache(async <T,>(id: string) => {
     item: processDatabaseItem<T>(pageBlock, collection),
     recordMap,
   };
-});
+};
 
-export const getScribblesDatabase = cache(async () => {
-  const recordMap = await notion.getPage(GalleryDB);
+export const getScribblesDatabase = async () => {
+  const recordMap = await getPage(GalleryDB);
+  /*   const imgSET = getPageImageUrls(recordMap, {
+    mapImageUrl: defaultMapImageUrl,
+  });
+  console.log(imgSET); */
 
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
@@ -132,9 +135,10 @@ export const getScribblesDatabase = cache(async () => {
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<ScribbleDatabaseItem>(pageBlock, collection)
     );
-});
-export const getProjectsDatabase = cache(async () => {
-  const recordMap = await notion.getPage(ProjectsDB);
+};
+
+export const getProjectsDatabase = async () => {
+  const recordMap = await getPage(ProjectsDB);
 
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
@@ -144,4 +148,4 @@ export const getProjectsDatabase = cache(async () => {
       processDatabaseItem<ProjectDatabaseItem>(pageBlock, collection)
     )
     .filter((item) => item.status);
-});
+};

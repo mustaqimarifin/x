@@ -1,9 +1,6 @@
-// @ts-nocheck
-/* eslint-disable no-undef */
-/** @type {import('tailwindcss').Config} */
-//const { fontFamily } = require("tailwindcss/defaultTheme");
+import typography from "@tailwindcss/typography";
 
-module.exports = {
+const config = {
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -40,5 +37,7 @@ module.exports = {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [typography],
 };
+
+export default config;

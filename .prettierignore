@@ -1,0 +1,15 @@
+# Ignore artifacts:
+build
+coverage
+pnpm-lock.yaml
+
+# Ignore all HTML files:
+*.html
+
+# DEFAULT
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+**/.next
+**/.contentlayer

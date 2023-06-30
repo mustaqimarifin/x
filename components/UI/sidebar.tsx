@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutGroup, motion } from "framer-motion";
-import { KittyIcon } from "./icons";
+import { KittyColor, KittyIcon } from "./icons";
 import { cx } from "lib/utils";
 import Image from "next/image";
 
@@ -41,17 +41,17 @@ export const NAV = () => {
   }
 
   return (
-    <aside className=" -mx-4 font-serif font-bold md:w-[150px] md:flex-shrink-0 ">
-      <div className="md:fixed md:top-20 md:max-h-screen">
-        <div className=" mb-2 ml-2 flex flex-col items-start space-y-10 px-4 dark:invert md:mb-8 md:ml-[12px] md:h-12 md:flex-row md:px-0 ">
-          <Image src="/kit-bw.png" alt={`KittyIcon`} width={48} height={48} />
+    <aside className=" -mx-4 font-serif font-bold lg:w-[150px] lg:flex-shrink-0 ">
+      <div className="lg:fixed lg:top-20 lg:max-h-screen">
+        <div className=" mb-2 ml-2 flex flex-col items-start space-y-10 px-4 dark:invert lg:mb-8 lg:ml-[12px] lg:flex-row lg:px-0 ">
+          <KittyIcon />
         </div>
         <LayoutGroup>
           <nav
-            className="fade relative flex scroll-pr-6 flex-col items-start overflow-x-auto px-4 pb-0 md:flex-row md:overflow-y-auto md:px-0"
+            className="fade relative flex scroll-pr-6 flex-col items-start overflow-x-auto px-4 pb-0 lg:flex-row lg:overflow-y-auto lg:px-0"
             id="nav"
           >
-            <div className="mb-2 mt-2 flex flex-row space-x-0 pr-10 md:mt-0 md:flex-none md:flex-col">
+            <div className="mb-2 mt-2 flex flex-row space-x-0 pr-10 lg:mt-0 lg:flex-none lg:flex-col">
               {Object.entries(navItems).map(([path, { name }]) => {
                 const isActive = path === pathname;
                 return (

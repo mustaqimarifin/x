@@ -1,7 +1,11 @@
 import { makeObservable, observable, runInAction, values } from "mobx";
 import React from "react";
 
-export type Pane = { id: string; content: React.ReactNode; z: number };
+export interface Pane {
+  id: string;
+  content: React.ReactNode;
+  z: number;
+}
 
 export const panesMobx = observable.map<string, Pane>([], { deep: false });
 

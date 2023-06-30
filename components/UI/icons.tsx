@@ -104,7 +104,7 @@ export function YoutubeIcon() {
 export function KittyIcon() {
   return (
     <svg
-      className=" h-11 dark:invert"
+      className="h-12 "
       viewBox="0 0 500 500"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -179,8 +179,8 @@ export function KittyColor() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1024 1024"
-      height={20}
-      className="animate-pulse "
+      height={50}
+      className="animate-pulse"
     >
       <path
         fill="#2d2c28"

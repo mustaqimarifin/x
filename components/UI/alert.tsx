@@ -3,7 +3,7 @@ import { cx } from "lib/utils";
 interface CalloutProps {
   icon?: string;
   children?: React.ReactNode;
-  type?: "default" | "warning" | "danger";
+  type?: "danger" | "default" | "warning";
 }
 
 export function Alert({

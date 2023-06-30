@@ -102,36 +102,29 @@ export default async function PostPage({
 
   return (
     <section>
-      <h1 className="mb-5 font-serif text-3xl font-bold">
-        <Balancer>{textDecorationsToString(post.title)}</Balancer>
-      </h1>
-      <div className="mb-8 mt-4 grid max-w-[650px] grid-cols-[auto_1fr_auto] items-center ">
-        <div className=" rounded-md bg-neutral-100 px-2 py-1 text-sm font-semibold tracking-tighter dark:bg-neutral-800">
-          {post.date}
-        </div>
-        <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800" />
-        <PageViews slug={post.slug} trackView />
-        {/*         { post.tags && (
-          <div className="py-4 xl:py-8">s
+      <div className="px-6 lg:pl-24">
+        <div className="w-full pb-24 pt-16 max-2xl:mx-auto">
+          <div className="mb-8 text-3xl font-semibold text-neutral-900">
+            {post.title}
+          </div>
+          <div className=" justify-end rounded-md bg-neutral-100 px-2 py-1 text-sm font-semibold tracking-tighter dark:bg-neutral-800">
+            {post.date}
+            <PageViews slug={post.slug} trackView />
+          </div>
+          <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800"></div>
+          {/*         { project.tags && (
+          <div className="py-4 xl:py-8">
 
             <div className="flex flex-wrap">
-              { post.tags.map((tag) => (
+              { project.tags.map((tag) => (
                 <Tag key={ tag } text={ tag } />
               )) }
             </div>
           </div>
         ) } */}
+          <NotionBlock blockId={postId} recordMap={recordMap} />
+        </div>
       </div>
-      <NotionBlock recordMap={recordMap} blockId={postId} />
-
-      {/*  <div suppressHydrationWarning className=" max-w-2xl">
-        <NotionBlock2
-          recordMap={recordMap}
-          rootPageId={postId}
-          rootDomain={ rootDomain }
-          previewImagesEnabled={ previewImagesEnabled }
-        />
-      </div>  */}
     </section>
   );
 }

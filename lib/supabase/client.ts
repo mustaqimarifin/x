@@ -1,5 +1,5 @@
 import { SupportedStorage, createClient } from "@supabase/supabase-js";
-import { Database } from "types/supabase";
+import type { Database } from "types/supabase";
 
 const customStorageAdapter: SupportedStorage = {
   getItem: (key) => {

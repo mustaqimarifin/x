@@ -11,7 +11,7 @@ function addDashesToUUID(uuid: string) {
     .toLowerCase();
 }
 
-export function NotionText({
+function NotionFormat({
   value,
   recordMap,
 }: {
@@ -130,4 +130,14 @@ export function NotionText({
       })}
     </>
   );
+}
+
+export function NotionText({
+  value,
+  recordMap,
+}: {
+  value: Decoration[] | undefined;
+  recordMap: ExtendedRecordMap;
+}) {
+  return <NotionFormat value={value} recordMap={recordMap} />;
 }

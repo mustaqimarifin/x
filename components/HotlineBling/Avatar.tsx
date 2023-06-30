@@ -6,7 +6,7 @@ import React, { type FC } from "react";
 export interface AvatarProps
   extends Omit<React.HTMLProps<HTMLDivElement>, "size"> {
   src: string;
-  size?: "sm" | "lg";
+  size?: "lg" | "sm";
   isLoading?: boolean;
   error?: any;
 }

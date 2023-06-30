@@ -5,7 +5,7 @@ export function cx(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(input: string | number): string {
+export function formatDate(input: number | string): string {
   const date = new Date(input);
   return date.toLocaleDateString("en-US", {
     month: "long",
@@ -47,14 +47,16 @@ export const customStorageAdapter: SupportedStorage = {
   setItem: (key, value) => {
     if (typeof localStorage !== "undefined") {
       // Configure alternate storage here
-      return globalThis.localStorage.setItem(key, value);
+      globalThis.localStorage.setItem(key, value);
+      return;
     }
     return null;
   },
   removeItem: (key) => {
     if (typeof localStorage !== "undefined") {
       // Configure alternate storage here
-      return globalThis.localStorage.removeItem(key);
+      globalThis.localStorage.removeItem(key);
+      return;
     }
     return null;
   },

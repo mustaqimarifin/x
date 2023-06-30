@@ -1,11 +1,13 @@
+import { PostgrestError } from "@supabase/supabase-js";
 import { routerClient } from "lib/supabase/server";
+import { errorToJSON } from "next/dist/server/render";
 //import supabase  from "lib/supabase/client"
 import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
-  let slug: string;
+  let slug: string | null;
   try {
     const { searchParams } = new URL(req.url);
     slug = searchParams.get("slug");
@@ -19,8 +21,7 @@ export async function POST(req: NextRequest) {
       page_slug: slug,
     });
     return new NextResponse("OK!");
-  } catch (e: any) {
-    console.log(`${e.message}`);
+  } catch (err) {
     return new Response(`Failed to increment page`, {
       status: 500,
     });
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: Request) {
-  let slug: string;
+  let slug: string | null;
   try {
     const { searchParams } = new URL(req.url);
     slug = searchParams.get("slug");
@@ -46,8 +47,8 @@ export async function GET(req: Request) {
     const total = data?.reduce((acc, row) => acc + row.view_count, 0);
 
     return NextResponse.json({ total });
-  } catch (e: any) {
-    console.log(`${e.message}`);
+  } catch (e) {
+    console.log(`${e}`);
     return new Response(`Failed to increment page`, {
       status: 500,
     });

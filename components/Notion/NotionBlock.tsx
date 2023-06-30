@@ -1,16 +1,25 @@
-import { AudioBlock, BaseBlock, ExtendedRecordMap } from "notion-types";
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import {
+  AudioBlock,
+  BaseBlock,
+  BasePageBlock,
+  Block,
+  BlockType,
+  ExtendedRecordMap,
+  ImageBlock,
+} from "notion-types";
 import React from "react";
 import { processDatabaseItem } from "../../app/data";
 import { NotionText } from "./NotionText";
 import { cx, textDecorationsToString } from "lib/utils";
 import dynamic from "next/dynamic";
-import Image from "components/Pics";
 import KodeBlock from "components/Code/KodeBlock";
+import getImage from "./imgMeta";
+import Image from "next/legacy/image";
 
-/* const KodeBlock = dynamic(() => import("components/Code/KodeBlock"), {
-  ssr: false,
-});
- */
+declare const B: { properties: { title: string; source: string } };
+
 const Exercise = dynamic(() => import("components/Code/Exercise"), {
   ssr: false,
 });
@@ -27,8 +36,8 @@ const YoutubeEmbed = dynamic(() => import("components/Embed/YoutubeEmbed"), {
 });
 
 function BlockIcon({ block }: { block: BaseBlock }) {
-  const pageIcon: string | undefined = block.format?.page_icon;
-  if (pageIcon === undefined) {
+  const pageIcon = block.format.page_icon;
+  if (!pageIcon) {
     return null;
   }
 
@@ -62,7 +71,7 @@ export const getYoutubeId = (url: string): string | null => {
   return null;
 };
 
-function BlockRenderer({
+async function BlockRenderer({
   block,
   recordMap,
   children,
@@ -72,7 +81,6 @@ function BlockRenderer({
   children: React.ReactNode;
 }) {
   const { type, id } = block;
-  //@ts-ignore
   const value = block[type];
   switch (block.type) {
     case "paragraph":
@@ -83,7 +91,7 @@ function BlockRenderer({
       );
     case "page": {
       return (
-        <div className=" text-sm leading-relaxed text-neutral-900 dark:text-neutral-100">
+        <div className=" leading-relaxed text-neutral-900 dark:text-neutral-100">
           {block.content?.map((blockId) => (
             <NotionBlock
               blockId={blockId}
@@ -122,11 +130,22 @@ function BlockRenderer({
         block.properties.source[0][0]
       )}?table=block&id=${block.id}`;
 
-      return (
-        <div className="aspect-square overflow-hidden rounded-md">
-          <Image src={imgSRC} alt={""} width={900} height={900} />
-        </div>
-      );
+      const data = await getImage(imgSRC);
+
+      if (data)
+        return (
+          <div className="overflow-hidden rounded-md">
+            <Image
+              src={imgSRC}
+              alt={""}
+              width={data.width}
+              height={data.height}
+              placeholder="blur"
+              blurDataURL={data.hash}
+            />
+          </div>
+        );
+      return null;
     }
     case "bulleted_list": {
       const wrapList = (content: React.ReactNode, start?: number) =>
@@ -289,7 +308,7 @@ function BlockRenderer({
       const ratio = block.format?.column_ratio || 0.5;
       const parent = recordMap.block[block.parent_id]?.value;
       const columns =
-        parent?.content?.length || Math.max(2, Math.ceil(1.0 / ratio));
+        parent?.content?.length ?? Math.max(2, Math.ceil(1.0 / ratio));
 
       const width = `calc((100% - (${
         columns - 1
@@ -337,15 +356,13 @@ function BlockRenderer({
 export function NotionBlock({
   blockId,
   recordMap,
-  level,
 }: {
   blockId: string;
-  recordMap?: ExtendedRecordMap;
-  level?: number;
+  recordMap: ExtendedRecordMap;
 }) {
-  const block = recordMap.block[blockId]?.value;
+  const block = recordMap?.block[blockId]?.value;
   return (
-    <article className="prose prose-neutral prose-quoteless max-w-3xl dark:prose-invert">
+    <article className="prose prose-neutral prose-quoteless max-w-3xl dark:prose-invert lg:prose-lg">
       <BlockRenderer block={block} recordMap={recordMap}>
         {block.content?.map((childBlockId) => {
           return (

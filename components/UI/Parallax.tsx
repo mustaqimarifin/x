@@ -8,12 +8,12 @@ import {
   useScroll,
 } from "framer-motion";
 
-type ParallaxProps = {
+interface ParallaxProps {
   children: ReactNode;
   offset?: number;
   clampInitial?: boolean;
   clampFinal?: boolean;
-};
+}
 
 export const Parallax = ({
   children,
@@ -46,7 +46,9 @@ export const Parallax = ({
     };
     onResize();
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
   }, [ref]);
 
   // Don't parallax if the user has "reduced motion" enabled

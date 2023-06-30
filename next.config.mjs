@@ -1,10 +1,19 @@
-const { get } = require("@vercel/edge-config");
+import { get } from "@vercel/edge-config";
+import withPlaiceholder from "@plaiceholder/next";
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   //pageExtensions: ["ts", "tsx", "js", "jsx", "mdx"],
   swcMinify: true,
   reactStrictMode: true,
+  modularizeImports: {
+    "@heathmont/moon-icons-tw/icons/?(((\\w*)?/?)*)": {
+      transform: "@heathmont/moon-icons-tw/icons/{{ matches.[1] }}/{{member}}",
+      //skipDefaultConversion: true,
+    },
+    "@heathmont/moon-core-tw": {
+      transform: "@heathmont/moon-core-tw/{{member}}",
+    },
+  },
   staticPageGenerationTimeout: 300,
   images: {
     dangerouslyAllowSVG: true,
@@ -14,6 +23,7 @@ const nextConfig = {
       "i.scdn.co", // Spotify Album Art
       "pbs.twimg.com", // Twitter Profile Picture
       "cdn.sanity.io",
+      "abs.twimg.com",
       "www.notion.so",
       "flowbite.s3.amazonaws.com",
       "lh3.googleusercontent.com",
@@ -37,4 +47,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default withPlaiceholder(nextConfig);

@@ -104,13 +104,14 @@ export default async function ProjectsPage({
       <h1 className="mb-5 font-serif text-3xl font-bold">
         <Balancer>{textDecorationsToString(project.title)}</Balancer>
       </h1>
-      <div className="mb-8 mt-4 grid max-w-[650px] grid-cols-[auto_1fr_auto] items-center ">
-        <div className=" rounded-md bg-neutral-100 px-2 py-1 text-sm font-semibold tracking-tighter dark:bg-neutral-800">
+      <div className="mb-8 mt-4 grid max-w-[650px] grid-cols-[auto_1fr_auto] items-center text-sm">
+        <div className="rounded-md bg-neutral-100 px-2 py-1 tracking-tighter dark:bg-neutral-800">
           {project.date}
         </div>
         <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800" />
         <PageViews slug={project.pageId} trackView />
-        {/*         { project.tags && (
+      </div>
+      {/*         { project.tags && (
           <div className="py-4 xl:py-8">
 
             <div className="flex flex-wrap">
@@ -120,7 +121,7 @@ export default async function ProjectsPage({
             </div>
           </div>
         ) } */}
-      </div>
+
       <NotionBlock recordMap={recordMap} blockId={projectId} />
 
       {/*  <div suppressHydrationWarning className=" max-w-2xl">

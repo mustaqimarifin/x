@@ -1,6 +1,6 @@
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 import { NextRequest, NextResponse } from "next/server";
-import { Database } from "types/supabase";
+import type { Database } from "types/supabase";
 
 export async function middleware(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);

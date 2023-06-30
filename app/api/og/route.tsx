@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // App router includes @vercel/og.
 // No need to install it.
 
@@ -11,7 +10,7 @@ const font = fetch(
 ).then((res) => res.arrayBuffer());
 
 export async function GET(req: Request) {
-  let slug: string;
+  let slug: string | null;
   try {
     const { searchParams } = new URL(req.url);
     const postTitle = searchParams.get("title");
@@ -144,7 +143,7 @@ export async function GET(req: Request) {
               whiteSpace: "pre-wrap",
             }}
           >
-            {postTitle || slug || "Default Title"}
+            {(postTitle ?? slug) || "Default Title"}
           </div>
           <div
             style={{
@@ -173,8 +172,8 @@ export async function GET(req: Request) {
         ],
       }
     );
-  } catch (e: any) {
-    console.log(`${e.message}`);
+  } catch (e) {
+    console.log(`${e}`);
     return new Response(`Failed to generate the image`, {
       status: 500,
     });

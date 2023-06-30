@@ -9,6 +9,8 @@ import { Providers } from "components/Providers";
 import { meta } from "data/meta";
 import { CurrentENV } from "lib/env";
 import { kK, rFlex, sfmono } from "./style/fonts";
+import { Sidebar } from "components/Menu/SydeBar";
+import { getPostDatabase, getProjectsDatabase } from "./data";
 
 export const metadata: Metadata = {
   title: {
@@ -74,6 +76,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const posts = await getPostDatabase();
+  const projects = await getProjectsDatabase();
   return (
     <html
       lang="en"
@@ -84,9 +88,9 @@ export default async function RootLayout({
         sfmono.variable
       )}
     >
-      <body className="mx-4 mb-40 mt-8 flex max-w-4xl flex-col antialiased md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
-        <NAV />
-        <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
+      <body className="">
+        <Sidebar posts={posts} projects={projects} />
+        <main className="mx-4 pl-80 max-lg:pl-64 max-md:pl-0">
           <Providers>{children}</Providers>
           <Analytics />
           <PanesLayer />
