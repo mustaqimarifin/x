@@ -1,8 +1,10 @@
-import { PostDB, GalleryDB, ProjectsDB } from "lib/env";
-import { getPage } from "lib/notion";
-import { Collection, Decoration, PageBlock } from "notion-types";
-import { getDateValue, getPageImageUrls } from "notion-utils";
-import "server-only";
+import { getPreviewImageMap } from 'components/Notion/meta2';
+import { PostDB, GalleryDB, ProjectsDB, previews } from 'lib/env';
+import { getPage } from 'lib/notion';
+import { Collection, Decoration, PageBlock } from 'notion-types';
+import { getDateValue, getPageImageUrls } from 'notion-utils';
+import { cache } from 'react';
+import 'server-only';
 
 export type DatabaseItem = Record<string, any> & { id: string };
 
@@ -22,7 +24,7 @@ export interface ScribbleDatabaseItem {
   Image: string;
 }
 
-export type PostStatus = "Draft" | "Published";
+export type PostStatus = 'Draft' | 'Published';
 
 export interface ProjectDatabaseItem {
   id: string;
@@ -35,18 +37,18 @@ export interface ProjectDatabaseItem {
 }
 
 const MONTHS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 export function processDatabaseItem<P>(
@@ -62,29 +64,29 @@ export function processDatabaseItem<P>(
   for (const [key, value] of Object.entries(page.properties)) {
     const propertyName = collection.schema[key].name;
     switch (collection.schema[key].type) {
-      case "text":
-      case "title":
+      case 'text':
+      case 'title':
         item[propertyName] = value;
         break;
-      case "date":
+      case 'date':
         const formattedDate = getDateValue(value);
-        if (formattedDate?.type === "date") {
+        if (formattedDate?.type === 'date') {
           const date = new Date(formattedDate.start_date);
           item[propertyName] = `${
             MONTHS[date.getMonth()]
           } ${date.getFullYear()}`;
         }
         break;
-      case "url":
+      case 'url':
         item[propertyName] = value[0][0];
         break;
-      case "file":
+      case 'file':
         item[propertyName] = value[0][1]?.[0][1];
         break;
-      case "checkbox":
-        item[propertyName] = value[0]?.[0] === "Yes";
+      case 'checkbox':
+        item[propertyName] = value[0]?.[0] === 'Yes';
         break;
-      case "select":
+      case 'select':
         item[propertyName] = value[0][1]?.[0][1];
         break;
       default:
@@ -95,57 +97,62 @@ export function processDatabaseItem<P>(
   return item as P;
 }
 
-export const getPostDatabase = async () => {
+export const getPostDatabase = cache(async () => {
   const recordMap = await getPage(PostDB);
+  if (previews!) {
+    const previewImageMap = await getPreviewImageMap(recordMap);
+    (recordMap as any).preview_images = previewImageMap;
+  }
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
-    .filter((block): block is PageBlock => block?.type === "page")
+    .filter((block): block is PageBlock => block?.type === 'page')
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<PostDatabaseItem>(pageBlock, collection)
     )
-    .filter((item) => item.status);
-};
 
-export const getDatabasePage = async <T>(id: string) => {
+    .filter((item) => item.status);
+});
+
+export const getDatabasePage = cache(async <T>(id: string) => {
   const recordMap = await getPage(id);
 
   const pageBlock = recordMap.block[id].value;
   const collection = Object.values(recordMap.collection)[0].value;
-  if (pageBlock.type !== "page") {
+  if (pageBlock.type !== 'page') {
     throw new Error();
   }
   return {
     item: processDatabaseItem<T>(pageBlock, collection),
     recordMap,
   };
-};
+});
 
-export const getScribblesDatabase = async () => {
+export const getScribblesDatabase = cache(async () => {
   const recordMap = await getPage(GalleryDB);
-  /*   const imgSET = getPageImageUrls(recordMap, {
-    mapImageUrl: defaultMapImageUrl,
-  });
-  console.log(imgSET); */
+  if (previews!) {
+    const previewImageMap = await getPreviewImageMap(recordMap);
+    (recordMap as any).preview_images = previewImageMap;
+  }
 
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
-    .filter((block): block is PageBlock => block?.type === "page")
+    .filter((block): block is PageBlock => block?.type === 'page')
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<ScribbleDatabaseItem>(pageBlock, collection)
     );
-};
+});
 
-export const getProjectsDatabase = async () => {
+export const getProjectsDatabase = cache(async () => {
   const recordMap = await getPage(ProjectsDB);
 
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
-    .filter((block): block is PageBlock => block?.type === "page")
+    .filter((block): block is PageBlock => block?.type === 'page')
     .map((pageBlock: PageBlock) =>
       processDatabaseItem<ProjectDatabaseItem>(pageBlock, collection)
     )
     .filter((item) => item.status);
-};
+});

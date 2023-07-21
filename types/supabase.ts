@@ -1,5 +1,10 @@
 export type Json =
-  Json[] | boolean | number | string | { [key: string]: Json } | null;
+  | Json[]
+  | boolean
+  | number
+  | string
+  | { [key: string]: Json }
+  | null;
 
 export interface Database {
   public: {

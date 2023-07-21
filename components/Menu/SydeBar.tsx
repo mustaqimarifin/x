@@ -1,14 +1,15 @@
-"use client";
-import Link from "next/link";
+'use client';
+import Link from 'next/link';
 import {
   ArrowsChevronLeftDouble,
   GenericBurgerRegular,
-} from "@heathmont/moon-icons-tw";
+} from '@heathmont/moon-icons-tw';
 
-import { usePathname, useSelectedLayoutSegments } from "next/navigation";
-import { useEffect, useState } from "react";
-import { PostDatabaseItem, ProjectDatabaseItem } from "app/data";
-import { cx, textDecorationsToString } from "lib/utils";
+import { usePathname, useSelectedLayoutSegments } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { PostDatabaseItem, ProjectDatabaseItem } from 'app/data';
+import { cx, textDecorationsToString } from 'lib/utils';
+import { PageViews } from 'components/PageViews';
 
 function SidebarLink({
   href,
@@ -24,10 +25,9 @@ function SidebarLink({
     <Link
       href={href}
       className={cx(
-        "group block rounded px-2 py-2 text-sm font-medium text-neutral-900 max-lg:text-xs",
-        isSelected ? "is-selected bg-accent-100" : "hover:bg-neutral-50"
-      )}
-    >
+        'group block rounded px-2 py-2 text-sm font-medium text-neutral-900 max-lg:text-xs',
+        isSelected ? 'is-selected bg-accent-100' : 'hover:bg-neutral-50'
+      )}>
       {children}
     </Link>
   );
@@ -52,7 +52,7 @@ function PostsList({ posts }: { posts: PostDatabaseItem[] }) {
           <div>{textDecorationsToString(post.title)}</div>
           {post.date !== undefined ? (
             <div className="text-xs font-normal text-neutral-600 text-opacity-50">
-              {post.date}
+              {post.date} {<PageViews slug={post.slug} trackView={false} />}
             </div>
           ) : null}
         </SidebarLink>
@@ -69,7 +69,8 @@ function ProjectsList({ projects }: { projects: ProjectDatabaseItem[] }) {
           <div>{textDecorationsToString(project.title)}</div>
           {project.summary !== undefined ? (
             <div className="text-xs font-normal text-neutral-600 text-opacity-50">
-              {project.summary}
+              {project.summary}{' '}
+              {<PageViews slug={project.pageId} trackView={false} />}
             </div>
           ) : null}
         </SidebarLink>
@@ -95,14 +96,14 @@ export function Sidebar({
   }, [pathname]);
   if (
     segments.length === 1 &&
-    ["posts", "projects"].includes(segments[0]) &&
+    ['posts', 'projects'].includes(segments[0]) &&
     !showCollapsed
   ) {
     setShowCollapsed(true);
   }
 
   const [forceShowTopMenu, setForceShowTopMenu] = useState(false);
-  if (!["posts", "projects"].includes(segments[0]) && forceShowTopMenu) {
+  if (!['posts', 'projects'].includes(segments[0]) && forceShowTopMenu) {
     setForceShowTopMenu(false);
   }
 
@@ -115,14 +116,14 @@ export function Sidebar({
 
   let currentMarker;
   switch (segments[0]) {
-    case "posts":
+    case 'posts':
       currentMarker = (
         <Link href="/posts" className="font-medium">
           posts
         </Link>
       );
       break;
-    case "projects":
+    case 'projects':
       currentMarker = (
         <Link href="/projects" className="font-medium">
           projects
@@ -137,8 +138,7 @@ export function Sidebar({
         onClick={() => {
           setShowCollapsed((v) => !v);
         }}
-        className="absolute left-5 top-5 z-10 p-1 text-neutral-400 transition hover:text-neutral-600 md:hidden"
-      >
+        className="absolute left-5 top-5 z-10 p-1 text-neutral-400 transition hover:text-neutral-600 md:hidden">
         <GenericBurgerRegular />
       </button>
       {showCollapsed ? (
@@ -151,11 +151,10 @@ export function Sidebar({
       ) : null}
       <div
         className={cx(
-          "fixed bottom-0 left-0 top-0 z-10 flex w-80 flex-shrink-0 transform flex-col border-r border-neutral-100 bg-white transition max-lg:w-64",
+          'fixed bottom-0 left-0 top-0 z-10 flex w-80 flex-shrink-0 transform flex-col border-r border-neutral-100 bg-white transition max-lg:w-64',
           { transition: !isInitialLoad },
-          !showCollapsed ? "max-md:-translate-x-full max-md:opacity-50" : ""
-        )}
-      >
+          !showCollapsed ? 'max-md:-translate-x-full max-md:opacity-50' : ''
+        )}>
         <div className="flex items-center gap-3 border-b border-neutral-100 py-5 pl-4 pr-2 text-xs">
           <Link
             href="/"
@@ -165,28 +164,26 @@ export function Sidebar({
                 e.preventDefault();
               }
             }}
-            className="text-neutral-400 transition hover:text-neutral-600"
-          >
+            className="text-neutral-400 transition hover:text-neutral-600">
             mustaqim arifin
           </Link>
           {currentMarker}
           <div className="grow" />
           {segments.length === 1 &&
-          ["posts", "projects"].includes(segments[0]) ? null : (
+          ['posts', 'projects'].includes(segments[0]) ? null : (
             <button
               onClick={() => {
                 setShowCollapsed(false);
               }}
-              className="text-neutral-400 transition hover:text-neutral-600 md:hidden"
-            >
+              className="text-neutral-400 transition hover:text-neutral-600 md:hidden">
               <ArrowsChevronLeftDouble />
             </button>
           )}
         </div>
         <div className="grow overflow-auto">
-          {segments[0] === "posts" && !forceShowTopMenu ? (
+          {segments[0] === 'posts' && !forceShowTopMenu ? (
             <PostsList posts={posts} />
-          ) : segments[0] === "projects" && !forceShowTopMenu ? (
+          ) : segments[0] === 'projects' && !forceShowTopMenu ? (
             <ProjectsList projects={projects} />
           ) : (
             <TopMenu />

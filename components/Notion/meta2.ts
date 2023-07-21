@@ -1,17 +1,30 @@
 import got from 'got';
-import lqip from 'lqip-modern';
-import { ExtendedRecordMap, PreviewImage, PreviewImageMap } from 'notion-types';
+import { mapImageUrl } from 'lib/mapImg';
+import { db } from 'lib/redis/connect';
+
+import { type ExtendedRecordMap } from 'notion-types';
 import { getPageImageUrls, normalizeUrl } from 'notion-utils';
 import pMap from 'p-map';
 import pMemoize from 'p-memoize';
+import { getPlaiceholder } from 'plaiceholder';
 
-import { get, set } from './redis/db';
-import { mapImageUrl } from './mapImg';
+export type PreIMG = {
+  w: number;
+  h: number;
+  b: string;
+};
+export interface PreMap {
+  [url: string]: PreIMG | null;
+}
 
 export async function getPreviewImageMap(
   recordMap: ExtendedRecordMap
-): Promise<PreviewImageMap> {
-  const urls: string[] = getPageImageUrls(recordMap, { mapImageUrl });
+): Promise<PreMap> {
+  const urls: string[] = getPageImageUrls(recordMap, {
+    mapImageUrl,
+  })
+    //.concat([defaultPageIcon, defaultPageCover])
+    .filter(Boolean);
 
   const previewImagesMap = Object.fromEntries(
     await pMap(
@@ -32,10 +45,10 @@ export async function getPreviewImageMap(
 async function createPreviewImage(
   url: string,
   { cacheKey }: { cacheKey: string }
-): Promise<PreviewImage | null> {
+): Promise<PreIMG | null> {
   try {
     try {
-      const cachedPreviewImage: PreviewImage = await get(cacheKey);
+      const cachedPreviewImage: PreIMG = await db.get(cacheKey);
       if (cachedPreviewImage) {
         return cachedPreviewImage;
       }
@@ -45,17 +58,20 @@ async function createPreviewImage(
     }
 
     const { body } = await got(url, { responseType: 'buffer' });
-    const result = await lqip(body);
-    console.log('lqip', { ...result.metadata, url, cacheKey });
+    console.log(body);
 
-    const previewImage: PreviewImage = {
-      originalWidth: result.metadata.originalWidth,
-      originalHeight: result.metadata.originalHeight,
-      dataURIBase64: result.metadata.dataURIBase64,
+    const result = await getPlaiceholder(body, { format: ['webp'] });
+    //const result = await lqip(body);
+    console.log('lqip', { result, cacheKey });
+
+    const previewImage = {
+      w: result.metadata.width,
+      h: result.metadata.height,
+      b: result.base64,
     };
 
     try {
-      await set(cacheKey, previewImage);
+      await db.set(cacheKey, { previewImage });
     } catch (err) {
       // ignore redis errors
       console.warn(`redis error set "${cacheKey}"`, err.message);

@@ -1,16 +1,16 @@
-import "app/style/global.css";
+import 'app/style/global.css';
 
-import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/react";
-import { cx } from "lib/utils";
-import { NAV } from "components/UI/sidebar";
-import { PanesLayer } from "components/UI/PanesLayer";
-import { Providers } from "components/Providers";
-import { meta } from "data/meta";
-import { CurrentENV } from "lib/env";
-import { kK, rFlex, sfmono } from "./style/fonts";
-import { Sidebar } from "components/Menu/SydeBar";
-import { getPostDatabase, getProjectsDatabase } from "./data";
+import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
+import { cx } from 'lib/utils';
+import { NAV } from 'components/UI/sidebar';
+import { PanesLayer } from 'components/UI/PanesLayer';
+import { Providers } from 'components/Providers';
+import { meta } from 'data/meta';
+import { CurrentENV } from 'lib/env';
+import { kK, rFlex, sfmono } from './style/fonts';
+import { Sidebar } from 'components/Menu/SydeBar';
+import { getPostDatabase, getProjectsDatabase } from './data';
 
 export const metadata: Metadata = {
   title: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: `%s | ${meta.name}`,
   },
   description: meta.description,
-  keywords: ["Music Production", "Audio Engineering", "Editorial", "Blog"],
+  keywords: ['Music Production', 'Audio Engineering', 'Editorial', 'Blog'],
   authors: [
     {
       name: meta.name,
@@ -27,12 +27,12 @@ export const metadata: Metadata = {
   ],
   creator: meta.name,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
   ],
   openGraph: {
-    type: "website",
-    locale: "en_US",
+    type: 'website',
+    locale: 'en_US',
     url: CurrentENV,
     title: meta.name,
     description: meta.description,
@@ -46,11 +46,11 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: meta.name,
     description: meta.description,
     images: [`${CurrentENV}/og.png`],
-    creator: "@vmprmyth",
+    creator: '@vmprmyth',
   },
   robots: {
     index: true,
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
   icons: {
@@ -82,12 +82,11 @@ export default async function RootLayout({
     <html
       lang="en"
       className={cx(
-        "bg-white text-black dark:bg-[#111010] dark:text-white",
+        'bg-white text-black dark:bg-[#111010] dark:text-white',
         rFlex.variable,
         kK.variable,
         sfmono.variable
-      )}
-    >
+      )}>
       <body className="">
         <Sidebar posts={posts} projects={projects} />
         <main className="mx-4 pl-80 max-lg:pl-64 max-md:pl-0">

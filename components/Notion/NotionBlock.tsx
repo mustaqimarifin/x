@@ -1,22 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import {
-  AudioBlock,
-  BaseBlock,
-  BasePageBlock,
-  Block,
-  BlockType,
-  ExtendedRecordMap,
-  ImageBlock,
-} from "notion-types";
+import { AudioBlock, BaseBlock, ExtendedRecordMap } from "notion-types";
 import React from "react";
 import { processDatabaseItem } from "../../app/data";
 import { NotionText } from "./NotionText";
 import { cx, textDecorationsToString } from "lib/utils";
 import dynamic from "next/dynamic";
 import KodeBlock from "components/Code/KodeBlock";
-import getImage from "./imgMeta";
 import Image from "next/legacy/image";
+
+import { getPreviewImage, getPreviewImageMap } from "./meta2";
+import { normalizeUrl } from "notion-utils";
 
 declare const B: { properties: { title: string; source: string } };
 
@@ -71,14 +65,16 @@ export const getYoutubeId = (url: string): string | null => {
   return null;
 };
 
-async function BlockRenderer({
+export async function BlockRenderer({
   block,
   recordMap,
   children,
+  previews,
 }: {
   block: BaseBlock;
   recordMap: ExtendedRecordMap;
   children: React.ReactNode;
+  previews?: boolean;
 }) {
   const { type, id } = block;
   const value = block[type];
@@ -126,26 +122,24 @@ async function BlockRenderer({
         </div>
       );
     case "image": {
-      const imgSRC = `https://www.notion.so/image/${encodeURIComponent(
+      let url = `https://www.notion.so/image/${encodeURIComponent(
         block.properties.source[0][0]
       )}?table=block&id=${block.id}`;
+      const cacheKey = normalizeUrl(url);
 
-      const data = await getImage(imgSRC);
-
-      if (data)
-        return (
-          <div className="overflow-hidden rounded-md">
-            <Image
-              src={imgSRC}
-              alt={""}
-              width={data.width}
-              height={data.height}
-              placeholder="blur"
-              blurDataURL={data.hash}
-            />
-          </div>
-        );
-      return null;
+      const preimg = await getPreviewImage(url, { cacheKey });
+      const { w, h, b } = preimg;
+      return (
+        <div className="overflow-hidden rounded-md">
+          <Image
+            src={url}
+            width={w}
+            height={h}
+            placeholder={`blur` ?? `empty`}
+            blurDataURL={b}
+          />
+        </div>
+      );
     }
     case "bulleted_list": {
       const wrapList = (content: React.ReactNode, start?: number) =>
@@ -353,7 +347,7 @@ async function BlockRenderer({
   }
 }
 
-export function NotionBlock({
+export default async function NotionBlock({
   blockId,
   recordMap,
 }: {
@@ -363,7 +357,7 @@ export function NotionBlock({
   const block = recordMap?.block[blockId]?.value;
   return (
     <article className="prose prose-neutral prose-quoteless max-w-3xl dark:prose-invert lg:prose-lg">
-      <BlockRenderer block={block} recordMap={recordMap}>
+      <BlockRenderer block={block} recordMap={recordMap} previews>
         {block.content?.map((childBlockId) => {
           return (
             <NotionBlock

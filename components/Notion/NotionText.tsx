@@ -1,7 +1,7 @@
 import { Decoration, ExtendedRecordMap } from "notion-types";
 import { formatDate } from "notion-utils";
 import React from "react";
-import { NotionBlock } from "./NotionBlock";
+import NotionBlock from "./NotionBlock";
 import { NotionTextAnchor } from "./NotionTextAnchor";
 import { textDecorationsToString } from "lib/utils";
 
