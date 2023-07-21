@@ -1,0 +1,4 @@
+{
+  "plugins": ["simple-import-sort"],
+  "extends": ["next", "prettier"]
+}

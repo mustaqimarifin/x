@@ -1,19 +1,19 @@
 /* eslint-disable no-unsafe-optional-chaining */
-import { notFound } from 'next/navigation';
-import { Balancer } from 'react-wrap-balancer';
-import { PostDatabaseItem, getDatabasePage, getPostDatabase } from 'app/data';
-import NotionBlock from 'components/Notion/NotionBlock';
+import { notFound } from "next/navigation";
+import { Balancer } from "react-wrap-balancer";
+import { PostDatabaseItem, getDatabasePage, getPostDatabase } from "app/data";
+import NotionBlock from "components/Notion/NotionBlock";
 
-import { PageViews } from 'components/PageViews';
+import { PageViews } from "components/PageViews";
 
-import 'app/style/notion2.css';
+import "app/style/notion2.css";
 
-import { textDecorationsToString } from 'lib/utils';
-import { Suspense } from 'react';
-import { LoadingSpinner } from 'components/UI/spinner';
-import { Metadata } from 'next/types';
-import { CurrentENV } from 'lib/env';
-import { LoadingDots } from 'components/States';
+import { textDecorationsToString } from "lib/utils";
+import { Suspense } from "react";
+import { LoadingSpinner } from "components/UI/spinner";
+import { Metadata } from "next/types";
+import { CurrentENV } from "lib/env";
+import { LoadingDots } from "components/States";
 //import dynamic from 'next/dynamic';
 interface PostPageProps {
   params: {
@@ -46,7 +46,7 @@ export async function generateMetadata({
   }
 
   const ogUrl = new URL(`${CurrentENV}/api/og`);
-  ogUrl.searchParams.set('title', postTitle);
+  ogUrl.searchParams.set("title", postTitle);
 
   return {
     title: postTitle,
@@ -54,7 +54,7 @@ export async function generateMetadata({
     openGraph: {
       title: postTitle,
       description: post.summary,
-      type: 'article',
+      type: "article",
       url: `${CurrentENV}/posts/${postSlug}`,
 
       images: [
@@ -67,7 +67,7 @@ export async function generateMetadata({
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: postTitle,
       description: post.summary,
       images: [ogUrl.toString()],

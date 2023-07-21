@@ -2,7 +2,7 @@
 build
 coverage
 pnpm-lock.yaml
-
+#.eslintrc.cjs
 # Ignore all HTML files:
 *.html
 

@@ -73,7 +73,7 @@ function NotionFormat({
                   return formatDate(startDate);
                 } else if (type === "daterange") {
                   const startDate = v.start_date;
-                  const endDate = v.end_date!;
+                  const endDate = v.end_date;
 
                   return `${formatDate(startDate)} → ${formatDate(endDate)}`;
                 } else {

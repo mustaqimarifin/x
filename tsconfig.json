@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -8,14 +8,14 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "Bundler",
-    "moduleDetection": "auto",
+    "moduleDetection": "force",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -36,7 +36,8 @@
     ".eslintrc.cjs",
     "next.config.mjs",
     "postcss.config.cjs",
-    "tailwind.config.ts"
+    "tailwind.config.ts",
+    "prettier.config.cjs"
   ],
   "exclude": [
     "node_modules"

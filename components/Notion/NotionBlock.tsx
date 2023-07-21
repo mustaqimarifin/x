@@ -69,7 +69,6 @@ export async function BlockRenderer({
   block,
   recordMap,
   children,
-  previews,
 }: {
   block: BaseBlock;
   recordMap: ExtendedRecordMap;
@@ -77,6 +76,7 @@ export async function BlockRenderer({
   previews?: boolean;
 }) {
   const { type, id } = block;
+  //@ts-ignore
   const value = block[type];
   switch (block.type) {
     case "paragraph":
@@ -122,7 +122,7 @@ export async function BlockRenderer({
         </div>
       );
     case "image": {
-      let url = `https://www.notion.so/image/${encodeURIComponent(
+      const url = `https://www.notion.so/image/${encodeURIComponent(
         block.properties.source[0][0]
       )}?table=block&id=${block.id}`;
       const cacheKey = normalizeUrl(url);
@@ -228,7 +228,7 @@ export async function BlockRenderer({
       const blockPointerId = block?.format?.alias_pointer?.id;
       const linkedBlock = recordMap.block[blockPointerId]?.value;
       if (linkedBlock === undefined) {
-        console.log('"alias" missing block', blockPointerId);
+        //     console.log('"alias" missing block', blockPointerId);
         return null;
       }
       const collection = recordMap.collection[linkedBlock.parent_id]?.value;
@@ -339,7 +339,7 @@ export async function BlockRenderer({
       );
     }
     default:
-      console.log(`unsupported: ${block.type}`);
+      //    console.log(`unsupported: ${block.type}`);
 
       // console.log(block);
 

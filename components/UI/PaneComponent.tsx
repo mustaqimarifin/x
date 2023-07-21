@@ -65,20 +65,20 @@ export const PaneComponent = observer(
     const bindDrag = useDrag(
       action(({ movement, first, last, memo }) => {
         if (first) {
-          headerRef.current!.style.cursor = "grabbing";
+          headerRef.current.style.cursor = "grabbing";
           return [...positionMobx];
         }
         positionMobx[0] = Math.floor(memo[0] + movement[0]);
         positionMobx[1] = Math.floor(memo[1] + movement[1]);
         if (last) {
-          headerRef.current!.style.cursor = "";
+          headerRef.current.style.cursor = "";
         }
       })
     );
     useEffect(
       () =>
         autorun(() => {
-          const rootElement = rootRef.current!;
+          const rootElement = rootRef.current;
           rootElement.style.transform = `translate(${Math.floor(
             positionMobx[0]
           )}px, ${Math.floor(positionMobx[1])}px)`;
@@ -88,7 +88,7 @@ export const PaneComponent = observer(
     useEffect(
       () =>
         autorun(() => {
-          const rootElement = rootRef.current!;
+          const rootElement = rootRef.current;
           rootElement.style.width = `${dimensionsMobx.width}px`;
           rootElement.style.height = `${dimensionsMobx.height}px`;
           rootElement.style.zIndex = `${pane.z}`;
