@@ -6,7 +6,7 @@ import { ImageResponse } from "next/server.js";
 export const runtime = "edge";
 
 const font = fetch(
-  new URL("../../../public/fonts/kaisei-tokumin-bold.ttf", import.meta.url)
+  new URL("../../../public/fonts/kaisei-tokumin-bold.ttf", import.meta.url),
 ).then((res) => res.arrayBuffer());
 
 export async function GET(req: Request) {
@@ -170,7 +170,7 @@ export async function GET(req: Request) {
             style: "normal",
           },
         ],
-      }
+      },
     );
   } catch (e) {
     console.log(`${e}`);

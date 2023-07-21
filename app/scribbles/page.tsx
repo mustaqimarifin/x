@@ -7,7 +7,7 @@ import { normalizeUrl } from "notion-utils";
 import { Suspense } from "react";
 import { LoadingDots } from "components/States";
 import { getScribblesDatabase } from "app/data";
-export const dynamic = "force-static";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Scribbles",
@@ -20,7 +20,12 @@ export default async function ScribblesPage({
   params: { id: string };
 }) {
   const scribbles = await getScribblesDatabase();
-  const postId = scribbles.find((p) => p.pic ?? p.Image === params.id)?.id;
+  //const scribbles dynamic(() =>
+
+  //const id = params?.id;
+  const postId = scribbles[0].id;
+  console.log(postId);
+
   const imgSRC = `https://www.notion.so/image/${encodeURIComponent(
     scribbles[0].pic ?? scribbles[0].Image
   )}?table=block&id=${postId}`;

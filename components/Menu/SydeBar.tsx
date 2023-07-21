@@ -26,7 +26,7 @@ function SidebarLink({
       href={href}
       className={cx(
         "group block rounded px-2 py-2 text-sm font-medium text-neutral-900 max-lg:text-xs",
-        isSelected ? "is-selected bg-accent-100" : "hover:bg-neutral-50"
+        isSelected ? "is-selected bg-accent-100" : "hover:bg-neutral-50",
       )}
     >
       {children}
@@ -155,7 +155,7 @@ export function Sidebar({
         className={cx(
           "fixed bottom-0 left-0 top-0 z-10 flex w-80 flex-shrink-0 transform flex-col border-r border-neutral-100 bg-white transition max-lg:w-64",
           { transition: !isInitialLoad },
-          !showCollapsed ? "max-md:-translate-x-full max-md:opacity-50" : ""
+          !showCollapsed ? "max-md:-translate-x-full max-md:opacity-50" : "",
         )}
       >
         <div className="flex items-center gap-3 border-b border-neutral-100 py-5 pl-4 pr-2 text-xs">

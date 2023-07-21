@@ -3,7 +3,6 @@ import "app/style/global.css";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { cx } from "lib/utils";
-import { NAV } from "components/UI/sidebar";
 import { PanesLayer } from "components/UI/PanesLayer";
 import { Providers } from "components/Providers";
 import { meta } from "data/meta";
@@ -85,7 +84,7 @@ export default async function RootLayout({
         "bg-white text-black dark:bg-[#111010] dark:text-white",
         rFlex.variable,
         kK.variable,
-        sfmono.variable
+        sfmono.variable,
       )}
     >
       <body className="">

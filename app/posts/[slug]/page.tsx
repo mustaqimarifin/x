@@ -1,8 +1,8 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import { notFound } from "next/navigation";
-import { Balancer } from "react-wrap-balancer";
+//import { Balancer } from "react-wrap-balancer";
 import { PostDatabaseItem, getDatabasePage, getPostDatabase } from "app/data";
-import NotionBlock from "components/Notion/NotionBlock";
+//import NotionBlock from "components/Notion/NotionBlock";
 
 import { PageViews } from "components/PageViews";
 
@@ -14,7 +14,7 @@ import { LoadingSpinner } from "components/UI/spinner";
 import { Metadata } from "next/types";
 import { CurrentENV } from "lib/env";
 import { LoadingDots } from "components/States";
-//import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 interface PostPageProps {
   params: {
     slug: string[];
@@ -91,7 +91,7 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-  //const NotionBlock = dynamic(() => import('components/Notion/NotionBlock'));
+  const NotionBlock = dynamic(() => import("components/Notion/NotionBlock"));
   const posts = await getPostDatabase();
   const postId = posts.find((p) => p.slug[0][0] === params.slug)?.id;
   if (postId === undefined) {
@@ -99,7 +99,7 @@ export default async function PostPage({
   }
 
   const { item: post, recordMap } = await getDatabasePage<PostDatabaseItem>(
-    postId
+    postId,
   );
 
   return (

@@ -27,7 +27,7 @@ export default function CodeEditor({
         monaco.languages.typescript.typescriptDefaults.addExtraLib(
           `interface Console { log(...data: any[]): void; }
         declare var console: Console;`,
-          "lib.dom.d.ts"
+          "lib.dom.d.ts",
         );
 
         codeValueCache[blockId] = editor.getValue();

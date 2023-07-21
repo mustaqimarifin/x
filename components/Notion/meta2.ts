@@ -1,6 +1,7 @@
+import 'server-only'
 import got from "got";
 import { mapImageUrl } from "lib/mapImg";
-import { db } from "lib/redis/connect";
+import { $$ } from "lib/redis/connect";
 
 import { type ExtendedRecordMap } from "notion-types";
 import { getPageImageUrls, normalizeUrl } from "notion-utils";
@@ -16,13 +17,11 @@ export interface PreIMG {
 export type PreMap = Record<string, PreIMG | null>;
 
 export async function getPreviewImageMap(
-  recordMap: ExtendedRecordMap
+  recordMap: ExtendedRecordMap,
 ): Promise<PreMap> {
   const urls: string[] = getPageImageUrls(recordMap, {
     mapImageUrl,
-  })
-    //.concat([defaultPageIcon, defaultPageCover])
-    .filter(Boolean);
+  });
 
   const previewImagesMap = Object.fromEntries(
     await pMap(
@@ -33,8 +32,8 @@ export async function getPreviewImageMap(
       },
       {
         concurrency: 8,
-      }
-    )
+      },
+    ),
   );
 
   return previewImagesMap;
@@ -42,11 +41,11 @@ export async function getPreviewImageMap(
 
 async function createPreviewImage(
   url: string,
-  { cacheKey }: { cacheKey: string }
+  { cacheKey }: { cacheKey: string },
 ): Promise<PreIMG | null> {
   try {
     try {
-      const cachedPreviewImage: PreIMG = await db.get(cacheKey);
+      const cachedPreviewImage = await $$.get(cacheKey);
       if (cachedPreviewImage) {
         return cachedPreviewImage;
       }
@@ -69,7 +68,8 @@ async function createPreviewImage(
     };
 
     try {
-      await db.set(cacheKey, { previewImage });
+      await $$.set(cacheKey, previewImage, 0);
+      console.log(previewImage);
     } catch (err) {
       // ignore redis errors
       console.warn(`redis error set "${cacheKey}"`, err);

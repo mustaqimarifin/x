@@ -22,7 +22,7 @@ export default function Exercise({
           onClick={() => {
             openPane(
               blockId,
-              <CodeEditor blockId={blockId} initialCode={exerciseCode} />
+              <CodeEditor blockId={blockId} initialCode={exerciseCode} />,
             );
           }}
           className="button"

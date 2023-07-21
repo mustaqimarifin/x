@@ -63,7 +63,7 @@ export const NAV = () => {
                       {
                         "text-neutral-500": !isActive,
                         "font-bold": isActive,
-                      }
+                      },
                     )}
                   >
                     <span className="relative px-[10px] py-[5px]">

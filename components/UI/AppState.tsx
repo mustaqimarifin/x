@@ -28,8 +28,8 @@ export function openPane(blockId: string, content: React.ReactNode) {
             content,
             z: newZ,
           },
-          { content: false, z: observable }
-        )
+          { content: false, z: observable },
+        ),
       );
     }
   });

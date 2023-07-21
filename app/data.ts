@@ -1,8 +1,7 @@
-import { getPreviewImageMap } from "components/Notion/meta2";
 import { PostDB, GalleryDB, ProjectsDB, previews } from "lib/env";
 import { getPage } from "lib/notion";
 import { Collection, Decoration, PageBlock } from "notion-types";
-import { getDateValue, getPageImageUrls } from "notion-utils";
+import { getDateValue } from "notion-utils";
 import { cache } from "react";
 import "server-only";
 
@@ -53,7 +52,7 @@ const MONTHS = [
 
 export function processDatabaseItem<P>(
   page: PageBlock,
-  collection: Collection
+  collection: Collection,
 ): P {
   const item: DatabaseItem = {
     id: page.id,
@@ -99,16 +98,16 @@ export function processDatabaseItem<P>(
 
 export const getPostDatabase = cache(async () => {
   const recordMap = await getPage(PostDB);
-  if (previews) {
+/*   if (previews) {
     const previewImageMap = await getPreviewImageMap(recordMap);
     (recordMap as any).preview_images = previewImageMap;
-  }
+  } */
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
     .filter((block): block is PageBlock => block?.type === "page")
     .map((pageBlock: PageBlock) =>
-      processDatabaseItem<PostDatabaseItem>(pageBlock, collection)
+      processDatabaseItem<PostDatabaseItem>(pageBlock, collection),
     )
 
     .filter((item) => item.status);
@@ -130,17 +129,17 @@ export const getDatabasePage = cache(async <T>(id: string) => {
 
 export const getScribblesDatabase = cache(async () => {
   const recordMap = await getPage(GalleryDB);
-  if (previews) {
+/*   if (previews) {
     const previewImageMap = await getPreviewImageMap(recordMap);
     (recordMap as any).preview_images = previewImageMap;
-  }
+  } */
 
   const collection = Object.values(recordMap.collection)[0].value;
   return Object.values(recordMap.block)
     .map((block) => block.value)
     .filter((block): block is PageBlock => block?.type === "page")
     .map((pageBlock: PageBlock) =>
-      processDatabaseItem<ScribbleDatabaseItem>(pageBlock, collection)
+      processDatabaseItem<ScribbleDatabaseItem>(pageBlock, collection),
     );
 });
 
@@ -152,7 +151,7 @@ export const getProjectsDatabase = cache(async () => {
     .map((block) => block.value)
     .filter((block): block is PageBlock => block?.type === "page")
     .map((pageBlock: PageBlock) =>
-      processDatabaseItem<ProjectDatabaseItem>(pageBlock, collection)
+      processDatabaseItem<ProjectDatabaseItem>(pageBlock, collection),
     )
     .filter((item) => item.status);
 });

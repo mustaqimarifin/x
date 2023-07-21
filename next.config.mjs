@@ -1,5 +1,8 @@
 import { get } from "@vercel/edge-config";
 import withPlaiceholder from "@plaiceholder/next";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import { browserslistToTargets } from "lightningcss";
+import browserslist from "browserslist";
 
 const nextConfig = {
   eslint: {
@@ -34,13 +37,23 @@ const nextConfig = {
       "img1-tw.alphaxcdn.com",
     ],
   },
-  /*   webpack: (config) => {
-    config.experiments = { ...config.experiments, topLevelAwait: true };
+  webpack: (config) => {
+    if (config.name === "server")
+      config.optimization = {
+        minimize: true,
+        minimizer: [
+          new CssMinimizerPlugin({
+            minify: CssMinimizerPlugin.lightningCssMinify,
+            minimizerOptions: {
+              targets: browserslistToTargets(browserslist(">= 0.25%")),
+            },
+          }),
+        ],
+      };
     return config;
-  }, */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  redirects() {
+  },
+
+  async redirects() {
     try {
       return get("redirects");
     } catch {
@@ -50,3 +63,7 @@ const nextConfig = {
 };
 
 export default withPlaiceholder(nextConfig);
+
+//const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+//const lightningcss = require("lightningcss");
+//const browserslist = require("browserslist");

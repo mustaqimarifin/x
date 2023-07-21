@@ -49,7 +49,7 @@ export interface Database {
             columns: ["parent_id"];
             referencedRelation: "hotline_bling";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       pageviews: {
@@ -101,7 +101,7 @@ export interface Database {
             columns: ["id"];
             referencedRelation: "users";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
     };
@@ -122,7 +122,7 @@ export interface Database {
             columns: ["author_id"];
             referencedRelation: "profiles";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
     };

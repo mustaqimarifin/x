@@ -24,7 +24,7 @@ function PaneResizers({
       if (direction.includes("bottom")) {
         dimensionsMobx.height = Math.max(memo.height + movement[1], 256);
       }
-    })
+    }),
   );
 
   return (
@@ -57,10 +57,10 @@ export const PaneComponent = observer(
       observable({
         width: Math.max(Math.min(512, window.innerWidth - 128), 320),
         height: Math.max(Math.min(448, window.innerHeight - 64), 256),
-      })
+      }),
     );
     const [positionMobx] = useState(() =>
-      observable([window.innerWidth - dimensionsMobx.width - 32, 32])
+      observable([window.innerWidth - dimensionsMobx.width - 32, 32]),
     );
     const bindDrag = useDrag(
       action(({ movement, first, last, memo }) => {
@@ -73,17 +73,17 @@ export const PaneComponent = observer(
         if (last) {
           headerRef.current.style.cursor = "";
         }
-      })
+      }),
     );
     useEffect(
       () =>
         autorun(() => {
           const rootElement = rootRef.current;
           rootElement.style.transform = `translate(${Math.floor(
-            positionMobx[0]
+            positionMobx[0],
           )}px, ${Math.floor(positionMobx[1])}px)`;
         }),
-      [positionMobx]
+      [positionMobx],
     );
     useEffect(
       () =>
@@ -93,7 +93,7 @@ export const PaneComponent = observer(
           rootElement.style.height = `${dimensionsMobx.height}px`;
           rootElement.style.zIndex = `${pane.z}`;
         }),
-      [dimensionsMobx.height, dimensionsMobx.width, pane.z]
+      [dimensionsMobx.height, dimensionsMobx.width, pane.z],
     );
 
     return (
@@ -128,5 +128,5 @@ export const PaneComponent = observer(
         <PaneResizers dimensionsMobx={dimensionsMobx} />
       </div>
     );
-  }
+  },
 );

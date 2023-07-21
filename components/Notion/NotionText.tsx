@@ -95,7 +95,7 @@ function NotionFormat({
                         <div className="px-4 py-2 sm:px-8 sm:py-4">
                           <div className="mb-4 text-xl font-semibold">
                             {textDecorationsToString(
-                              linkedBlock.properties.title
+                              linkedBlock.properties.title,
                             )}
                           </div>
                           <NotionBlock
@@ -123,7 +123,7 @@ function NotionFormat({
                 return element;
             }
           },
-          <>{text.replaceAll("→", "->")}</>
+          <>{text.replaceAll("→", "->")}</>,
         );
 
         return <React.Fragment key={index}>{formatted}</React.Fragment>;

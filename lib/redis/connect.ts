@@ -1,14 +1,20 @@
-import KeyvRedis from "@keyv/redis";
-import Keyv from "keyv";
-import { extRedis, intRedis, isDev } from "lib/env";
-const enabled = true;
-let db: Keyv;
+import { extRedis, intRedis, isDev, previews } from "lib/env";
 
-if (enabled) {
+import Keyv from "keyv";
+import KeyvRedis from "@keyv/redis";
+import KeyvBrotli from "@keyv/compress-brotli";
+
+let $$: Keyv;
+
+if (previews!) {
   const keyvRedis = new KeyvRedis(isDev ? intRedis : extRedis);
-  db = new Keyv({ store: keyvRedis, namespace: "sexy" || undefined });
+  $$ = new Keyv({
+    store: keyvRedis,
+    compression: new KeyvBrotli(),
+    namespace: "sexy" || undefined,
+  });
 } else {
-  db = new Keyv();
+  $$ = new Keyv();
 }
 
-export { db };
+export { $$ };

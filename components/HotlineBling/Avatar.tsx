@@ -28,7 +28,7 @@ const Avatar: FC<AvatarProps> = ({
       className={cx(
         size === "sm" ? "h-6 w-6" : "h-10 w-10",
         "bg-alpha-10 relative inline-block overflow-hidden rounded-full",
-        className
+        className,
       )}
     >
       {src && (

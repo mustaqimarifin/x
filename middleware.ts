@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
     res.headers.set("Access-Control-Allow-Credentials", "true");
     res.headers.set(
       "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, OPTIONS"
+      "GET, POST, PUT, DELETE, OPTIONS",
     );
   }
   const supabase = createMiddlewareClient<Database>({ req, res });

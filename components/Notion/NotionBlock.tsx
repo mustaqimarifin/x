@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { AudioBlock, BaseBlock, ExtendedRecordMap } from "notion-types";
 import React from "react";
 import { processDatabaseItem } from "../../app/data";
@@ -9,7 +7,7 @@ import dynamic from "next/dynamic";
 import KodeBlock from "components/Code/KodeBlock";
 import Image from "next/legacy/image";
 
-import { getPreviewImage, getPreviewImageMap } from "./meta2";
+import { getPreviewImage } from "./meta2";
 import { normalizeUrl } from "notion-utils";
 
 declare const B: { properties: { title: string; source: string } };
@@ -65,7 +63,7 @@ export const getYoutubeId = (url: string): string | null => {
   return null;
 };
 
-export async function BlockRenderer({
+async function BlockRenderer({
   block,
   recordMap,
   children,
@@ -123,24 +121,28 @@ export async function BlockRenderer({
       );
     case "image": {
       const url = `https://www.notion.so/image/${encodeURIComponent(
-        block.properties.source[0][0]
+        block.properties.source[0][0],
       )}?table=block&id=${block.id}`;
       const cacheKey = normalizeUrl(url);
 
-      const preimg = await getPreviewImage(url, { cacheKey });
-      const { w, h, b } = preimg;
-      return (
-        <div className="overflow-hidden rounded-md">
+      const preimg =  getPreviewImage(url, { cacheKey });
+preimg.then((b64) => {
+<div className="overflow-hidden rounded-md">
           <Image
+            alt=""
             src={url}
-            width={w}
-            height={h}
+            width={b64.w}
+            height={b64.h}
             placeholder={`blur` ?? `empty`}
-            blurDataURL={b}
+            blurDataURL={b64.b}
           />
         </div>
-      );
-    }
+})}
+
+    
+        
+      
+    
     case "bulleted_list": {
       const wrapList = (content: React.ReactNode, start?: number) =>
         block.type === "bulleted_list" ? (
@@ -205,7 +207,7 @@ export async function BlockRenderer({
         <div className="-mx-2 my-6 md:-mx-4">
           <KodeBlock
             language={textDecorationsToString(
-              block.properties.language
+              block.properties.language,
             ).toLowerCase()}
             code={textDecorationsToString(block.properties.title)}
           />

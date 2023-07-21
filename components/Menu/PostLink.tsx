@@ -15,7 +15,7 @@ export function PostsSidebarLink(post: Decoration[] & PostDatabaseItem) {
       href={postPath}
       className={cx(
         "block rounded px-2 py-2",
-        isSelected ? "bg-sky-800 text-white" : "hover:bg-neutral-100"
+        isSelected ? "bg-sky-800 text-white" : "hover:bg-neutral-100",
       )}
     >
       <div className="text-sm font-medium max-lg:text-xs">
@@ -25,7 +25,7 @@ export function PostsSidebarLink(post: Decoration[] & PostDatabaseItem) {
         <div
           className={cx(
             "text-xs text-opacity-50",
-            isSelected ? "text-white" : "text-neutral-600"
+            isSelected ? "text-white" : "text-neutral-600",
           )}
         >
           {post.date} WHOS A MUNKEH?!@
