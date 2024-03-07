@@ -8,7 +8,7 @@ const themeMapping = {
   dark: "noborder_gray",
 };
 
-function Giscus () {
+function Giscus() {
   const { resolvedTheme } = useTheme();
   const theme = useRef(resolvedTheme);
 
@@ -64,23 +64,23 @@ function Giscus () {
   return (
     <>
       <Head>
-        { Object.values(themeMapping).map((theme) => (
+        {Object.values(themeMapping).map((theme) => (
           <link
-            key={ theme }
+            key={theme}
             rel="prefetch"
-            href={ `https://giscus.app/themes/${theme}.css` }
+            href={`https://giscus.app/themes/${theme}.css`}
             as="style"
             type="text/css"
             crossOrigin="anonymous"
           />
-        )) }
+        ))}
       </Head>
       <div className="giscus" />
     </>
   );
 }
 
-export default function Geezcuz () {
+export default function Geezcuz() {
   return (
     <div
       className="select-none pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
@@ -88,5 +88,5 @@ export default function Geezcuz () {
     >
       <Giscus />
     </div>
-  )
+  );
 }

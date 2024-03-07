@@ -81,14 +81,14 @@ export const getPostSlugs = async (): Promise<Post[]> => {
     return (await sanity.fetch(postSlugs)) || [];
   }
   return [];
-}
+};
 
 export const getLilSlugs = async (): Promise<LilBits[]> => {
   if (sanity) {
     return (await sanity.fetch(lilSlugs)) || [];
   }
   return [];
-}
+};
 /* export async function getPostSlugs(): Promise<Post[]> {
   if (sanity) {
     return (await sanity.fetch(postSlugs)) || [];
@@ -108,14 +108,14 @@ export const getAllPosts = async (): Promise<Post[]> => {
     return (await sanity.fetch(postsQuery)) || [];
   }
   return [];
-}
+};
 
 export const getAllBits = async (): Promise<LilBits[]> => {
   if (sanity) {
     return (await sanity.fetch(lilQueries)) || [];
   }
   return [];
-}
+};
 /* export async function getPost(slug: string) {
   if (sanity) {
     return (await sanity.fetch(postQuery, { slug })) || {};

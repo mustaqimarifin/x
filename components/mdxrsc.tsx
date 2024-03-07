@@ -5,12 +5,12 @@ import { components } from "./mdx";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 import imageMetadata from "lib/image-size";
 
+
+
 const options: Options = {
-  keepBackground: false,
+  keepBackground: true,
   filterMetaString: (string) => string.replace(/filename="[^"]*"/, ""),
   onVisitLine(node) {
-    // Prevent lines from collapsing in `display: grid` mode, and
-    // allow empty lines to be copy/pasted
     if (node.children.length === 0) {
       node.children = [{ type: "text", value: " " }];
     }
@@ -18,9 +18,8 @@ const options: Options = {
   onVisitTitle(node) {
     node.properties!.className = ["title"];
   },
-  // Feel free to add classNames that suit your docs
   onVisitHighlightedLine(node) {
-    node.properties.className?.push("highlighted");
+    node.properties.className!.push('highlighted');
   },
   onVisitHighlightedChars(node) {
     node.properties.className = ["word"];

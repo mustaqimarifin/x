@@ -63,7 +63,7 @@ import { Suspense } from "react";
 //const baseUrl = "http://localhost:3000";
 
 export async function generateStaticParams() {
- const allPostSlugs = await getPostSlugs();
+  const allPostSlugs = await getPostSlugs();
 
   return allPostSlugs.map((post) => ({
     slug: post.slug,
@@ -80,9 +80,9 @@ export default async function PostPage({
   params: { slug: string };
 }) {
   const post: Post = await getPost(params.slug);
-	if (!post) {
-		notFound();
-	}
+  if (!post) {
+    notFound();
+  }
 
   return (
     <div className="px-6 lg:pl-24">
@@ -91,7 +91,9 @@ export default async function PostPage({
           {post.title}
         </div>
         <Cerealize source={post?.content} />
-              <Suspense><Geezcuz /></Suspense>
+        <Suspense>
+          <Geezcuz />
+        </Suspense>
       </div>
     </div>
   );

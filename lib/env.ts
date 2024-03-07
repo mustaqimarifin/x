@@ -15,7 +15,7 @@ export const isPreview =
   process.env.VERCEL_ENV === "preview" ||
   process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
 
-export const liveURL = "eff1gy.xyz";
+export const liveURL = "mstqmarfn.vercel.app";
 
 export const CurrentENV = isProd
   ? `https://${liveURL}`

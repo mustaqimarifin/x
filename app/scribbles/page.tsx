@@ -23,14 +23,10 @@ export default async function ScribblesPage({
   )}?table=block&id=${postId}`;
 
   return (
- <div className="grid grid-cols-3 gap-2 px-8 py-8 max-md:px-4 max-lg:grid-cols-2">
+    <div className="grid grid-cols-3 gap-2 px-8 py-8 max-md:px-4 max-lg:grid-cols-2">
       {scribbles.map((scribble) => (
         <div className="relative aspect-square" key={scribble.id}>
-          <Image
-            src={imgSRC}
-            alt="drawing"
-            fill={true}
-          ></Image>
+          <Image src={imgSRC} alt="drawing" fill={true}></Image>
         </div>
       ))}
     </div>

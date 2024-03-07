@@ -5,10 +5,7 @@ import { name, about, bio, avatar } from "lib/info";
 import { Balancer } from "react-wrap-balancer";
 import { NowPlaying } from "components/UI/NowPlaying";
 
-
 export default function HomePage() {
-
-
   return (
     <section>
       <h1 className="mb-5 font-serif text-3xl font-bold">

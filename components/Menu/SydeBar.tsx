@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import { useEffect, useState } from "react";
-import { cx, formatDate  } from "lib/utils";
+import { cx, formatDate } from "lib/utils";
 
 import ThemeSwitch from "components/Theme/Switch";
 import { ArrowLeftIcon, BurgerIcon } from "components/UI/icons";
@@ -61,7 +61,6 @@ function PostsList({ posts }) {
     </div>
   );
 }
-
 
 function BitList({ lilbits }) {
   return (
@@ -137,7 +136,7 @@ export function Sidebar({ posts, lilbits }) {
         }}
         className="absolute left-5 top-5 z-10 p-1 text-neutral-400 transition hover:text-neutral-600 md:hidden"
       >
-        <BurgerIcon/>
+        <BurgerIcon />
       </button>
       {showCollapsed ? (
         <div
@@ -177,7 +176,7 @@ export function Sidebar({ posts, lilbits }) {
               }}
               className="text-neutral-400 transition hover:text-neutral-600 dark:text-neutral-50 md:hidden"
             >
-              <ArrowLeftIcon/>
+              <ArrowLeftIcon />
             </button>
           )}
         </div>

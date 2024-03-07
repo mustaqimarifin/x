@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: " /api/og/*",
     },
-    sitemap: "https://eff1gy.xyz/sitemap.xml",
-    host: "https://eff1gy.xyz",
+    sitemap: "https://mstqmarfn.vercel.app/sitemap.xml",
+    host: "https://mstqmarfn.vercel.app",
   };
 }

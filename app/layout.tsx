@@ -77,8 +77,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
- const allBits = await getAllBits();
- const allPosts = await getAllPosts();
+  const allBits = await getAllBits();
+  const allPosts = await getAllPosts();
   return (
     <html
       lang="en"

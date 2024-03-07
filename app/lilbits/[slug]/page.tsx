@@ -71,7 +71,7 @@ export async function generateMetadata({
   };
 }
  */
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   const allLilSlugs = await getLilSlugs();
   return allLilSlugs.map((p) => ({
     slug: p.slug,
@@ -81,8 +81,8 @@ export async function generateStaticParams () {
 const Geezcuz = dynamic(() => import("components/Giscus/G"), {
   ssr: false,
 });
-export default async function LilPage ({
-  params
+export default async function LilPage({
+  params,
 }: {
   params: { slug: string };
 }) {
@@ -95,18 +95,18 @@ export default async function LilPage ({
     <section>
       <div className="flex items-center space-x-6">
         <Image
-          src={ p?.caption }
-          width={ 80 }
-          height={ 80 }
-          alt={ `${p?.title} icon` }
-          className={ "rounded-2xl" }
+          src={p?.caption}
+          width={80}
+          height={80}
+          alt={`${p?.title} icon`}
+          className={"rounded-2xl"}
         />
         <div>
           <h1 className="mb-5 font-serif text-3xl font-bold">
-            <Balancer>{ p?.title }</Balancer>
+            <Balancer>{p?.title}</Balancer>
           </h1>
           <span className="text-tertiary inline-block leading-snug">
-            { p?.date }
+            {p?.date}
           </span>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default async function LilPage ({
           {p.date}
         </div> */}
         <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800" />
-        {/*   <PageViews slug={project.pageId} trackView /> */ }
+        {/*   <PageViews slug={project.pageId} trackView /> */}
       </div>
       {/*         { project.tags && (
           <div className="py-4 xl:py-8">
@@ -129,9 +129,10 @@ export default async function LilPage ({
           </div>
         ) } */}
 
-      <Cerealize source={ p?.content } />
-      <Suspense><Geezcuz /></Suspense>
-
+      <Cerealize source={p?.content} />
+      <Suspense>
+        <Geezcuz />
+      </Suspense>
     </section>
   );
 }
