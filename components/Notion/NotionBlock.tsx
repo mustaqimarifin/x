@@ -5,7 +5,7 @@ import { NotionText } from "./NotionText";
 import { cx, textDecorationsToString } from "lib/utils";
 import dynamic from "next/dynamic";
 import KodeBlock from "components/Code/KodeBlock";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import { getPreviewImage } from "./meta2";
 import { normalizeUrl } from "notion-utils";
@@ -15,9 +15,9 @@ declare const B: { properties: { title: string; source: string } };
 const Exercise = dynamic(() => import("components/Code/Exercise"), {
   ssr: false,
 });
-const MeatTweet = dynamic(() => import("components/Embed/Tweet"), {
+/* const MeatTweet = dynamic(() => import("components/Embed/Tweet"), {
   ssr: false,
-});
+}); */
 
 const AudioBlok = dynamic(() => import("components/Embed/Audio"), {
   ssr: false,
@@ -119,30 +119,24 @@ async function BlockRenderer({
           <NotionText value={block.properties.title} recordMap={recordMap} />
         </div>
       );
-    case "image": {
-      const url = `https://www.notion.so/image/${encodeURIComponent(
-        block.properties.source[0][0],
-      )}?table=block&id=${block.id}`;
-      const cacheKey = normalizeUrl(url);
-
-      const preimg =  getPreviewImage(url, { cacheKey });
-preimg.then((b64) => {
-<div className="overflow-hidden rounded-md">
+    case "image":
+      return (
+        <div className="relative aspect-square overflow-hidden rounded-md">
           <Image
             alt=""
-            src={url}
-            width={b64.w}
-            height={b64.h}
-            placeholder={`blur` ?? `empty`}
-            blurDataURL={b64.b}
+            src={`https://www.notion.so/image/${encodeURIComponent(
+              block.properties.source[0][0],
+            )}?table=block&id=${block.id}`}
+            fill
           />
         </div>
-})}
+      );
 
-    
-        
-      
-    
+    // const cacheKey = normalizeUrl(url);
+
+    //const preimg =  getPreviewImage(url, { cacheKey });
+    //preimg.then((b64) => {
+
     case "bulleted_list": {
       const wrapList = (content: React.ReactNode, start?: number) =>
         block.type === "bulleted_list" ? (
@@ -274,7 +268,7 @@ preimg.then((b64) => {
         </div>
       );
     }
-    case "tweet": {
+    /*   case "tweet": {
       const source =
         recordMap.signed_urls?.[block.id] ?? block.properties?.source?.[0]?.[0];
       const id = source.split("?")[0].split("/").pop();
@@ -287,7 +281,7 @@ preimg.then((b64) => {
           <MeatTweet id={id} />
         </div>
       );
-    }
+    } */
     case "embed": {
       return (
         <div className="w-full rounded-md">

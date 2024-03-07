@@ -2,8 +2,8 @@ import { Decoration, ExtendedRecordMap } from "notion-types";
 import { formatDate } from "notion-utils";
 import React from "react";
 import NotionBlock from "./NotionBlock";
-import { NotionTextAnchor } from "./NotionTextAnchor";
 import { textDecorationsToString } from "lib/utils";
+import { NotionTextAnchor } from "./NotionTextAnchor";
 
 function addDashesToUUID(uuid: string) {
   return uuid
@@ -75,7 +75,7 @@ function NotionFormat({
                   const startDate = v.start_date;
                   const endDate = v.end_date;
 
-                  return `${formatDate(startDate)} → ${formatDate(endDate)}`;
+                  return `${formatDate(startDate)} → ${formatDate(endDate!)}`;
                 } else {
                   return element;
                 }

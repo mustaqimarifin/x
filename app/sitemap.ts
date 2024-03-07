@@ -1,23 +1,15 @@
 import { CurrentENV } from "lib/env";
-import {
-  PostDatabaseItem,
-  ProjectDatabaseItem,
-  getPostDatabase,
-  getProjectsDatabase,
-} from "./data";
+//let home = 'http://localhost:3000'
+import { allBits, allPosts } from "lib/sanity/client";
 
 export default async function sitemap() {
-  const posts: PostDatabaseItem[] = await getPostDatabase();
-
-  posts.map((post) => ({
+  allPosts.map((post) => ({
     url: `${CurrentENV}/posts/${post.slug}`,
     lastModified: post.date,
   }));
 
-  const projects: ProjectDatabaseItem[] = await getProjectsDatabase();
-
-  projects.map((project) => ({
-    url: `${CurrentENV}/projects/${project.pageId}`,
+  allBits.map((project) => ({
+    url: `${CurrentENV}/lilbits/${project.slug}`,
     lastModified: project.date,
   }));
 
@@ -25,8 +17,7 @@ export default async function sitemap() {
     "",
     "/about",
     "/posts",
-    "/projects",
-    "/hotline",
+    "/lilbits",
     "/scribbles",
     "/uses",
   ].map((route) => ({
@@ -34,5 +25,5 @@ export default async function sitemap() {
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
-  return [...routes, ...posts, ...projects];
+  return [...routes, ...allPosts, ...allBits];
 }

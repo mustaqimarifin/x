@@ -1,6 +1,6 @@
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+const client_id = process.env.SPOTIFY_CLIENT_ID as string;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET as string;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN as string;
 
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
@@ -24,6 +24,7 @@ const getAccessToken = async () => {
 };
 
 export const getNowPlaying = async () => {
+  //noStore()
   const { access_token } = await getAccessToken();
 
   return fetch(NOW_PLAYING_ENDPOINT, {
@@ -40,5 +41,6 @@ export const getTopTracks = async () => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
+    next: { revalidate: 86400 },
   });
 };

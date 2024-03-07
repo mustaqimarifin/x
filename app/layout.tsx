@@ -1,15 +1,17 @@
 import "app/style/global.css";
 
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/react";
+//import { Analytics } from "@vercel/analytics/react";
 import { cx } from "lib/utils";
-import { PanesLayer } from "components/UI/PanesLayer";
-import { Providers } from "components/Providers";
+//import { PanesLayer } from "components/UI/PanesLayer";
 import { meta } from "data/meta";
 import { CurrentENV } from "lib/env";
-import { kK, rFlex, sfmono } from "./style/fonts";
+import { NewsReader, kK, rFlex, sfmono } from "./style/fonts";
 import { Sidebar } from "components/Menu/SydeBar";
-import { getPostDatabase, getProjectsDatabase } from "./data";
+import { ThemeProviders } from "components/Theme";
+import { PageTransition } from "components/UI/PageTransition";
+import { getAllBits, getAllPosts } from "lib/sanity/client";
+//import { posts } from "./posts/[slug]/page";
 
 export const metadata: Metadata = {
   title: {
@@ -25,10 +27,10 @@ export const metadata: Metadata = {
     },
   ],
   creator: meta.name,
-  themeColor: [
+  /*   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  ], */
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -75,25 +77,26 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const posts = await getPostDatabase();
-  const projects = await getProjectsDatabase();
+ const allBits = await getAllBits();
+ const allPosts = await getAllPosts();
   return (
     <html
       lang="en"
       className={cx(
-        "bg-white text-black dark:bg-[#111010] dark:text-white",
+        "bg-gray-50 text-black dark:bg-gray-950 dark:text-white",
         rFlex.variable,
         kK.variable,
         sfmono.variable,
+        NewsReader.variable,
       )}
     >
       <body className="">
-        <Sidebar posts={posts} projects={projects} />
-        <main className="mx-4 pl-80 max-lg:pl-64 max-md:pl-0">
-          <Providers>{children}</Providers>
-          <Analytics />
-          <PanesLayer />
-        </main>
+        <ThemeProviders>
+          <Sidebar posts={allPosts} lilbits={allBits} />
+          <main className="mx-4 pl-80 max-lg:pl-64 max-md:pl-0">
+            <PageTransition>{children}</PageTransition>
+          </main>
+        </ThemeProviders>
       </body>
     </html>
   );

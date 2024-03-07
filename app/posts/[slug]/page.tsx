@@ -1,30 +1,16 @@
-/* eslint-disable no-unsafe-optional-chaining */
 import { notFound } from "next/navigation";
-//import { Balancer } from "react-wrap-balancer";
-import { PostDatabaseItem, getDatabasePage, getPostDatabase } from "app/data";
-//import NotionBlock from "components/Notion/NotionBlock";
 
-import { PageViews } from "components/PageViews";
+import { getPost, type Post, getPostSlugs } from "lib/sanity/client";
+import Cerealize from "components/mdxrsc";
 
-import "app/style/notion2.css";
-
-import { textDecorationsToString } from "lib/utils";
-import { Suspense } from "react";
-import { LoadingSpinner } from "components/UI/spinner";
-import { Metadata } from "next/types";
-import { CurrentENV } from "lib/env";
-import { LoadingDots } from "components/States";
 import dynamic from "next/dynamic";
-interface PostPageProps {
-  params: {
-    slug: string[];
-  };
-}
+import { Suspense } from "react";
 
-async function getPostParams(params: { slug: any }) {
+/* async function getPostParams(params: { slug: any }) {
   const slug = params?.slug;
-  const posts = await getPostDatabase();
-  const post = posts?.find((post) => post.slug[0][0] === slug);
+  //const posts = await getPostDatabase();
+  //const post = posts?.find((post) => post.slug[0][0] === slug);
+  const post = posts?.find((post) => post.slug === slug);
 
   if (!post) {
     null;
@@ -32,13 +18,13 @@ async function getPostParams(params: { slug: any }) {
 
   return post;
 }
-
-export async function generateMetadata({
+ */
+/* export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   const post = await getPostParams(params);
-  const postTitle = post?.title[0][0];
-  const postSlug = post?.slug[0][0];
+  const postTitle = post?.title//[0][0];
+  const postSlug = post?.slug//[0][0];
   //console.log(postSlug);
 
   if (!post) {
@@ -50,10 +36,10 @@ export async function generateMetadata({
 
   return {
     title: postTitle,
-    description: post.summary,
+    description: post.excerpt,
     openGraph: {
       title: postTitle,
-      description: post.summary,
+      description: post.excerpt,
       type: "article",
       url: `${CurrentENV}/posts/${postSlug}`,
 
@@ -66,69 +52,47 @@ export async function generateMetadata({
         },
       ],
     },
-    twitter: {
-      card: "summary_large_image",
+     twitter: {
+      card: "excerpt_large_image",
       title: postTitle,
-      description: post.summary,
+      description: post.excerpt,
       images: [ogUrl.toString()],
-    },
+    }, 
   };
-}
+} */
+//const baseUrl = "http://localhost:3000";
 
 export async function generateStaticParams() {
-  const posts = await getPostDatabase();
+ const allPostSlugs = await getPostSlugs();
 
-  return posts?.map((post) => ({
-    id: post.id,
-    slug: post.slug[0][0],
+  return allPostSlugs.map((post) => ({
+    slug: post.slug,
   }));
 }
 
-export const revalidate = 14400;
+const Geezcuz = dynamic(() => import("components/Giscus/G"), {
+  ssr: false,
+});
 
 export default async function PostPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const NotionBlock = dynamic(() => import("components/Notion/NotionBlock"));
-  const posts = await getPostDatabase();
-  const postId = posts.find((p) => p.slug[0][0] === params.slug)?.id;
-  if (postId === undefined) {
-    notFound();
-  }
-
-  const { item: post, recordMap } = await getDatabasePage<PostDatabaseItem>(
-    postId,
-  );
+  const post: Post = await getPost(params.slug);
+	if (!post) {
+		notFound();
+	}
 
   return (
-    <section>
-      <div className="px-6 lg:pl-24">
-        <div className="w-full pb-24 pt-16 max-2xl:mx-auto">
-          <div className="mb-8 text-3xl font-semibold text-neutral-900">
-            {post.title}
-          </div>
-          <div className=" justify-end rounded-md bg-neutral-100 px-2 py-1 text-sm font-semibold tracking-tighter dark:bg-neutral-800">
-            {post.date}
-            <PageViews slug={post.slug} trackView />
-          </div>
-          <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800"></div>
-          {/*         { project.tags && (
-          <div className="py-4 xl:py-8">
-
-            <div className="flex flex-wrap">
-              { project.tags.map((tag) => (
-                <Tag key={ tag } text={ tag } />
-              )) }
-            </div>
-          </div>
-        ) } */}
-          <Suspense fallback={<LoadingDots />}>
-            <NotionBlock recordMap={recordMap} blockId={postId} />
-          </Suspense>
+    <div className="px-6 lg:pl-24">
+      <div className="w-full max-w-3xl pt-16 pb-24 max-3xl:mx-auto">
+        <div className="mb-8 text-3xl font-semibold text-neutral-900">
+          {post.title}
         </div>
+        <Cerealize source={post?.content} />
+              <Suspense><Geezcuz /></Suspense>
       </div>
-    </section>
+    </div>
   );
 }

@@ -25,7 +25,7 @@ export type CounterProps = {
   trackView: boolean;
 };
 
-export type Exercise = {
+export type Sexercise = {
   blockId: string;
   prompt: React.ReactNode;
   exerciseCode: string;

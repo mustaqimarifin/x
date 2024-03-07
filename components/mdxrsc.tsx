@@ -1,0 +1,46 @@
+import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import type { JSX } from "react";
+import { components } from "./mdx";
+import rehypePrettyCode, { type Options } from "rehype-pretty-code";
+import imageMetadata from "lib/image-size";
+
+const options: Options = {
+  keepBackground: false,
+  filterMetaString: (string) => string.replace(/filename="[^"]*"/, ""),
+  onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and
+    // allow empty lines to be copy/pasted
+    if (node.children.length === 0) {
+      node.children = [{ type: "text", value: " " }];
+    }
+  },
+  onVisitTitle(node) {
+    node.properties!.className = ["title"];
+  },
+  // Feel free to add classNames that suit your docs
+  onVisitHighlightedLine(node) {
+    node.properties.className?.push("highlighted");
+  },
+  onVisitHighlightedChars(node) {
+    node.properties.className = ["word"];
+  },
+};
+export default async function Cerealize(
+  props: JSX.IntrinsicAttributes & MDXRemoteProps,
+) {
+  return (
+    <article className="prose prose-neutral prose-quoteless max-w-3xl dark:prose-invert lg:prose-lg">
+      <MDXRemote
+        {...props}
+        options={{
+          mdxOptions: {
+            //@ts-expect-error
+            rehypePlugins: [imageMetadata, [rehypePrettyCode, options]],
+          },
+        }}
+        components={{ ...components, ...(props.components || {}) }}
+      />
+    </article>
+  );
+}

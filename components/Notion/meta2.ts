@@ -1,4 +1,4 @@
-import 'server-only'
+//@ts-nocheck
 import got from "got";
 import { mapImageUrl } from "lib/mapImg";
 import { $$ } from "lib/redis/connect";

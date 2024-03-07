@@ -98,7 +98,7 @@ export function processDatabaseItem<P>(
 
 export const getPostDatabase = cache(async () => {
   const recordMap = await getPage(PostDB);
-/*   if (previews) {
+  /*   if (previews) {
     const previewImageMap = await getPreviewImageMap(recordMap);
     (recordMap as any).preview_images = previewImageMap;
   } */
@@ -129,7 +129,7 @@ export const getDatabasePage = cache(async <T>(id: string) => {
 
 export const getScribblesDatabase = cache(async () => {
   const recordMap = await getPage(GalleryDB);
-/*   if (previews) {
+  /*   if (previews) {
     const previewImageMap = await getPreviewImageMap(recordMap);
     (recordMap as any).preview_images = previewImageMap;
   } */

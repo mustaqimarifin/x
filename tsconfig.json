@@ -10,10 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "Bundler",
-    "moduleDetection": "force",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
     "incremental": true,
@@ -22,7 +20,8 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": false
+    "strictNullChecks": true,
+    "isolatedModules": true
   },
   "include": [
     "next-env.d.ts",
@@ -35,5 +34,5 @@
     "tailwind.config.ts",
     "prettier.config.cjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "components/Notion/meta2.ts"]
 }

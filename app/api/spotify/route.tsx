@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { PLAY } from "types";
 //import { NextResponse } from "next/server";
 
-export const runtime = "edge";
+//export const runtime = "edge";
 export const revalidate = 60;
 
 export async function GET() {

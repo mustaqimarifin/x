@@ -1,9 +1,4 @@
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cx(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+export const cx = (...classes: any[]) => classes.filter(Boolean).join(" ");
 
 export function formatDate(input: number | string): string {
   const date = new Date(input);
@@ -22,7 +17,6 @@ export const formatTags = (arr: string[]): string =>
   new Intl.ListFormat("en", { type: "conjunction" }).format(arr);
 
 import { Decoration } from "notion-types";
-import { SupportedStorage } from "@supabase/supabase-js";
 
 export function textDecorationsToString(decorations: Decoration[]): string {
   return decorations.map((decoration) => decoration[0]).join("");
@@ -35,29 +29,3 @@ export async function fetcher<JSON = any>(
   const res = await fetch(input, init);
   return res.json();
 }
-
-export const customStorageAdapter: SupportedStorage = {
-  getItem: (key) => {
-    if (typeof localStorage !== "undefined") {
-      // Configure alternate storage
-      return globalThis.localStorage.getItem(key);
-    }
-    return null;
-  },
-  setItem: (key, value) => {
-    if (typeof localStorage !== "undefined") {
-      // Configure alternate storage here
-      globalThis.localStorage.setItem(key, value);
-      return;
-    }
-    return null;
-  },
-  removeItem: (key) => {
-    if (typeof localStorage !== "undefined") {
-      // Configure alternate storage here
-      globalThis.localStorage.removeItem(key);
-      return;
-    }
-    return null;
-  },
-};

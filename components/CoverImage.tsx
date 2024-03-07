@@ -29,9 +29,7 @@ export default function CoverImage(props) {
         alt={""}
         className={cx(
           " w-full items-center justify-center object-cover object-top duration-700 ease-in-out group-hover:opacity-75",
-          isLoading
-            ? "scale-95 blur-2xl grayscale"
-            : "scale-100 blur-0 grayscale-0",
+          isLoading ? "scale-95 grayscale" : "scale-100 blur-0 grayscale-0",
         )}
         onLoadingComplete={() => {
           setLoading(false);

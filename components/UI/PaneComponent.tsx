@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Pane, panesMobx } from "./AppState";
-import { ControlsEyeCrossed } from "@heathmont/moon-icons-tw";
+import { XIcon } from "./icons";
 
 function PaneResizers({
   dimensionsMobx,
@@ -65,13 +65,13 @@ export const PaneComponent = observer(
     const bindDrag = useDrag(
       action(({ movement, first, last, memo }) => {
         if (first) {
-          headerRef.current.style.cursor = "grabbing";
+          headerRef.current!.style.cursor = "grabbing";
           return [...positionMobx];
         }
         positionMobx[0] = Math.floor(memo[0] + movement[0]);
         positionMobx[1] = Math.floor(memo[1] + movement[1]);
         if (last) {
-          headerRef.current.style.cursor = "";
+          headerRef.current!.style.cursor = "";
         }
       }),
     );
@@ -79,7 +79,7 @@ export const PaneComponent = observer(
       () =>
         autorun(() => {
           const rootElement = rootRef.current;
-          rootElement.style.transform = `translate(${Math.floor(
+          rootElement!.style.transform = `translate(${Math.floor(
             positionMobx[0],
           )}px, ${Math.floor(positionMobx[1])}px)`;
         }),
@@ -89,9 +89,9 @@ export const PaneComponent = observer(
       () =>
         autorun(() => {
           const rootElement = rootRef.current;
-          rootElement.style.width = `${dimensionsMobx.width}px`;
-          rootElement.style.height = `${dimensionsMobx.height}px`;
-          rootElement.style.zIndex = `${pane.z}`;
+          rootElement!.style.width = `${dimensionsMobx.width}px`;
+          rootElement!.style.height = `${dimensionsMobx.height}px`;
+          rootElement!.style.zIndex = `${pane.z}`;
         }),
       [dimensionsMobx.height, dimensionsMobx.width, pane.z],
     );
@@ -121,7 +121,7 @@ export const PaneComponent = observer(
             })}
             className="text-white opacity-80 hover:opacity-100"
           >
-            <ControlsEyeCrossed />
+            <XIcon />
           </button>
         </div>
         <div className="grow overflow-auto text-sm">{children}</div>

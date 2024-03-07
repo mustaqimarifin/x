@@ -4,27 +4,10 @@ import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons";
 import { name, about, bio, avatar } from "lib/info";
 import { Balancer } from "react-wrap-balancer";
 import { NowPlaying } from "components/UI/NowPlaying";
-import { cache } from "react";
-import { serverClient } from "lib/supabase/server";
-import { env } from "node:process";
 
-export const dynamic = "force-dynamic";
 
-const options = {
-  headers: {
-    Authorization: `Bearer ${env.TWITTER_KEY}`,
-  },
-};
+export default function HomePage() {
 
-const getBlogViews = cache(async () => {
-  const supabase = await serverClient();
-  const { data: total } = await supabase.from("pageviews").select("*");
-  return total;
-});
-
-export default async function HomePage() {
-  const views = await getBlogViews();
-  const vTotal = views?.reduce((acc, row) => acc + row.view_count, 0);
 
   return (
     <section>
@@ -57,9 +40,9 @@ export default async function HomePage() {
             </a>
           }
 
-          <Link href="/projects" className="flex items-center">
+          <Link href="/lilbits" className="flex items-center">
             <ViewsIcon />
-            {vTotal && `${vTotal?.toString()} blog views all time`}
+            {/*  {vTotal && `${vTotal?.toString()} blog views all time`} */}
           </Link>
           <div className="flex items-center">
             <NowPlaying />

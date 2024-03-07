@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import { NextFontWithVariable } from "next/dist/compiled/@next/font";
-import { Roboto_Flex } from "next/font/google";
+import { Newsreader, Roboto_Flex } from "next/font/google";
 
 const rFlex = Roboto_Flex({
   weight: ["400", "500", "700"],
@@ -23,6 +23,13 @@ const rFlex = Roboto_Flex({
   display: "optional",
 });
  */
+
+const NewsReader: NextFontWithVariable = Newsreader({
+  subsets: ["latin"],
+  style: ["italic", "normal"],
+  weight: ["400", "600"],
+  variable: "--newsreader",
+});
 const kK: NextFontWithVariable = localFont({
   src: "../../public/fonts/kaisei-tokumin-latin-700-normal.woff2",
   weight: "700",
@@ -37,4 +44,4 @@ const sfmono: NextFontWithVariable = localFont({
   display: "swap",
 });
 
-export { rFlex, kK, sfmono };
+export { rFlex, kK, sfmono, NewsReader };

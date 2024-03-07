@@ -6,6 +6,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./node_modules/@heathmont/moon-core-tw/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "selector",
   presets: [
     require("@heathmont/moon-core-tw/lib/private/presets/ds-moon-preset"),
   ],
@@ -13,7 +14,7 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-rFlex)"],
-        serif: ["var(--font-k)"],
+        serif: ["var(--newsreader)"],
         mono: ["var(--font-sfmono)"],
       },
       /*  fontFamily: {
