@@ -1,27 +1,17 @@
 import typography from "@tailwindcss/typography";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./node_modules/@heathmont/moon-core-tw/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   darkMode: "selector",
-  presets: [
-    require("@heathmont/moon-core-tw/lib/private/presets/ds-moon-preset"),
-  ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-rFlex)"],
-        serif: ["var(--newsreader)"],
-        mono: ["var(--font-sfmono)"],
+        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        mono: ["var(--font-geist-mono)", ...fontFamily.mono],
+        quad: ["var(--font-quad)", ...fontFamily.serif],
       },
-      /*  fontFamily: {
-        sans: ["RobotoFlex", ...fontFamily.sans],
-        serif: ["Kaisei", ...fontFamily.serif],
-        mono: ["SFMono", ...fontFamily.mono],
-      }, */
+
       typography: {
         quoteless: {
           css: {

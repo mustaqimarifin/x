@@ -1,47 +1,42 @@
+import type { NextFontWithVariable } from "next/dist/compiled/@next/font";
+//import {  Roboto_Flex } from "next/font/google";
 import localFont from "next/font/local";
-import { NextFontWithVariable } from "next/dist/compiled/@next/font";
-import { Newsreader, Roboto_Flex } from "next/font/google";
-
-const rFlex = Roboto_Flex({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-rFlex",
-  display: "swap",
+import { GeistMono as GMono } from "geist/font/mono";
+import { GeistSans as GSans } from "geist/font/sans";
+/* const RFlex = Roboto_Flex({
+	//weight: ['400', '500', '700'],
+	variable: "--rflex",
+	subsets: ["latin"],
 });
 
-/* const kK = Kaisei_Tokumin({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-k",
-  display: "swap",
+const Mono = localFont({
+	src: "../assets/fonts/sonmono.woff2",
+	variable: "--mono",
 });
  */
-/* const rFlex: NextFontWithVariable = localFont({
-  src: "../../public/fonts/RobotoFlex.woff2",
-  weight: "variable",
-  variable: "--font-robotoFlex",
-  display: "optional",
-});
- */
-
-const NewsReader: NextFontWithVariable = Newsreader({
-  subsets: ["latin"],
-  style: ["italic", "normal"],
-  weight: ["400", "600"],
-  variable: "--newsreader",
-});
-const kK: NextFontWithVariable = localFont({
-  src: "../../public/fonts/kaisei-tokumin-latin-700-normal.woff2",
+const Quad: NextFontWithVariable = localFont({
+  src: "../assets/fonts/qbc.woff2",
   weight: "700",
-  variable: "--font-kaisei",
-  display: "swap",
+  style: "italic",
+  variable: "--font-quad",
 });
 
-const sfmono: NextFontWithVariable = localFont({
-  src: "../../public/fonts/SFMono-300.woff2",
-  weight: "300",
-  variable: "--font-sfmono",
-  display: "swap",
+/* const NewsReader: NextFontWithVariable = Newsreader({
+	subsets: ["latin"],
+	style: ["italic", "normal"],
+	weight: ["400", "600"],
+	variable: "--newsreader",
 });
+ */
+export { GMono, GSans, Quad };
 
-export { rFlex, kK, sfmono, NewsReader };
+/* const GT: NextFontWithVariable = localFont({
+  src: [
+    { path: './assets/fonts/7.woff2', weight: '400', style: 'normal' },
+    { path: './assets/fonts/gtwm.woff2', weight: '500', style: 'normal' },
+    { path: './assets/fonts/gtwb.woff2', weight: '700', style: 'normal' },
+    { path: './assets/fonts/gtwbb.woff2', weight: '800', style: 'normal' },
+  ],
+  variable: '--font-gt',
+})
+ */

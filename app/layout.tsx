@@ -1,17 +1,22 @@
 import "app/style/global.css";
 
 import type { Metadata } from "next";
-//import { Analytics } from "@vercel/analytics/react";
 import { cx } from "lib/utils";
-//import { PanesLayer } from "components/UI/PanesLayer";
 import { meta } from "data/meta";
 import { CurrentENV } from "lib/env";
-import { NewsReader, kK, rFlex, sfmono } from "./style/fonts";
+import { GSans, GMono, Quad } from "./style/fonts";
 import { Sidebar } from "components/Menu/SydeBar";
 import { ThemeProviders } from "components/Theme";
 import { PageTransition } from "components/UI/PageTransition";
-import { getAllBits, getAllPosts } from "lib/sanity/client";
-//import { posts } from "./posts/[slug]/page";
+import { allBits, allPosts, getAllBits, getAllPosts } from "lib/sanity/client";
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: {
@@ -27,10 +32,6 @@ export const metadata: Metadata = {
     },
   ],
   creator: meta.name,
-  /*   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ], */
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -77,17 +78,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const allBits = await getAllBits();
-  const allPosts = await getAllPosts();
+  //const allBits = await getAllBits();
+  //const allPosts = await getAllPosts();
   return (
     <html
       lang="en"
       className={cx(
-        "bg-gray-50 text-black dark:bg-gray-950 dark:text-white",
-        rFlex.variable,
-        kK.variable,
-        sfmono.variable,
-        NewsReader.variable,
+        "bg-gray-50 text-black dark:bg-gray-950 dark:text-white antialiased",
+        GSans.variable,
+        Quad.variable,
+        GMono.variable,
       )}
     >
       <body className="">

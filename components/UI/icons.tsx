@@ -31,9 +31,9 @@ export function BurgerIcon() {
       height="24"
       fill="none"
       stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
       className="lucide lucide-menu"
     >
       <path d="M4 12h16M4 6h16M4 18h16" />
@@ -50,9 +50,9 @@ export function ArrowLeftIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-arrow-left-circle"
     >
       <circle cx="12" cy="12" r="10" />
@@ -71,9 +71,9 @@ export function XIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-x"
     >
       <path d="M18 6 6 18" />

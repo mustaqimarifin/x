@@ -7,9 +7,6 @@ import dynamic from "next/dynamic";
 import KodeBlock from "components/Code/KodeBlock";
 import Image from "next/image";
 
-import { getPreviewImage } from "./meta2";
-import { normalizeUrl } from "notion-utils";
-
 declare const B: { properties: { title: string; source: string } };
 
 const Exercise = dynamic(() => import("components/Code/Exercise"), {

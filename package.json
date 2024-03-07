@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "format": "pnpm prettier --write . --ignore-path .gitignore",
     "diff": "pnpm prettier --list-different '\"./**/*.{ts,mts,cts,tsx,js,mjs,cjs,jsx,json,md,css}\"'",
     "lint": "next lint -- --ignore-path .gitignore",
@@ -13,14 +13,10 @@
     "@keyv/compress-brotli": "^1.1.6",
     "@keyv/redis": "^2.8.4",
     "@monaco-editor/react": "^4.6.0",
-    "@plaiceholder/next": "^3.0.0",
-    "@types/json-buffer": "^3.0.2",
     "@use-gesture/react": "^10.3.0",
-    "@vercel/analytics": "^1.2.2",
-    "@vercel/edge-config": "^1.1.0",
     "framer-motion": "^11.0.8",
+    "geist": "^1.2.2",
     "got": "^14.2.1",
-    "json-buffer": "^3.0.1",
     "keyv": "^4.5.4",
     "mobx": "^6.12.0",
     "mobx-react-lite": "^4.0.5",
@@ -45,7 +41,6 @@
     "react-wrap-balancer": "^1.1.0",
     "rehype-pretty-code": "^0.13.0",
     "sanity": "^3.32.0",
-    "superjson": "^2.2.1",
     "swr": "^2.2.5"
   },
   "devDependencies": {

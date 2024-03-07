@@ -66,7 +66,7 @@ function CustomLink(props) {
 }
 
 function BlockQuote({ children }) {
-  return <blockquote className="font-itl">{children}</blockquote>;
+  return <blockquote className="font-">{children}</blockquote>;
 }
 
 function RoundedImage(props) {
@@ -148,24 +148,7 @@ function slugify(str) {
     .replace(/[^\w-]+/g, "") // Remove all non-word characters except for -
     .replace(/--+/g, "-"); // Replace multiple - with single -
 }
-function createAnchor(level) {
-  // eslint-disable-next-line react/display-name
-  return ({ children }) => {
-    const slug = slugify(children);
-    return createElement(
-      `h${level}`,
-      { id: slug },
-      [
-        createElement("a", {
-          href: `$${slug}`,
-          key: `link-${slug}`,
-          className: "anchor",
-        }),
-      ],
-      children,
-    );
-  };
-}
+
 function createHeading(level) {
   // eslint-disable-next-line react/display-name
   return ({ children }) => {

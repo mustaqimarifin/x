@@ -4,7 +4,12 @@ import Image from "next/image";
 //import "app/style/notion2.css";
 
 import { notFound } from "next/navigation";
-import { getLilBit, getLilSlugs, type LilBits } from "lib/sanity/client";
+import {
+  allLilSlugs,
+  getLilBit,
+  getLilSlugs,
+  type LilBits,
+} from "lib/sanity/client";
 import Cerealize from "components/mdxrsc";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
@@ -72,13 +77,13 @@ export async function generateMetadata({
 }
  */
 export async function generateStaticParams() {
-  const allLilSlugs = await getLilSlugs();
+  //const allLilSlugs = await getLilSlugs();
   return allLilSlugs.map((p) => ({
     slug: p.slug,
   }));
 }
 
-const Geezcuz = dynamic(() => import("components/Giscus/G"), {
+const Giscus = dynamic(() => import("components/Giscus/load"), {
   ssr: false,
 });
 export default async function LilPage({
@@ -92,8 +97,8 @@ export default async function LilPage({
   }
 
   return (
-    <section>
-      <div className="flex items-center space-x-6">
+    <div className="px-6 lg:pl-24">
+      <div className="w-full max-w-3xl pt-16 pb-24 max-3xl:mx-auto">
         <Image
           src={p?.caption}
           width={80}
@@ -101,38 +106,14 @@ export default async function LilPage({
           alt={`${p?.title} icon`}
           className={"rounded-2xl"}
         />
-        <div>
-          <h1 className="mb-5 font-serif text-3xl font-bold">
-            <Balancer>{p?.title}</Balancer>
-          </h1>
-          <span className="text-tertiary inline-block leading-snug">
-            {p?.date}
-          </span>
+        <div className="mb-8 text-3xl font-quad font-semibold dark:text-gray-50 text-neutral-900">
+          {p.title}
         </div>
+        <Cerealize source={p?.content} />
+        <Suspense>
+          <Giscus />
+        </Suspense>
       </div>
-
-      <div className="mb-8 mt-4 grid max-w-[650px] grid-cols-[auto_1fr_auto] items-center text-sm">
-        {/* <div className="rounded-md bg-neutral-100 px-2 py-1 tracking-tighter dark:bg-neutral-800">
-          {p.date}
-        </div> */}
-        <div className="mx-2 h-[0.2em] bg-neutral-50 dark:bg-neutral-800" />
-        {/*   <PageViews slug={project.pageId} trackView /> */}
-      </div>
-      {/*         { project.tags && (
-          <div className="py-4 xl:py-8">
-
-            <div className="flex flex-wrap">
-              { project.tags.map((tag) => (
-                <Tag key={ tag } text={ tag } />
-              )) }
-            </div>
-          </div>
-        ) } */}
-
-      <Cerealize source={p?.content} />
-      <Suspense>
-        <Geezcuz />
-      </Suspense>
-    </section>
+    </div>
   );
 }

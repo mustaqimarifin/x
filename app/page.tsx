@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowIcon, TwitterIcon, ViewsIcon } from "components/UI/icons";
+import { TwitterIcon, ViewsIcon } from "components/UI/icons";
 import { name, about, bio, avatar } from "lib/info";
 import { Balancer } from "react-wrap-balancer";
 import { NowPlaying } from "components/UI/NowPlaying";

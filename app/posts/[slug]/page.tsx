@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 
-import { getPost, type Post, getPostSlugs } from "lib/sanity/client";
+import {
+  getPost,
+  type Post,
+  getPostSlugs,
+  allPostSlugs,
+} from "lib/sanity/client";
 import Cerealize from "components/mdxrsc";
 
 import dynamic from "next/dynamic";
@@ -63,14 +68,14 @@ import { Suspense } from "react";
 //const baseUrl = "http://localhost:3000";
 
 export async function generateStaticParams() {
-  const allPostSlugs = await getPostSlugs();
+  //const allPostSlugs = await getPostSlugs();
 
   return allPostSlugs.map((post) => ({
     slug: post.slug,
   }));
 }
 
-const Geezcuz = dynamic(() => import("components/Giscus/G"), {
+const Giscus = dynamic(() => import("components/Giscus/load"), {
   ssr: false,
 });
 
@@ -87,12 +92,12 @@ export default async function PostPage({
   return (
     <div className="px-6 lg:pl-24">
       <div className="w-full max-w-3xl pt-16 pb-24 max-3xl:mx-auto">
-        <div className="mb-8 text-3xl font-semibold text-neutral-900">
+        <div className="mb-8 text-3xl font-quad font-semibold dark:text-gray-50 text-neutral-900">
           {post.title}
         </div>
         <Cerealize source={post?.content} />
         <Suspense>
-          <Geezcuz />
+          <Giscus />
         </Suspense>
       </div>
     </div>

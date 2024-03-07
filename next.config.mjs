@@ -4,20 +4,29 @@ const nextConfig = {
   },
   reactStrictMode: false,
   images: {
-    dangerouslyAllowSVG: true,
     formats: ["image/avif", "image/webp"],
-    domains: [
-      "i.scdn.co", // Spotify Album Art
-      "pbs.twimg.com", // Twitter Profile Picture
-      "cdn.sanity.io",
-      "abs.twimg.com",
-      "www.notion.so",
-      "flowbite.s3.amazonaws.com",
-      "lh3.googleusercontent.com",
-      "i.ytimg.com",
-      "avatars.githubusercontent.com",
-      "img1-tw.alphaxcdn.com",
+    remotePatterns: [
+      { protocol: "https", hostname: "*.twimg.com", pathname: "/**" },
+      { protocol: "https", hostname: "www.notion.so", pathname: "/**" },
+      { protocol: "https", hostname: "cdn.sanity.io", pathname: "/**" },
+      { protocol: "https", hostname: "i.scdn.co", pathname: "/**" },
+      {
+        protocol: "https",
+        hostname: "ik.imagekit.io",
+        pathname: "/mstqmarfn/**",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "/**",
+      },
     ],
+    dangerouslyAllowSVG: true,
   },
 };
 

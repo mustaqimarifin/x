@@ -5,10 +5,8 @@ import { components } from "./mdx";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 import imageMetadata from "lib/image-size";
 
-
-
 const options: Options = {
-  keepBackground: true,
+  keepBackground: false,
   filterMetaString: (string) => string.replace(/filename="[^"]*"/, ""),
   onVisitLine(node) {
     if (node.children.length === 0) {
@@ -19,7 +17,7 @@ const options: Options = {
     node.properties!.className = ["title"];
   },
   onVisitHighlightedLine(node) {
-    node.properties.className!.push('highlighted');
+    node.properties.className!.push("highlighted");
   },
   onVisitHighlightedChars(node) {
     node.properties.className = ["word"];
