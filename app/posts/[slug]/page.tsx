@@ -10,6 +10,11 @@ import Cerealize from "components/mdxrsc";
 
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import { rdx } from "lib/redis/connect";
+import ViewCounter from "components/counter";
+import { increment } from "app/actions";
+
+export const revalidate = 30;
 
 /* async function getPostParams(params: { slug: any }) {
   const slug = params?.slug;
@@ -79,12 +84,8 @@ const Giscus = dynamic(() => import("components/Giscus/load"), {
   ssr: false,
 });
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post: Post = await getPost(params.slug);
+export default async function PostPage({ params: { slug } }) {
+  const post: Post = await getPost(slug);
   if (!post) {
     notFound();
   }
@@ -95,6 +96,9 @@ export default async function PostPage({
         <div className="mb-8 text-3xl font-quad font-semibold dark:text-gray-50 text-neutral-900">
           {post.title}
         </div>
+        <Suspense fallback={<p className="h-5" />}>
+          <Views slug={post.slug} />
+        </Suspense>
         <Cerealize source={post?.content} />
         <Suspense>
           <Giscus />
@@ -102,4 +106,11 @@ export default async function PostPage({
       </div>
     </div>
   );
+}
+
+async function Views({ slug }: { slug: string }) {
+  const views = (await rdx.get(["pageviews", slug].join(":"))) ?? 0;
+
+  increment(slug);
+  return <ViewCounter views={views} />;
 }

@@ -16,7 +16,7 @@ const Exercise = dynamic(() => import("components/Code/Exercise"), {
   ssr: false,
 }); */
 
-const AudioBlok = dynamic(() => import("components/Embed/Audio"), {
+const AudioBlock = dynamic(() => import("components/Embed/Audio"), {
   ssr: false,
 });
 

@@ -10,6 +10,7 @@ import { ThemeProviders } from "components/Theme";
 import { PageTransition } from "components/UI/PageTransition";
 import { allBits, allPosts, getAllBits, getAllPosts } from "lib/sanity/client";
 import type { Viewport } from "next";
+import { rdx } from "lib/redis/connect";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -94,7 +95,7 @@ export default async function RootLayout({
         <ThemeProviders>
           <Sidebar posts={allPosts} lilbits={allBits} />
           <main className="mx-4 pl-80 max-lg:pl-64 max-md:pl-0">
-            <PageTransition>{children}</PageTransition>
+            {children}
           </main>
         </ThemeProviders>
       </body>

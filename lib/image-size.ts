@@ -4,6 +4,9 @@ import { readFile } from "fs/promises";
 import { imageDimensionsFromData } from "image-dimensions";
 import { cache } from "react";
 import { visit } from "unist-util-visit";
+import pMap from "p-map";
+import normalizeUrl from "normalize-url";
+import { getPreviewImage } from "./imagemeta";
 export type Size = {
   width: number | undefined;
   height: number | undefined;
@@ -72,9 +75,21 @@ const imageMetadata = cache(() => {
       }
     });
 
-    for (const image of images) {
-      await addProps(image);
-    }
+    Object.fromEntries(
+      await pMap(
+        images,
+        async (image) => {
+          const cacheKey = normalizeUrl(image.properties.src);
+          return [
+            cacheKey,
+            await getPreviewImage(image.properties.src, { cacheKey }),
+          ];
+        },
+        {
+          concurrency: 8,
+        },
+      ),
+    );
 
     return tree;
   };

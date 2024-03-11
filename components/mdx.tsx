@@ -5,6 +5,9 @@ import { createElement } from "react";
 //import { TweetComponent } from "./tweet";
 
 import dynamic from "next/dynamic";
+import IKImage from "./lazyboy";
+import Youtube from "./Embed/YoutubeEmbed";
+import AudioBlock from "./Embed/Audio";
 
 const GhostImage = dynamic(() => import("./lazyboy"), { ssr: false });
 
@@ -176,6 +179,10 @@ function Bust(props) {
   );
 }
 
+/* const AudioBlock = dynamic(() => import("components/Embed/Audio"), {
+  ssr: false,
+});
+ */
 export const components = {
   h1: createHeading(1),
   h2: createHeading(2),
@@ -185,12 +192,14 @@ export const components = {
   h6: createHeading(6),
   Bust,
   blockquote: BlockQuote,
-  RoundedImage,
+  IKImage,
   img: GhostImage,
   a: CustomLink,
   Callout,
   ProsCard,
   ConsCard,
+  Youtube,
+  AudioBlock,
   //StaticTweet: TweetComponent,
   //pre: Code,
   Table,

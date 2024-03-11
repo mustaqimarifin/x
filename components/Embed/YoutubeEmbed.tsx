@@ -3,7 +3,7 @@
 import React from "react";
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
 
-const YoutubeEmbed = ({ embedId }: { embedId: string }) => (
+const Youtube = ({ embedId }: { embedId: string }) => (
   <div className="aspect-video overflow-hidden rounded-md ">
     <LiteYouTubeEmbed
       id={embedId} // Default none, id of the video or playlist
@@ -18,4 +18,4 @@ const YoutubeEmbed = ({ embedId }: { embedId: string }) => (
   </div>
 );
 
-export default YoutubeEmbed;
+export default Youtube;

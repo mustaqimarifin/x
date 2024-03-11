@@ -12,6 +12,7 @@ import {
   postsQuery,
 } from "./queries";
 import { cache } from "react";
+import { revalidatePath } from "next/cache";
 
 export const projectId = "do33z8xq";
 export const dataset = "production";
@@ -126,6 +127,7 @@ export const getPost = cache(async (slug: string) => {
   if (sanity) {
     return (await sanity.fetch(postQuery, { slug })) || {};
   }
+  revalidatePath("/posts/[slug]", "page");
   return {};
 });
 
@@ -133,6 +135,7 @@ export const getLilBit = cache(async (slug: string) => {
   if (sanity) {
     return (await sanity.fetch(lilQuery, { slug })) || {};
   }
+  revalidatePath("/lilbits/[slug]", "page");
   return {};
 });
 export async function getAllCases() {

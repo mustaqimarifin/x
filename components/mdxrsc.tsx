@@ -3,7 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import type { JSX } from "react";
 import { components } from "./mdx";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
-import imageMetadata from "lib/image-size";
+//import imageMetadata from "lib/image-size";
 
 const options: Options = {
   keepBackground: false,
@@ -23,7 +23,7 @@ const options: Options = {
     node.properties.className = ["word"];
   },
 };
-export default async function Cerealize(
+export default function Cerealize(
   props: JSX.IntrinsicAttributes & MDXRemoteProps,
 ) {
   return (
@@ -33,7 +33,7 @@ export default async function Cerealize(
         options={{
           mdxOptions: {
             //@ts-expect-error
-            rehypePlugins: [imageMetadata, [rehypePrettyCode, options]],
+            rehypePlugins: [[rehypePrettyCode, options]],
           },
         }}
         components={{ ...components, ...(props.components || {}) }}

@@ -1,20 +1,21 @@
+import Redis from "ioredis";
 import { extRedis, intRedis, isDev, previews } from "lib/env";
 
-import Keyv from "keyv";
-import KeyvRedis from "@keyv/redis";
-import KeyvBrotli from "@keyv/compress-brotli";
+//import Keyv from "@keyvhq/core";
+//import KeyvRedis from "@keyvhq/redis";
 
-let $$: Keyv;
+let rdx = new Redis(isDev ? intRedis : extRedis);
 
-if (previews!) {
-  const keyvRedis = new KeyvRedis(isDev ? intRedis : extRedis);
-  $$ = new Keyv({
+/* if (previews!) {
+  rdx = new Keyv({
     store: keyvRedis,
-    compression: new KeyvBrotli(),
-    namespace: "sexy" || undefined,
+    namespace: "previews" || undefined,
   });
 } else {
-  $$ = new Keyv();
-}
+ rdx = new Keyv({
+    store: keyvRedis,
+    namespace: "cache" || undefined,
+  });
+} */
 
-export { $$ };
+export { rdx };

@@ -13,6 +13,9 @@ import {
 import Cerealize from "components/mdxrsc";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import { increment } from "app/actions";
+import ViewCounter from "components/counter";
+import { rdx } from "lib/redis/connect";
 
 //xport const revalidate = 20;
 
@@ -109,6 +112,9 @@ export default async function LilPage({
         <div className="mb-8 text-3xl font-quad font-semibold dark:text-gray-50 text-neutral-900">
           {p.title}
         </div>
+        <Suspense fallback={<p className="h-5" />}>
+          <Views slug={p.slug} />
+        </Suspense>
         <Cerealize source={p?.content} />
         <Suspense>
           <Giscus />
@@ -116,4 +122,11 @@ export default async function LilPage({
       </div>
     </div>
   );
+}
+
+async function Views({ slug }: { slug: string }) {
+  const views = (await rdx.get(["pageviews", slug].join(":"))) ?? 0;
+
+  increment(slug);
+  return <ViewCounter views={views} />;
 }

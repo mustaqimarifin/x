@@ -26,7 +26,13 @@ export default async function ScribblesPage({
     <div className="grid grid-cols-3 gap-2 px-8 py-8 max-md:px-4 max-lg:grid-cols-2">
       {scribbles.map((scribble) => (
         <div className="relative overflow-hidden " key={scribble.id}>
-          <Image src={imgSRC} alt="drawing" className=" object-cover aspect-square" width={549} height={824}/>
+          <Image
+            src={imgSRC}
+            alt="drawing"
+            className=" object-cover aspect-square"
+            width={549}
+            height={824}
+          />
         </div>
       ))}
     </div>

@@ -4,7 +4,9 @@ import { TwitterIcon, ViewsIcon } from "components/UI/icons";
 import { name, about, bio, avatar } from "lib/info";
 import { Balancer } from "react-wrap-balancer";
 import { NowPlaying } from "components/UI/NowPlaying";
-
+import AudioBlock from "components/Embed/Audio";
+import ReactPlayer from "react-player";
+import BlockAudio from "components/Embed/BlockAudio";
 export default function HomePage() {
   return (
     <section>
@@ -46,9 +48,11 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <p className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">
+     
+      <div className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">
+       <BlockAudio source="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1669510497&color=%23c5898f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" />
         {bio()}
-      </p>
+      </div>
       {/*       <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-500 dark:text-neutral-400 md:flex-row md:space-x-4 md:space-y-0">
         <li>
           <a
