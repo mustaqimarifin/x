@@ -17,7 +17,7 @@ export default function Footer() {
 					<ul className={styles.list}>
 						<li>
 							<a
-								href="https://x.com/stallboerger"
+								href="https://x.com/vmprmyth"
 								className={`${styles.link} ${styles.twitter}`}
 								target="_blank"
 								rel="noreferrer"
@@ -27,7 +27,7 @@ export default function Footer() {
 						</li>
 						<li>
 							<a
-								href="mailto:hi@antonstallboerger.com"
+								href="mailto:mustaqim.arifin@gmail.com"
 								className={`${styles.link} ${styles.imessage}`}
 								target="_blank"
 								rel="noreferrer"
@@ -35,19 +35,19 @@ export default function Footer() {
 								Mail
 							</a>
 						</li>
-						<li>
+						{/* <li>
 							<a href="https://www.cosmos.so/stallboerger" className={styles.link} target="_blank" rel="noreferrer">
 								Cosmos
 							</a>
-						</li>
+						</li> */}
 						<li>
 							<a
-								href="https://read.cv/stallboerger"
+								href="https://t.ly/iB7Sz"
 								className={`${styles.link} ${styles.readcv}`}
 								target="_blank"
 								rel="noreferrer"
 							>
-								Read.cv
+								Resume
 							</a>
 						</li>
 					</ul>
@@ -84,9 +84,9 @@ export default function Footer() {
 					<Link href="/credits" className={styles.link}>
 						Credits
 					</Link>
-					<Link href="/imprint" className={styles.link}>
+					{/* <Link href="/imprint" className={styles.link}>
 						Imprint
-					</Link>
+					</Link> */}
 				</div>
 			</section>
 			<Suspense>
