@@ -1,82 +1,55 @@
+import Card from "@/components/card";
 import Link from "next/link";
-import Image from "next/image";
-import { TwitterIcon, ViewsIcon } from "components/UI/icons";
-import { name, about, bio, avatar } from "lib/info";
-import { Balancer } from "react-wrap-balancer";
-import { NowPlaying } from "components/UI/NowPlaying";
-import AudioBlock from "components/Embed/Audio";
-import ReactPlayer from "react-player";
-import BlockAudio from "components/Embed/BlockAudio";
-export default function HomePage() {
-  return (
-    <section>
-      <h1 className="mb-5 font-serif text-3xl font-bold">
-        <Balancer>{name}</Balancer>
-      </h1>
 
-      <p className="my-5 max-w-[460px] text-neutral-800 dark:text-neutral-200">
-        {about()}
-      </p>
-      <div className="my-8 flex  flex-col items-start md:flex-row md:items-center">
-        <Image
-          alt={name}
-          className="rounded-full grayscale transition duration-1000 ease-out hover:grayscale-0 hover:duration-75"
-          src={avatar}
-          placeholder="blur"
-          width={100}
-          priority
-        />
-        <div className="ml-0 mt-8 space-y-2 text-neutral-500 dark:text-neutral-400 md:ml-6 md:mt-0">
-          {
-            <a
-              rel="noopener noreferrer"
-              target="_blank"
-              href="https://twitter.com/vmprmyth"
-              className="flex items-center gap-2"
-            >
-              <TwitterIcon />
-              {`9760 tweets all time`}
-            </a>
-          }
+import { getYear } from "@/components/_date";
+import { Fade } from "@/components/fade";
+import { projects } from "@/lib/sortedContent";
 
-          <Link href="/lilbits" className="flex items-center">
-            <ViewsIcon />
-            {/*  {vTotal && `${vTotal?.toString()} blog views all time`} */}
-          </Link>
-          <div className="flex items-center">
-            <NowPlaying />
-          </div>
-        </div>
-      </div>
-     
-      <div className="my-5 max-w-[600px] text-neutral-800 dark:text-neutral-200">
-       <BlockAudio source="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1669510497&color=%23c5898f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" />
-        {bio()}
-      </div>
-      {/*       <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-500 dark:text-neutral-400 md:flex-row md:space-x-4 md:space-y-0">
-        <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://twitter.com/vmprmyth"
-          >
-            <ArrowIcon />
-            <p className="h-7">follow me on twitter</p>
-          </a>
-        </li>
-        <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://leerob.substack.com"
-          >
-            <ArrowIcon />
-            <p className="h-7">get email updates</p>
-          </a>
-        </li>
-      </ul> */}
-    </section>
-  );
+export default function Home() {
+	return (
+		<>
+			<section className="col-span-full md:col-span-12 lg:col-span-5 lg:sticky lg:top-[calc(53px_+_32px)] lg:self-start mb-20 lg:mb-0">
+				<p className="mb-8">
+					<span className="font-bold">Mustaqim Arifin</span>
+					<br />
+					Marketing Manager
+				</p>
+				<p className="">
+					Driven by curiosity and a love for great, high-quality and thoughtful design. Pushing the boundaries and
+					striving to create something truly unique and meaningful.
+					<br />
+					<br />
+					Currently building icons for{" "}
+					<a
+						href="https://icons.saman.design"
+						className="text-black underline dark:text-white hover:decoration-titan-200 dark:decoration-titan-800"
+					>
+						Saman Icons
+					</a>{" "}
+					and exploring different{" "}
+					<Link
+						href="/playground"
+						className="text-black underline dark:text-white hover:decoration-titan-200 dark:hover:decoration-titan-800"
+					>
+						side projects
+					</Link>
+					.
+				</p>
+			</section>
+
+			<section className="grid grid-cols-1 gap-4 col-span-full lg:col-start-9 lg:col-span-8 sm:grid-cols-2 lg:grid-cols-1">
+				{projects.map((project) => (
+					<Card
+						title={project.title}
+						imageSrc={`/projects/${project.slug}/${project.image}`}
+						imageAlt={project.title}
+						description={project.description}
+						year={getYear(project.year)}
+						link={`/projects/${project.slug}`}
+						key={project._id}
+					/>
+				))}
+			</section>
+		</>
+	);
 }

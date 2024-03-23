@@ -1,7 +1,0 @@
-{
-  "plugins": ["simple-import-sort"],
-  "extends": ["next", "prettier"],
-  "rules": {
-    "react/no-unescaped-entities": 0
-  }
-}

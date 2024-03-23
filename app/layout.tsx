@@ -1,104 +1,100 @@
-import "app/style/global.css";
-
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { cx } from "lib/utils";
-import { meta } from "data/meta";
-import { CurrentENV } from "lib/env";
-import { GSans, GMono, Quad } from "./style/fonts";
-import { Sidebar } from "components/Menu/SydeBar";
-import { ThemeProviders } from "components/Theme";
-import { PageTransition } from "components/UI/PageTransition";
-import { allBits, allPosts, getAllBits, getAllPosts } from "lib/sanity/client";
-import type { Viewport } from "next";
-import { rdx } from "lib/redis/connect";
+//import Soehne from "next/font/local";
+import "/styles/base.scss";
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-};
+import { cx } from "@/lib/utils";
+import styles from "@/styles/layout.module.scss";
+import { GMono, GSans, Quad } from "./fonts";
+
+/* const soehne = Soehne({
+	src: [
+		{
+			path: "@/public/font/soehne-buch.woff2",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "@/public/font/soehne-buch-kursiv.woff2",
+			weight: "400",
+			style: "italic",
+		},
+		{
+			path: "@/public/font/soehne-halbfett.woff2",
+			weight: "600",
+			style: "normal",
+		},
+	],
+}); */
 
 export const metadata: Metadata = {
-  title: {
-    default: meta.name,
-    template: `%s | ${meta.name}`,
-  },
-  description: meta.description,
-  keywords: ["Music Production", "Audio Engineering", "Editorial", "Blog"],
-  authors: [
-    {
-      name: meta.name,
-      url: meta.url,
-    },
-  ],
-  creator: meta.name,
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: CurrentENV,
-    title: meta.name,
-    description: meta.description,
-    siteName: meta.name,
-    images: [
-      {
-        url: `${CurrentENV}/og.png`,
-        width: 1200,
-        height: 626,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: meta.name,
-    description: meta.description,
-    images: [`${CurrentENV}/og.png`],
-    creator: "@vmprmyth",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  icons: {
-    icon: `${CurrentENV}/favicon.ico`,
-    shortcut: `${CurrentENV}/icon.svg`,
-    apple: `${CurrentENV}/apple-icon.png`,
-  },
-  manifest: `${CurrentENV}/manifest.json`,
+	title: {
+		default: "Mustaqim Arifin",
+		template: "%s · Mustaqim Arifin",
+	},
+	description: "Marketing Manager",
+	openGraph: {
+		title: "Mustaqim Arifin",
+		description: "Marketing Manager",
+		url: `https://mstqmarfn.vercel.app`,
+		siteName: "Mustaqim Arifin",
+		images: [
+			{
+				url: `https://mstqmarfn.vercel.app/og.jpg`,
+				width: 1920,
+				height: 1080,
+			},
+		],
+		locale: "en-US",
+		type: "website",
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
+	},
+	twitter: {
+		title: "Mustaqim Arifin",
+		card: "summary_large_image",
+		description: "Marketing Manager",
+		images: [
+			{
+				url: `https://mstqmarfn.vercel.app/og.jpg`,
+				width: 1920,
+				height: 1080,
+			},
+		],
+	},
+	icons: {
+		shortcut: `https://mstqmarfn.vercel.app/favicon.ico`,
+	},
 };
 
-export default async function RootLayout({
-  children,
+export default function RootLayout({
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  //const allBits = await getAllBits();
-  //const allPosts = await getAllPosts();
-  return (
-    <html
-      lang="en"
-      className={cx(
-        "bg-gray-50 text-black dark:bg-gray-950 dark:text-white antialiased",
-        GSans.variable,
-        Quad.variable,
-        GMono.variable,
-      )}
-    >
-      <body className="">
-        <ThemeProviders>
-          <Sidebar posts={allPosts} lilbits={allBits} />
-          <main className="mx-4 pl-80 max-lg:pl-64 max-md:pl-0">
-            {children}
-          </main>
-        </ThemeProviders>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en" className={cx(GSans.variable, Quad.variable, GMono.variable)}>
+			<body className={styles.body}>
+				<Navbar />
+				<main id="swup" className={`transition-fade ${styles.layout}`}>
+					{children}
+				</main>
+				<Footer />
+				<Analytics />
+				<SpeedInsights />
+			</body>
+		</html>
+	);
 }

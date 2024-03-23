@@ -1,31 +1,55 @@
+import RPC, { type Options } from "rehype-pretty-code";
+
+export const readingTime = (text: string): string => {
+	// Step 2: Determine the average reading speed (words per minute)
+	const wordsPerMinute = 200;
+	// Step 3: Calculate the word count
+	const noOfWords = text.split(/\s/g).length;
+	// Step 4: Calculate the estimated reading time (in minutes)
+	const minutes = noOfWords / wordsPerMinute;
+	const readTime = Math.ceil(minutes).toString();
+	// Step 5: Format the output
+	return `${readTime} min read`;
+};
+
+export const codeOptions: Options = {
+	keepBackground: false,
+	theme: "one-dark-pro",
+	filterMetaString: (string) => string.replace(/filename="[^"]*"/, ""),
+	onVisitLine(node) {
+		// Prevent lines from collapsing in `display: grid` mode, and
+		// allow empty lines to be copy/pasted
+		if (node.children.length === 0) {
+			node.children = [{ type: "text", value: " " }];
+		}
+		node.properties.className?.push("line");
+	},
+	onVisitTitle(node) {
+		node.properties.className = ["title"];
+	},
+	// Feel free to add classNames that suit your docs
+	onVisitHighlightedLine(node) {
+		node.properties.className?.push("highlighted");
+	},
+	onVisitHighlightedChars(node) {
+		node.properties.className = ["word"];
+	},
+};
+
 export const cx = (...classes: any[]) => classes.filter(Boolean).join(" ");
 
-export function formatDate(input: number | string): string {
-  const date = new Date(input);
-  return date.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-}
+type ConvertUndefined<T> = OrUndefined<{
+	[K in keyof T as undefined extends T[K] ? K : never]-?: T[K];
+}>;
+type OrUndefined<T> = { [K in keyof T]: T[K] | undefined };
+type PickRequired<T> = {
+	[K in keyof T as undefined extends T[K] ? never : K]: T[K];
+};
+type ConvertPick<T> = ConvertUndefined<T> & PickRequired<T>;
 
-export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
-}
-
-export const formatTags = (arr: string[]): string =>
-  new Intl.ListFormat("en", { type: "conjunction" }).format(arr);
-
-import { Decoration } from "notion-types";
-
-export function textDecorationsToString(decorations: Decoration[]): string {
-  return decorations.map((decoration) => decoration[0]).join("");
-}
-
-export async function fetcher<JSON = any>(
-  input: RequestInfo,
-  init?: RequestInit,
-): Promise<JSON> {
-  const res = await fetch(input, init);
-  return res.json();
-}
+export const pick = <Obj, Keys extends keyof Obj>(obj: Obj, keys: Keys[]): ConvertPick<{ [K in Keys]: Obj[K] }> => {
+	return keys.reduce((acc, key) => {
+		acc[key] = obj[key];
+		return acc;
+	}, {} as any);
+};
