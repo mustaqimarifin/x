@@ -1,6 +1,6 @@
 import { defineDocumentType, defineNestedType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
-import imageMetadataLQIP from "./lib/Meta2";
+//import imageMetadataLQIP from "./lib/Meta2";
 import { codeOptions, readingTime } from "./lib/utils";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
@@ -141,6 +141,6 @@ export default makeSource({
 	mdx: {
 		remarkPlugins: [],
 		//@ts-expect-error
-		rehypePlugins: [imageMetadataLQIP, [rehypePrettyCode, codeOptions]],
+		rehypePlugins: [[rehypePrettyCode, codeOptions]],
 	},
 });

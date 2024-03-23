@@ -1,6 +1,6 @@
+import t from "@tailwindcss/typography";
 import colors from "tailwindcss/colors";
 import { fontFamily } from "tailwindcss/defaultTheme";
-
 const config = {
 	content: ["./content/**/*.mdx", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
 	//darkMode: ['class'],
@@ -44,7 +44,7 @@ const config = {
 	future: {
 		hoverOnlyWhenSupported: true,
 	},
-	plugins: [require("@tailwindcss/typography")],
+	plugins: [t],
 };
 
 export default config;
