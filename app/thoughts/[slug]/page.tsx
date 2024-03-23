@@ -9,13 +9,13 @@ import styles from "@/styles/views/thought.module.scss";
 
 export const generateStaticParams = async () => thoughtParam.map((thought) => ({ slug: thought.slug }));
 
-export const generateMetadata = ({ params }: { params: { slug: string } }) => {
-	const thought = allThoughts.find((thought) => thought._raw.flattenedPath === `thoughts/${params.slug}`);
+export const generateMetadata = ({ params: { slug } }) => {
+	const thought = allThoughts.find((thought) => thought._raw.flattenedPath === `thoughts/${slug}`);
 	return { title: thought?.title };
 };
 
-const ThoughtLayout = ({ params }: { params: { slug: string } }) => {
-	const thought = allThoughts.find((thought) => thought._raw.flattenedPath === `thoughts/${params.slug}`);
+const ThoughtLayout = ({ params: { slug } }) => {
+	const thought = allThoughts.find((thought) => thought._raw.flattenedPath === `thoughts/${slug}`);
 
 	if (thought) {
 		return (

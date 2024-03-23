@@ -1,4 +1,4 @@
-import { defineDocumentType, defineNestedType, makeSource, type ComputedFields } from "contentlayer/source-files";
+import { type ComputedFields, defineDocumentType, defineNestedType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
 import imageMetadata from "./lib/image-size";
 import { codeOptions, readingTime } from "./lib/utils";

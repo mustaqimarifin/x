@@ -22,11 +22,11 @@ export default function ThoughtsPage() {
 				</div>
 			</header>
 
-			{thoughts.map((post) => (
-				<Link id={post.slug} key={post.date} className={styles.thought} href={{ pathname: `/thoughts/${post.slug}` }}>
-					<IKImage src={`/thoughts/${post.image}`} alt={post.title} width={593} height={305} className={styles.image} />
-					<h3 className={styles.title}>{post.title}</h3>
-					<time className={styles.year}>{formatDate(post.date)}</time>
+			{thoughts.map((t) => (
+				<Link id={t.slug} key={t.date} className={styles.thought} href={{ pathname: `/thoughts/${t.slug}` }}>
+					<IKImage src={`/thoughts/${t.image}`} alt={t.title} width={593} height={305} className={styles.image} />
+					<h3 className={styles.title}>{t.title}</h3>
+					<time className={styles.year}>{formatDate(t.date)}</time>
 				</Link>
 			))}
 		</>

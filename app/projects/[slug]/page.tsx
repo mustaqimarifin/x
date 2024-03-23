@@ -9,13 +9,13 @@ import styles from "@/styles/views/project.module.scss";
 
 export const generateStaticParams = async () => projectParam.map((project) => ({ slug: project.slug }));
 
-export const generateMetadata = ({ params }: { params: { slug: string } }) => {
-	const project = allProjects.find((project) => project.slug === params.slug);
+export const generateMetadata = ({ params: { slug } }) => {
+	const project = allProjects.find((project) => project.slug === slug);
 	return { title: project?.title };
 };
 
-export default async function ProjectLayout({ params }: { params: { slug: string } }) {
-	const project = allProjects.find((project) => project.slug === params.slug);
+export default async function ProjectLayout({ params: { slug } }) {
+	const project = allProjects.find((project) => project.slug === slug);
 
 	if (project) {
 		return (
@@ -61,16 +61,10 @@ export default async function ProjectLayout({ params }: { params: { slug: string
 										{collaborator.name}
 									</Link>
 								))} */}
-								{project.collaborators?.map((collaborator) => (
-									<Link href={collaborator.url} target="_blank" className={styles.collaborator} key={collaborator._id}>
-										<Image
-											src={collaborator.avatar}
-											alt={collaborator.name}
-											width={240}
-											height={240}
-											className={styles.avatar}
-										/>
-										{collaborator.name}
+								{project.collaborators?.map((c) => (
+									<Link href={c.url} target="_blank" className={styles.collaborator} key={c._id}>
+										<Image src={c.avatar} alt={c.name} width={240} height={240} className={styles.avatar} />
+										{c.name}
 									</Link>
 								))}
 							</div>

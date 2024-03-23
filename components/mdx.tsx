@@ -1,6 +1,6 @@
 import { getMDXComponent } from "next-contentlayer/hooks";
 import * as React from "react";
-import Image from './Pics';
+import Image from "./Pics";
 
 const components = {
 	img: Image,

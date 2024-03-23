@@ -1,6 +1,5 @@
 "use client";
 
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -31,7 +30,7 @@ export default function Navbar() {
 						betweenPages: false,
 						samePageWithHash: false,
 						samePage: false,
-					},  
+					},
 				}),
 			],
 		});

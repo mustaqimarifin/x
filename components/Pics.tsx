@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
 import { cx } from "@/lib/utils";
+import Image from "next/image";
 
 type Props = {
 	src?: string;
@@ -15,15 +15,14 @@ type Props = {
 const Pix = (props: Props) => {
 	const { src, alt, className, caption } = props;
 	return (
-
 		<div className="filter drop-shadow-sm">
 			<figure>
 				<Image
-					src={ require(`../public/images${src}`) }
+					src={require(`../public/images${src}`)}
 					//src={src}
-					alt={ alt! }
-					width={ 680 }
-					height={ 503 }
+					alt={alt!}
+					width={680}
+					height={503}
 					//sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 
 					//sizes="(max-width: 1920px) 213px, 33vw"
@@ -34,11 +33,10 @@ const Pix = (props: Props) => {
 					className={cx(className, "rounded-lg dark:bg-titan-950 bg-zinc-50")}
 				/>
 				<figcaption className="text-right">
-					{ caption && <span className="text-sm  text-gray-600 dark:text-gray-400">{ caption }</span> }
+					{caption && <span className="text-sm  text-gray-600 dark:text-gray-400">{caption}</span>}
 				</figcaption>
 			</figure>
 		</div>
-
 	);
 };
 

@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 import { cx } from "@/lib/utils";
 
-const Image = (props:any) => {
+const Image = (props: any) => {
 	return (
 		<Suspense>
 			<figure>
