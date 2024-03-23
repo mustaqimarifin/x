@@ -1,4 +1,4 @@
-import RPC, { type Options } from "rehype-pretty-code";
+import type { Options } from "rehype-pretty-code";
 
 export const readingTime = (text: string): string => {
 	// Step 2: Determine the average reading speed (words per minute)

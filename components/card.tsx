@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import styles from "@/styles/components/card.module.scss";
-import Pix from "./Pics";
 import IKImage from "./coverpix";
 
 interface Props {

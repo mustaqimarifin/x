@@ -1,13 +1,6 @@
 import type { NextFontWithVariable } from "next/dist/compiled/@next/font";
-//import {  Roboto_Flex } from "next/font/google";
 import localFont from "next/font/local";
 
-/*  const RFlex = Roboto_Flex({
-	//weight: ['400', '500', '700'],
-	variable: "--rflex",
-	subsets: ["latin"],
-});
- */
 const GMono = localFont({
 	src: "../public/font/GeistMono.woff2",
 	variable: "--mono",

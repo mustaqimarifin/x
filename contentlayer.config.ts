@@ -1,10 +1,9 @@
-import { defineDocumentType, defineNestedType, makeSource } from "contentlayer/source-files";
+import { defineDocumentType, defineNestedType, makeSource, type ComputedFields } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
-//import imageMetadataLQIP from "./lib/Meta2";
+import imageMetadata from "./lib/image-size";
 import { codeOptions, readingTime } from "./lib/utils";
 
-/** @type {import('contentlayer/source-files').ComputedFields} */
-const computedFields = {
+const computedFields: ComputedFields = {
 	slug: {
 		type: "string",
 		resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx/, ""),
@@ -141,6 +140,6 @@ export default makeSource({
 	mdx: {
 		remarkPlugins: [],
 		//@ts-expect-error
-		rehypePlugins: [[rehypePrettyCode, codeOptions]],
+		rehypePlugins: [imageMetadata, [rehypePrettyCode, codeOptions]],
 	},
 });

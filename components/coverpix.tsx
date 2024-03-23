@@ -1,8 +1,5 @@
 "use client";
-
 import Image, { type ImageProps } from "next/image";
-
-import { Fade } from "./fade";
 
 const imageKitLoader = ({
 	src,

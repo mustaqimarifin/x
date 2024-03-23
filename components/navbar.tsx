@@ -1,7 +1,6 @@
 "use client";
 
-import { Logo } from "@/components/icons";
-import Image from "next/image";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -28,11 +27,11 @@ export default function Navbar() {
 				}),
 				new SwupFadeTheme(),
 				new SwupScrollPlugin({
-					/* animateScroll: {
+					animateScroll: {
 						betweenPages: false,
 						samePageWithHash: false,
 						samePage: false,
-					},  */
+					},  
 				}),
 			],
 		});

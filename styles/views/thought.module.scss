@@ -14,6 +14,11 @@
     }
 }
 
+    .title {
+        @apply font-quad
+    }
+      
+
 .content {
     @apply col-span-full lg:col-start-9 lg:col-span-6 prose dark:prose-invert;
 

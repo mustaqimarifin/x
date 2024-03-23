@@ -1,1 +1,1 @@
-var g=function(){let f=new Date,d=f.getHours(),b=f.getMinutes(),c="AM";if(d>=12){if(d>12)d-=12;c="PM"}else if(d===0)d=12,c="AM";d=d<10?"0"+d:d,b=b<10?"0"+b:b;let j=d+":"+b+":"+c;document.getElementById("clock").innerHTML=j};setInterval(g,60000);g();
+var b=function(){let a=new Date,y=a.getHours(),P=a.getMinutes();if(y>=12){if(y>12)y-=12}else if(y===0)y=12;y=y<10?"0"+y:y,P=P<10?"0"+P:P;let d=y+":"+P+":KL";document.getElementById("clock").innerHTML=d};setInterval(b,60000);b();

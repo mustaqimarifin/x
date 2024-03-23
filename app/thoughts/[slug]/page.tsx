@@ -1,7 +1,6 @@
 import ToastWrapper from "@/components/copyLink";
 import { Mdx } from "components/mdx";
 import { allThoughts } from "contentlayer/generated";
-import Image from "next/image";
 
 import { formatDate } from "@/components/_date";
 import IKImage from "@/components/coverpix";
@@ -33,7 +32,7 @@ const ThoughtLayout = ({ params }: { params: { slug: string } }) => {
 
 				<header className={styles.header}>
 					<div className="flex flex-row gap-2">
-						<h1 className={styles.title}>{thought.title}</h1>
+						<div className="font-quad text-3xl">{thought.title}</div>
 						<ToastWrapper />
 					</div>
 					<time className={styles.date} dateTime={thought.date}>

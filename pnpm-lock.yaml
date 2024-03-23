@@ -32,6 +32,9 @@ dependencies:
   autoprefixer:
     specifier: 10.4.19
     version: 10.4.19(postcss@8.4.38)
+  image-dimensions:
+    specifier: ^2.3.0
+    version: 2.3.0
   next:
     specifier: ^14.1.4
     version: 14.1.4(@babel/core@7.24.3)(@opentelemetry/api@1.8.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
@@ -4343,6 +4346,12 @@ packages:
       postcss: ^8.1.0
     dependencies:
       postcss: 8.4.38
+    dev: false
+
+  /image-dimensions@2.3.0:
+    resolution: {integrity: sha512-8Ar3lsO6+/JLfnUeHnR8Jp/IyQR85Jut5t4Swy1yiXNwj/xM9h5V53v5KE/m/ZSMG4qGRopnSy37uPzKyQCv0A==}
+    engines: {node: '>=18'}
+    hasBin: true
     dev: false
 
   /imagescript@1.2.18:

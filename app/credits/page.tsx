@@ -21,9 +21,13 @@ export default function CreditPage() {
 					<a href="https://vercel.com/font" className={styles.link} target="_blank" rel="noreferrer">
 						Geist
 					</a>{" "}
-					is a typeface designed and published by{" "}
+					is a typeface designed by{" "}
 					<a href="https://basement.studio/" className={styles.link} target="_blank" rel="noreferrer">
 						Basement Studio
+					</a>
+					and commisioned by{" "}
+					<a href="https://vercel.com" className={styles.link} target="_blank" rel="noreferrer">
+						Vercel
 					</a>
 				</p>
 

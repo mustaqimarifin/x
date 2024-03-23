@@ -3,7 +3,7 @@ import { allProjects } from "contentlayer/generated";
 import Image from "next/image";
 import Link from "next/link";
 
-import { formatDate, getYear } from "@/components/_date";
+import { getYear } from "@/components/_date";
 import { projectParam } from "@/lib/sortedContent";
 import styles from "@/styles/views/project.module.scss";
 

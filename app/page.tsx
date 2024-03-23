@@ -2,7 +2,6 @@ import Card from "@/components/card";
 import Link from "next/link";
 
 import { getYear } from "@/components/_date";
-import { Fade } from "@/components/fade";
 import { projects } from "@/lib/sortedContent";
 
 export default function Home() {

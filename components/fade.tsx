@@ -7,7 +7,7 @@ export const Fade = ({ children }: { children: ReactNode }) => {
 	const { ref, inView } = useInView({
 		triggerOnce: true,
 		//rootMargin: '-100px 0px',
-		threshold: 0.25,
+		threshold: 0.2,
 	});
 
 	return (

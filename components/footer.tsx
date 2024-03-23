@@ -6,7 +6,7 @@ import Link from "next/link";
 import styles from "@/styles/components/footer.module.scss";
 import { Suspense } from "react";
 
-const KLC = dynamic(() => import("@/components/clock"), { ssr: false });
+const KLC = dynamic(() => import("@/components/clock2"), { ssr: false });
 
 export default function Footer() {
 	return (
@@ -90,7 +90,7 @@ export default function Footer() {
 				</div>
 			</section>
 			<Suspense>
-				<section className={styles.clock}>
+				<section id="clock" className={styles.clock}>
 					<KLC />
 				</section>
 			</Suspense>
