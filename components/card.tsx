@@ -25,7 +25,7 @@ const Card = ({ title, imageSrc, imageAlt, description, year, link }: Props) => 
 			<div className={styles["image-wrapper"]}>
 				<Link href={link}>
 					{/* 	<Image alt={imageAlt} className={styles.image} src={imageSrc} width={3840} height={3840} priority /> */}
-					<IKImage alt={imageAlt} className={styles.image} src={imageSrc} width={3840} height={3840} priority />
+					<IKImage alt={imageAlt} className={styles.image} src={imageSrc} width={1920} height={1920} priority />
 				</Link>
 			</div>
 

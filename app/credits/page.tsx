@@ -21,11 +21,10 @@ export default function CreditPage() {
 					<a href="https://vercel.com/font" className={styles.link} target="_blank" rel="noreferrer">
 						Geist
 					</a>{" "}
-					is a typeface designed and published by {" "}
+					is a typeface designed and published by{" "}
 					<a href="https://basement.studio/" className={styles.link} target="_blank" rel="noreferrer">
 						Basement Studio
 					</a>
-					
 				</p>
 
 				<h2>Web Stack</h2>
@@ -42,16 +41,10 @@ export default function CreditPage() {
 					<a href="https://swup.js.org" className={styles.link} target="_blank" rel="noreferrer">
 						Swup
 					</a>
-					. Native JS wherever possible lol{" "}
-					.
+					. Native JS wherever possible lol .
 				</p>
 				<p>
-					<a
-						href="https://github.com/mustaqimarifin/x"
-						className={styles.link}
-						target="_blank"
-						rel="noreferrer"
-					>
+					<a href="https://github.com/mustaqimarifin/x" className={styles.link} target="_blank" rel="noreferrer">
 						GitHub Repository
 					</a>
 				</p>

@@ -38,6 +38,8 @@ const IKImage = (props: Props) => {
 		<Image
 			{...props}
 			loader={imageKitLoader}
+			//sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+
 			//src='default-image.jpg'
 			//alt="Default image"
 			// width={980}

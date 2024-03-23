@@ -58,16 +58,48 @@ export default function AboutPage() {
 	return (
 		<>
 			<figure className={styles.figure}>
-				<Image src={fire} alt={`Mustaqim Arifin`} width="1656" height="1300" className={styles.image} priority />
+				<Image
+					src={fire}
+					alt={`Mustaqim Arifin`}
+					width="1656"
+					height="1300"
+					sizes="(max-width: 768px) 213px, 33vw"
+					className={styles.image}
+					priority
+				/>
 			</figure>
 			<figure className={styles.figure}>
-				<Image src={avatar} alt={`Mustaqim Arifin`} width="1080" height="1080" className={styles.image} priority />
+				<Image
+					src={avatar}
+					alt={`Mustaqim Arifin`}
+					width="1080"
+					height="1080"
+					sizes="(max-width: 768px) 213px, 33vw"
+					className={styles.image}
+					priority
+				/>
 			</figure>
 			<figure className={styles.figure}>
-				<Image src={vv} alt={`Mustaqim Arifin`} width="640" height="852" className={styles.image} priority />
+				<Image
+					src={vv}
+					alt={`Mustaqim Arifin`}
+					width="640"
+					height="852"
+					sizes="(max-width: 768px) 213px, 33vw"
+					className={styles.image}
+					priority
+				/>
 			</figure>
 			<figure className={styles.figure}>
-				<Image src={sg} alt={`Mustaqim Arifin`} width="1920" height="305" className={styles.image} priority />
+				<Image
+					src={sg}
+					alt={`Mustaqim Arifin`}
+					width="1920"
+					height="305"
+					sizes="(max-width: 768px) 213px, 33vw"
+					className={styles.image}
+					priority
+				/>
 			</figure>
 
 			<header className={styles.header}>

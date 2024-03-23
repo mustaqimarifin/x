@@ -18,6 +18,9 @@ const Pix = (props: Props) => {
 				src={require(`../public/images${src}`)}
 				//src={src}
 				alt={alt!}
+				//sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+
+				//sizes="(max-width: 1920px) 213px, 33vw"
 				//blurDataURL={blurDataURL}
 				//width={width}
 				//height={height}
