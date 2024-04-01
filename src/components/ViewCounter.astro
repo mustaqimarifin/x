@@ -1,0 +1,38 @@
+---
+// components/ViewCounter.astro
+import {db, Views, sql} from "astro:db"
+const {slug} = Astro.props
+
+type Item = {
+  slug: string
+  count: number
+}
+
+let item
+
+try {
+  item = await db
+    .insert(Views)
+    .values({
+      slug,
+      count: 1,
+    })
+    .onConflictDoUpdate({
+      target: Views.slug,
+      set: {
+        count: sql`count + 1`,
+      },
+    })
+    .returning({
+      slug: Views.slug,
+      count: Views.count,
+    })
+} catch (error) {
+  console.error(error)
+  item = { slug, count: 1 } as unknown as Item[]
+}
+---
+
+<div>
+  <p>Views: {item[0].count}</p>
+</div>
