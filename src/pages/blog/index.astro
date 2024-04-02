@@ -21,7 +21,7 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) =
   </TopLayout>
   <BottomLayout>
     <div class="animate">
-      <Blog client:load tags={tags} data={posts} />
+      <Blog client:only="solid-js"  tags={tags} data={posts} />
     </div>
   </BottomLayout>
 </PageLayout>
