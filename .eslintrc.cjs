@@ -30,4 +30,4 @@ module.exports = {
     semi: ["error", "never"],
     quotes: ["error", "double", { allowTemplateLiterals: true }],
   },
-};
+}
