@@ -1,5 +1,5 @@
-import defaultTheme from "tailwindcss/defaultTheme";
-import t from "@tailwindcss/typography";
+import defaultTheme from "tailwindcss/defaultTheme"
+import t from "@tailwindcss/typography"
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -26,4 +26,4 @@ export default {
     },
   },
   plugins: [t],
-};
+}
