@@ -5,15 +5,14 @@ import tailwind from "@astrojs/tailwind"
 import solidJs from "@astrojs/solid-js"
 import db from "@astrojs/db"
 
-//import vercel from "@astrojs/vercel/serverless"
+import vercel from "@astrojs/vercel/serverless"
 
 // https://astro.build/config
 export default defineConfig({
-/*   output: "hybrid",
+  output: "hybrid",
   adapter: vercel({
-      imageService: true,
-
-  }), */
+  imageService: true,
+  }), 
   site: "https://mstqmarfn.vercel.app",
   markdown: {
     shikiConfig: {
