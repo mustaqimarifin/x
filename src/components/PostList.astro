@@ -14,15 +14,11 @@ type Props = {
 
 import {getCollection} from "astro:content"
 
-type Item = {
-  slug: string
-  count: number
-}
 
 const {blog, pill} = Astro.props
 
 
-import { db, eq, Views} from 'astro:db';
+import { db, eq, Views} from "astro:db"
 const views = await db.select().from(Views).where(eq(Views.slug, blog[0].slug))
 const posts = await getCollection("blog")
 const sortedPosts = posts.sort((a, b) => {

@@ -5,14 +5,7 @@ import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import {BLOG} from "@consts"
 
-const {slug} = Astro.props
 
-/* type Item = {
-  slug: string
-  count: number
-}
- */
-import { db, eq, Views} from 'astro:db';
 import Blog from "@components/Blog"
 //const views = await db.select().from(Views).where(eq(Views.slug, slug))
 const posts = (await getCollection("blog")).filter((post) => !post.data.draft).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())

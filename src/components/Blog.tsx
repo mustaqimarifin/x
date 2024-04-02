@@ -13,12 +13,10 @@ export default function Blog({ data }: Props) {
   const [filter] = createSignal(new Set<string>())
   const [posts, setPosts] = createSignal<CollectionEntry<"blog">[]>([])
   const sortedPosts = posts().sort((a, b) => {
-  const aDate = a.data.date
-  const bDate = b.data.date
-  return Date.parse(bDate.toString()) - Date.parse(aDate.toString())
-})
-
-  
+    const aDate = a.data.date
+    const bDate = b.data.date
+    return Date.parse(bDate.toString()) - Date.parse(aDate.toString())
+  })
 
   createEffect(() => {
     setPosts(
