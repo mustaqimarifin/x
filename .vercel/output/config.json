@@ -13,11 +13,11 @@
 		},
 		{
 			"src": "^\\/_image$",
-			"dest": "_render"
+			"dest": "_image.astro"
 		},
 		{
 			"src": "^\\/api\\/page(?:\\/(.*?))?\\/?$",
-			"dest": "_render"
+			"dest": "api/page/[...slug].ts"
 		}
 	]
 }
