@@ -1,7 +1,7 @@
 ---
 import type {CollectionEntry} from 'astro:content'
 import {formatDate, readingTime} from '@lib/utils'
-import {Views1} from '@components/Views1'
+import Kount from '@components/Kount.astro'
 
 type Props = {
   entry: CollectionEntry<'projects'> | CollectionEntry<'blog'>
@@ -55,7 +55,7 @@ const repoUrl = collection === 'projects' ? data.repoUrl : null
       {readingTime(body)}
     </div>
     <div class="flex items-center gap-2">
-      <Views1 client:only slug={slug} />
+      <Kount slug={slug} />
     </div>
   </div>
   <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">

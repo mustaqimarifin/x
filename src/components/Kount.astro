@@ -1,0 +1,10 @@
+---
+import {Views1} from './Views1'
+
+type Props = {
+  slug: string
+}
+const {slug} = Astro.props
+---
+
+<Views1 client:only="solid-js" slug={slug} />

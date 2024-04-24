@@ -15,7 +15,9 @@ export const GET: APIRoute = async ({params}) => {
     })
     .returning({count: views.count})
 
-  return new Response(JSON.stringify(res[0].count), {
+  let data = res[0].count
+
+  return new Response(JSON.stringify(data), {
     status: 200,
     headers: {
       'Content-Type': 'application/json',
