@@ -1,5 +1,5 @@
 {
-  "name": "astro-sphere",
+  "name": "astro-ass",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
@@ -7,6 +7,7 @@
     "dev:network": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "remote": "astro check && astro build --remote",
     "preview": "astro preview",
     "preview:network": "astro dev --host",
     "astro": "astro",
@@ -16,7 +17,6 @@
   "dependencies": {
     "@astrojs/check": "^0.5.10",
     "@astrojs/mdx": "^2.3.1",
-    "@astrojs/node": "^8.2.5",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.4",
     "@astrojs/solid-js": "^4.1.0",
