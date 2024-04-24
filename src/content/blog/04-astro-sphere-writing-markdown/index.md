@@ -4,19 +4,15 @@ summary: "Basic Markdown syntax that can be used when writing Markdown content i
 date: "Mar 13 2024"
 draft: false
 tags:
-  - Tutorial
-  - Astro
-  - Astro Sphere
-  - Markdown
+- Tutorial
+- Astro
+- Astro Sphere
+- Markdown
 ---
-
-## Inline Code Highlighting
-
-The result of `[1, 2, 3].join('-'){:js}` is `'1-2-3'{:js}`.
 
 ### Headings
 
-```markdown
+```text
 # H1
 
 ## H2
@@ -28,6 +24,7 @@ The result of `[1, 2, 3].join('-'){:js}` is `'1-2-3'{:js}`.
 ##### H5
 
 ###### H6
+
 ```
 
 # H1
@@ -234,6 +231,6 @@ H<sub>2</sub>O
 
 X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+Press <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd></kbd> to end the session.
 
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.

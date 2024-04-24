@@ -1,39 +1,21 @@
-import {
-  createSignal,
-  createResource,
-  Switch,
-  Match,
-  Show,
-  createEffect,
-} from "solid-js"
+import { createSignal } from "solid-js"
 
-const fetchViews = async (slug: string) => {
-  const response = await fetch(`/api/views/${slug}`)
-  return response.json()
-}
-
-export default function Counter() {
+function CounterButton() {
   const [count, setCount] = createSignal(0)
-  //@ts-expect-error sdsds
-  const [slug] = createResource(count, fetchViews)
 
-  createEffect(() => {
-    setCount(1)
-  })
+  const increment = () => setCount(count() + 1)
 
   return (
-    <div>
-      <Show when={count() > 1} fallback={null}>
-        <div>Count limit reached</div>
-      </Show>
-      <Show when={slug.loading}>
-        <p>Loading...</p>
-      </Show>
-      <Switch>
-        <Match when={slug()}>
-          <div>{count() + 1}</div>
-        </Match>
-      </Switch>
+    <div class="flex gap-4 items-center">
+      <button onClick={increment} class="px-3 py-1 border border-black/25 dark:border-white/25 hover:bg-black/5 dark:hover:bg-white/15 blend">
+        Increment
+      </button>
+      <div>
+       Clicked {count()} {count() === 1 ? "time" : "times"}
+      </div>
     </div>
+
   )
 }
+
+export default CounterButton

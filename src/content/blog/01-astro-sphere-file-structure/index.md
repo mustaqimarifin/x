@@ -1,16 +1,15 @@
 ---
-title: "⊛ Astro Sphere: File Structure"
+title: "Astro Sphere: File Structure"
 summary: "You'll find these directories and files in the project. What do they do?"
 date: "Mar 17 2024"
 draft: false
 tags:
-  - Tutorial
-  - Astro
-  - Astro Sphere
+- Tutorial
+- Astro
+- Astro Sphere
 ---
 
 A one line summary of what each file and directory is for:
-
 ```js
 /
 ├── public/ // Files publicly available to the browser

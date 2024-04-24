@@ -2,5 +2,10 @@
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },
-  "typescript.tsserver.nodePath": "/home/vmp/.config/nvm/versions/node/v21.7.1/bin/node"
+  "editor.fontFamily": "0xProto Nerd Font",
+  "js/ts.implicitProjectConfig.target": "ESNext",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.tsserver.nodePath": "",
+  "typescript.tsserver.maxTsServerMemory": 16000,
+  "explorer.confirmDelete": false
 }

@@ -1,36 +1,28 @@
 import type { CollectionEntry } from "astro:content"
-import { createEffect, createSignal } from "solid-js"
-
-import ArrowCard from "./ArrowCard"
-//mport { cn } from "@lib/utils"
+import { createEffect, createSignal, For } from "solid-js"
+import ArrowCard from "@components/ArrowCard"
+import { cn } from "@lib/utils"
 
 type Props = {
-  tags?: string[];
-  data: CollectionEntry<"blog">[];
-};
+  tags: string[]
+  data: CollectionEntry<"blog">[]
+}
 
-export default function Blog({ data }: Props) {
-  const [filter] = createSignal(new Set<string>())
+export default function Blog({ data, tags }: Props) {
+  const [filter, setFilter] = createSignal(new Set<string>())
   const [posts, setPosts] = createSignal<CollectionEntry<"blog">[]>([])
-  const sortedPosts = posts().sort((a, b) => {
-    const aDate = a.data.date
-    const bDate = b.data.date
-    return Date.parse(bDate.toString()) - Date.parse(aDate.toString())
-  })
 
   createEffect(() => {
-    setPosts(
-      data.filter((entry) =>
-        Array.from(filter()).every((value) =>
-          entry.data.tags.some(
-            (tag: string) => tag.toLowerCase() === String(value).toLowerCase(),
-          ),
-        ),
-      ),
-    )
+    setPosts(data.filter((entry) => 
+      Array.from(filter()).every((value) => 
+        entry.data.tags.some((tag:string) => 
+          tag.toLowerCase() === String(value).toLowerCase()
+        )
+      )
+    ))
   })
 
-  /*   function toggleTag(tag: string) {
+  function toggleTag(tag: string) {
     setFilter((prev) => 
       new Set(prev.has(tag) 
         ? [...prev].filter((t) => t !== tag) 
@@ -38,10 +30,11 @@ export default function Blog({ data }: Props) {
       )
     )
   }
- */
+
   return (
-    <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-6">
-      {/*  <div class="sticky top-24">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div class="col-span-3 sm:col-span-1">
+        <div class="sticky top-24">
           <div class="text-sm font-semibold uppercase mb-2 text-black dark:text-white">Filter</div>
           <ul class="flex flex-wrap sm:flex-col gap-1.5">
             <For each={tags}>
@@ -58,11 +51,12 @@ export default function Blog({ data }: Props) {
               )}
             </For>
           </ul>
-        </div> */}
-      <div class="sm:col-span-2">
+        </div>
+      </div>
+      <div class="col-span-3 sm:col-span-2">
         <div class="flex flex-col">
           <div class="text-sm uppercase mb-2">
-            SHOWING {sortedPosts.length} OF {data.length} POSTS
+            SHOWING {posts().length} OF {data.length} POSTS
           </div>
           <ul class="flex flex-col gap-3">
             {posts().map((post) => (

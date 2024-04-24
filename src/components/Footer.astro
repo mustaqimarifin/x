@@ -32,13 +32,12 @@ import Container from "@components/Container.astro"
               {SITE.TITLE}
             </a>
           </div>
-          <div id="clock" class=" font-bold font-mono tabular-nums text-gray-700 dark:text-gray-50 flex gap-2 justify-center sm:justify-end items-center">
+          <div class="flex gap-2 justify-center sm:justify-end items-center">
             <span class="relative flex h-3 w-3">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            <script  is:inline src="/js/clock.js"></script>
-
+            All systems normal
           </div>
         </div>
       </Container>
@@ -85,3 +84,21 @@ import Container from "@components/Container.astro"
   </div>
 
 </footer>
+
+<script is:inline>
+  function goBackToTop(event) {
+    event.preventDefault()
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
+  }
+
+  function inintializeBackToTop() {
+    const backToTop = document.getElementById("back-to-top")
+    backToTop?.addEventListener("click", goBackToTop)
+  }
+
+  document.addEventListener("astro:after-swap", inintializeBackToTop)
+  inintializeBackToTop()
+</script>
